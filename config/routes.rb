@@ -2,6 +2,10 @@ Flip::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
+
+  namespace :admin do
+    resources :categories, :users
+  end
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
