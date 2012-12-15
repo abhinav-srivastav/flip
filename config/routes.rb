@@ -3,6 +3,7 @@ Flip::Application.routes.draw do
   # first created -> highest priority.
 
  match 'login' => "admin/sessions#new"
+ match "logout" => "admin/sessions#destroy"
 
 
   namespace :admin do
