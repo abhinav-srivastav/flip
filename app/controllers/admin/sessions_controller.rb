@@ -1,5 +1,7 @@
 class Admin::SessionsController < ApplicationController
   layout 'public'
+  skip_before_filter :admin_authorize
+
   def new
   end
 
@@ -7,7 +9,7 @@ class Admin::SessionsController < ApplicationController
   	valid_user = User.authorize(params[:username], params[:password])
   	if valid_user
   		session[:user_id] = valid_user.id
-      redirect_to admin_categories_path
+      redirect_to :root
     else
       render 'new'
     end
@@ -16,6 +18,5 @@ class Admin::SessionsController < ApplicationController
   def destroy
   	reset_session
     redirect_to :root
-
   end
 end
