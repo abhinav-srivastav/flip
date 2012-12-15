@@ -6,9 +6,30 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-
-<%= yield %>
+<body>    
+<div class="navbar navbar-inverse">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <a class="brand" href="#">Flip-Tray</a>
+      <div class="nav-collapse collapse">
+        <p class="navbar-text pull-right">
+          <%= link_to 'Home', root_path  %> |
+          <%= link_to 'Log in'%>
+        </p>
+        <ul class='nav'>
+          <li><%= link_to 'Category', admin_categories_path %></li>
+          <li><%= link_to 'Brand', admin_brands_path %></li>
+          <li><%= link_to 'Product', admin_products_path %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+  <div class = "container-fluid">
+    <div class = "row-fluid">
+      <%= yield %>
+    </div>
+  </div>
 
 </body>
 </html>

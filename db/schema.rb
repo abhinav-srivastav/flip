@@ -11,13 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121214121337) do
+ActiveRecord::Schema.define(:version => 20121215101441) do
 
   create_table "brands", :force => true do |t|
     t.string   "brand"
-    t.integer  "category_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "brands_categories", :id => false, :force => true do |t|
+    t.integer "brand_id"
+    t.integer "category_id"
   end
 
   create_table "categories", :force => true do |t|
@@ -27,10 +31,15 @@ ActiveRecord::Schema.define(:version => 20121214121337) do
     t.boolean  "visible",    :default => true
   end
 
+  create_table "categories_products", :id => false, :force => true do |t|
+    t.integer "category_id"
+    t.integer "product_id"
+  end
+
   create_table "products", :force => true do |t|
     t.string   "product"
     t.string   "product_type"
-    t.decimal  "price",        :precision => 10, :scale => 0
+    t.decimal  "price",        :precision => 10, :scale => 2
     t.integer  "brand_id"
     t.datetime "created_at",                                  :null => false
     t.datetime "updated_at",                                  :null => false
@@ -41,9 +50,9 @@ ActiveRecord::Schema.define(:version => 20121214121337) do
     t.string   "password_digest"
     t.string   "email"
     t.boolean  "admin",                                          :default => false
-    t.decimal  "wallet",          :precision => 10, :scale => 0, :default => 10000
-    t.datetime "created_at",                                                        :null => false
-    t.datetime "updated_at",                                                        :null => false
+    t.decimal  "wallet",          :precision => 10, :scale => 2, :default => 10000.0
+    t.datetime "created_at",                                                          :null => false
+    t.datetime "updated_at",                                                          :null => false
   end
 
 end

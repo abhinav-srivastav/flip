@@ -1,25 +1,20 @@
-<div >
-  <ul>	<h3>Categories</h3>
+<div>
+  <h3>Categories</h3>
+  <%= link_to "New Category", new_admin_category_path,:class => "btn btn-primary" %><br/><br/>
+  <table class = 'table'>
+    <tr>
+      <td><b>Category</b></td>
+      <td><b>Actions</b></td>
+    </tr>
     <% @categories.each do |cat| %>
-      <li><%= cat.category %>
-        <ul>
-            <% brands = cat.brands %>
-            <% unless brands.nil? %>
-              <% brands.each do |brand| %>
-                <li> <%= brand.brand %>
-                  <ul>
-                    <% pro = brand.products %>
-                    <% unless pro.nil? %>
-                      <% pro.each do |p|  %>
-                        <li><%= p.product %>  [  <%= p.product_type %> ] </li>
-                      <% end %>
-                    <% end %>
-                  </ul>  
-                </li>
-              <% end %>
-            <% end %>
-          </ul>
-      </li>
+    <tr>
+      <td><%= cat.category %></td>
+      <td>
+        <%= link_to "show", admin_category_path(cat), :class => "btn btn-small" %>
+        <%= link_to "edit", edit_admin_category_path(cat), :class => "btn btn-small" %>
+        <%= link_to "remove", admin_category_path(cat), method: :delete, data: { confirm: "Are u sure ?" },:class =>"btn btn-danger btn-small" %>
+       </td>
+    </tr>
     <% end %>
-  </ul>
+  </table>
 </div>

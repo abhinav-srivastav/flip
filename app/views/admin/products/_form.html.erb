@@ -1,0 +1,8 @@
+<%= simple_form_for ([:admin,@product]), :html => { :class => 'form-horizontal'} do |f| %>
+  <%= f.input :product %>
+  <%= f.input :product_type %>
+  <%= f.input :price %>
+  <%= f.association :brand, :label_method => :brand, :as => :radio_buttons %>
+  <%= f.association :categories, :label_method => :category, :as => :check_boxes %>
+  <%=f.submit :class => "btn btn-success"%>
+<% end %> 

@@ -1,0 +1,21 @@
+<div>
+  <h3>Products</h3>
+  <%= link_to "New Product", new_admin_product_path,:class => "btn btn-primary" %><br/><br/>
+  <table class = 'table'>
+    <tr>
+      <td><b>Product</b></td>
+      <td><b>Actions</b></td>
+    </tr>
+    <% @products.each do |pro| %>
+    <tr>
+      <td><%= pro.product %></td>
+      <td>
+        <%= link_to "show", admin_product_path(pro), :class => "btn btn-small" %>
+        <%= link_to "edit", edit_admin_product_path(pro), :class => "btn btn-small" %>
+        <%= link_to "remove", admin_product_path(pro), method: :delete, data: { confirm: "Are u sure ?" },:class =>"btn btn-danger btn-small" %>
+       </td>
+    </tr>
+    <% end %>
+  </table>
+</div>
+

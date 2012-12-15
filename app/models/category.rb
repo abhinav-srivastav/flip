@@ -1,12 +1,11 @@
 class Category < ActiveRecord::Base
-  has_many :brands
-   attr_accessible :category
-   scope :visible, where(:visible => true)
+  has_and_belongs_to_many :brands
+  has_and_belongs_to_many :products
 
-
-  def products
-  	c = []
-    self.brands.each { |brand| c << brand.products }
-    c.flatten!
-  end
+  attr_accessible :category, :visible, :product_ids, :brand_ids
+  
+  accepts_nested_attributes_for :products
+  accepts_nested_attributes_for :brands
+  
+  scope :visible, where(:visible => true)
 end

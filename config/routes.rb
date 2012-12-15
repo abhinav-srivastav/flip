@@ -4,7 +4,7 @@ Flip::Application.routes.draw do
 
 
   namespace :admin do
-    resources :categories, :users
+    resources :categories, :users, :products, :brands 
   end
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

@@ -1,0 +1,20 @@
+<div>
+  <h3>Brands</h3>
+  <%= link_to "New Brand", new_admin_brand_path,:class => "btn btn-primary" %><br/><br/>
+  <table class = 'table'>
+    <tr>
+      <td><b>Brand</b></td>
+      <td><b>Actions</b></td>
+    </tr>
+    <% @brands.each do |brand| %>
+    <tr>
+      <td><%= brand.brand %></td>
+      <td>
+        <%= link_to "show", admin_brand_path(brand), :class => "btn btn-small" %>
+        <%= link_to "edit", edit_admin_brand_path(brand), :class => "btn btn-small" %>
+        <%= link_to "remove", admin_brand_path(brand), method: :delete, data: { confirm: "Are u sure ?" },:class =>"btn btn-danger btn-small" %>
+       </td>
+    </tr>
+    <% end %>
+  </table>
+</div>
