@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  layout 'public'
   def index 
   	@categories = Category.visible
   	respond_to do |format|

@@ -1,3 +1,10 @@
 class User < ActiveRecord::Base
-  # attr_accessible :title, :body
+  attr_accessible :username, :password, :password_confirmation, :email, :wallet
+  has_secure_password
+
+  def self.authorize(username, password)
+    user = User.find_by_username(username)
+    return user if user && user.authenticate(password)
+    nil
+  end
 end

@@ -2,9 +2,11 @@ Flip::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
+ match 'login' => "admin/sessions#new"
+
 
   namespace :admin do
-    resources :categories, :users, :products, :brands 
+    resources :categories, :users, :products, :brands, :sessions
   end
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

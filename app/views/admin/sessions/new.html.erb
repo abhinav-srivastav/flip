@@ -1,0 +1,28 @@
+<div>
+  <%#= simple_form_for :authentication , :html => { :class => 'form-horizontal'} do |f| %>
+  <!--   <legend>Please Log In</legend> -->
+    <%#= f.input :username %>
+    <%#= f.input :password %>
+    <%#= f.submit  :class => "btn btn-success", :value => "Log In"%>
+  <%# end %>
+  <%= form_tag admin_sessions_path do %>
+    <fieldset>
+      <legend>Please Log In</legend>
+      <div>
+        <%= label_tag :username, 'Username:' %>
+        <%= text_field_tag :username, params[:username] %>
+      </div>
+      <div>
+        <%= label_tag :password, 'Password:' %>
+        <%= password_field_tag :password, params[:password] %>
+      </div>
+      <div>
+        <%= submit_tag "Login", :class => "btn btn-success"%>
+      </div>
+    </fieldset>
+  <% end %>
+
+
+
+
+</div>
