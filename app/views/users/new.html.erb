@@ -1,0 +1,11 @@
+<div>
+  <h3>Sign Up </h3>
+	<%= simple_form_for (@user), :html => { :class => 'form-horizontal'} do |f| %>
+	  <%= f.input :username %>
+	  <%= f.input :password %>
+	  <%= f.input :password_confirmation %>	  
+	  <%= f.input :email  %>
+	  <%= f.submit :class => "btn btn-success"%>
+	  <%= link_to 'back', :root, :class => 'btn btn-inverse'  %>
+	<% end %> 
+</div>

@@ -1,0 +1,9 @@
+<div>
+  <h3>Edit Account <%= @user.username  %>   </h3>
+	<%= simple_form_for (@user), :html => { :class => 'form-horizontal'} do |f| %>
+	  <%= f.input :username %>
+	  <%= f.input :email  %>
+	  <%= f.submit :class => "btn btn-success"%>
+	  <%= link_to 'back', request.referrer, :class => 'btn btn-inverse'  %>
+	<% end %> 
+</div>

@@ -11,6 +11,6 @@
     <dt>Email:</dt>
     <dd><%= @user.email %></dd>
   </dl>
-
+  <%= link_to 'edit', edit_user_path(@user), :class => "btn" %>
   <%= link_to 'back', request.referrer, :class => "btn btn-inverse" %>
 </div>
