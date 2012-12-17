@@ -14,11 +14,9 @@
       <div class="nav-collapse collapse">
         <div class="navbar-text pull-right">
           <% if logged_in? %>
-            Hi,<%= current_user.username %> ! |
-                        <%= link_to 'Log out', logout_path %>
+            Hi,<%= link_to current_user.username %> ! | <%= link_to 'Log out', logout_path %>
           <% else %>
-            <%= link_to 'Sign Up' %> |
-            <%= link_to 'Log in', login_path%>
+            <%= link_to 'Sign Up' %> | <%= link_to 'Log in', login_path%>
           <% end %>
         </div>
         <% if admin_logged_in? %> 

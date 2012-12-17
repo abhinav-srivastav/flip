@@ -1,4 +1,7 @@
 class Product < ActiveRecord::Base
+  extend FriendlyId
+
+  friendly_id :product, use: :slugged
   has_and_belongs_to_many :categories
   belongs_to :brand 
   attr_accessible :product, :product_type, :price, :category_ids, :brand_id

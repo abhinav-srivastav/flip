@@ -1,25 +1,7 @@
 <div >
   <ul>	
       <% @categories.each do |cat| %>
-      <li><%= cat.category %>
-        <ul>
-            <% brands = cat.brands %>
-            <% unless brands.nil? %>
-              <% brands.each do |brand| %>
-                <li> <%= brand.brand %>
-                  <ul>
-                    <% pro = brand.products %>
-                    <% unless pro.nil? %>
-                      <% pro.each do |p|  %>
-                        <li><%= p.product %>  [  <%= p.product_type %> ] </li>
-                      <% end %>
-                    <% end %>
-                  </ul>  
-                </li>
-              <% end %>
-            <% end %>
-          </ul>
-      </li>
+      <li><%= link_to cat.category, category_path(cat) %></li>
     <% end %>
   </ul>
 </div>

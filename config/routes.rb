@@ -9,6 +9,12 @@ Flip::Application.routes.draw do
   namespace :admin do
     resources :categories, :users, :products, :brands, :sessions
   end
+
+  resources :categories do
+    resources :brands do
+      get 'show_all', :on => :collection
+    end
+  end
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
