@@ -18,10 +18,17 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
+
   def admin_authorize
   	unless admin_logged_in?
   		redirect_to :root
   	end
+  end
+  
+  def user_authorize
+    unless logged_in?
+      redirect_to :root
+    end
   end
 
 end

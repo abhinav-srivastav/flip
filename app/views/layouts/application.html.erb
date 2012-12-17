@@ -13,7 +13,7 @@
       <%= link_to 'Flip-Tray', root_path, :class => 'brand' %>
       <div class="nav-collapse collapse">
         <div class="navbar-text pull-right">
-          Hi,<%= current_user.username%>! |
+          Hi,<%= link_to current_user.username, user_path(current_user)%>! |
           <%= link_to 'Log out', logout_path   %>
         </div>
         <ul class='nav'>

@@ -1,0 +1,20 @@
+<div>
+  <dl class  = "dl-horizontal" >      
+    <dt>Product Name:</dt>
+    <dd><%= @product.product %></dd>
+  </dl>
+  <dl class  = "dl-horizontal" >      
+    <dt>Brand name:</dt>
+    <dd><%= @product.brand.brand %></dd>
+  </dl>
+  <dl class  = "dl-horizontal" >      
+    <dt>Price:</dt>
+    <dd><%= @product.price %></dd>
+  </dl>
+  <dl class  = "dl-horizontal" >      
+    <dt>Product type:</dt>
+    <dd><%= @product.product_type %></dd>
+  </dl>
+  <%= button_to 'buy' %>
+
+</div>

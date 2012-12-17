@@ -8,7 +8,7 @@
     <% unless pro.nil? %>
       <dt>Products</dt>
       <% pro.each do |p|  %>
-        <dd><%= p.product %> || <%= p.brand.brand %></dd>
+        <dd><%= link_to p.product, product_path(p) %> || <%= p.brand.brand %></dd>
       <% end %>
     <% end %>
   </dl>  
