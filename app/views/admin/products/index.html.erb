@@ -10,7 +10,7 @@
     <tr>
       <td><%= pro.product %></td>
       <td>
-        <%= link_to "show", admin_product_path(pro), :class => "btn btn-small" %>
+        <%#= link_to "show", admin_product_path(pro), :class => "btn btn-small" %>
         <%= link_to "edit", edit_admin_product_path(pro), :class => "btn btn-small" %>
         <%= link_to "remove", admin_product_path(pro), method: :delete, data: { confirm: "Are u sure ?" },:class =>"btn btn-danger btn-small" %>
        </td>

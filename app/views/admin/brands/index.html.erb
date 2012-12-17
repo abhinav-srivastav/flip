@@ -10,7 +10,7 @@
     <tr>
       <td><%= brand.brand %></td>
       <td>
-        <%= link_to "show", admin_brand_path(brand), :class => "btn btn-small" %>
+        <%#= link_to "show", admin_brand_path(brand), :class => "btn btn-small" %>
         <%= link_to "edit", edit_admin_brand_path(brand), :class => "btn btn-small" %>
         <%= link_to "remove", admin_brand_path(brand), method: :delete, data: { confirm: "Are u sure ?" },:class =>"btn btn-danger btn-small" %>
        </td>
