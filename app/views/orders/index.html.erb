@@ -1,0 +1,36 @@
+<div>
+  <dl class  = "dl-horizontal" >      
+    <dt>Orders For:</dt>
+    <dd><%= @orders.first.user.username %></dd>
+  </dl>
+  <dl class  = "dl-horizontal" >      
+    <dt>Ordered Products:</dt>
+    <dd>
+      <ol>
+    	  <% @orders.each do |order| %>        
+          <li>
+            <table class='table'>
+              <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+              </tr>
+              <% order.line_items.each do |line| %>
+              <tr>
+                <td><%= line.product.product %> :<%= line.product.brand.brand %> </td>
+                <td><%= line.quantity %></td>
+                <td><%= line.price %></td>
+              </tr>
+              <%end%>
+              <tr>
+                <td></td>
+                <td><span class = 'pull-right'><b>Total Amount:</b></span></td>
+                <td><b><%= order.amount %></b></td>
+              <tr>
+            </table>          
+          </li>
+        <%end%>
+      </ol>
+    </dd>
+  </dl>
+</div>

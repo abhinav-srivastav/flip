@@ -15,6 +15,6 @@
     <dt>Product type:</dt>
     <dd><%= @product.product_type %></dd>
   </dl>
-  <%= link_to 'buy',:root, :class => "btn" %>
+  <%= button_to 'grab in trolley',orders_path(:id => @product.id, :price => @product.price), :class => "btn"  %>
 
 </div>

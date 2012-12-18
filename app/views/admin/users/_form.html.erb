@@ -1,8 +1,12 @@
 <%= simple_form_for ([:admin,@user]), :html => { :class => 'form-horizontal'} do |f| %>
+  <%= hidden_field_tag :modified,  true  %>
   <%= f.input :username %>
+  <% if current_user.super %>
+  	<%= f.input :admin %>
+  	<%= f.input :super %>
+  <% end %>
   <%= f.input :email %>
   <%= f.input :wallet %>
-  <%= f.input :password %>
   <%=f.submit :class => "btn btn-success"%>
   <%= link_to 'back', request.referrer, :class => 'btn btn-inverse'  %>
 <% end %> 

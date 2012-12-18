@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
   def index
-  	@users = User.all
+  	@users = User.super
     respond_to do |format|
 		  format.html
 	  end

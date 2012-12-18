@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121217134745) do
+ActiveRecord::Schema.define(:version => 20121218115722) do
 
   create_table "brands", :force => true do |t|
     t.string   "brand"
@@ -42,6 +42,23 @@ ActiveRecord::Schema.define(:version => 20121217134745) do
     t.integer "product_id"
   end
 
+  create_table "line_items", :force => true do |t|
+    t.integer  "product_id"
+    t.integer  "quantity",                                  :default => 1
+    t.decimal  "price",      :precision => 10, :scale => 2
+    t.integer  "order_id"
+    t.datetime "created_at",                                               :null => false
+    t.datetime "updated_at",                                               :null => false
+  end
+
+  create_table "orders", :force => true do |t|
+    t.integer  "user_id"
+    t.decimal  "amount",          :precision => 11, :scale => 2, :default => 0.0
+    t.text     "shiping_address"
+    t.datetime "created_at",                                                      :null => false
+    t.datetime "updated_at",                                                      :null => false
+  end
+
   create_table "products", :force => true do |t|
     t.string   "product"
     t.string   "product_type"
@@ -54,19 +71,6 @@ ActiveRecord::Schema.define(:version => 20121217134745) do
 
   add_index "products", ["slug"], :name => "index_products_on_slug", :unique => true
 
-  create_table "products_trolleys", :id => false, :force => true do |t|
-    t.integer "product_id"
-    t.integer "trolley_id"
-  end
-
-  create_table "trolleys", :force => true do |t|
-    t.string   "product_name"
-    t.integer  "quantity"
-    t.decimal  "amount",       :precision => 10, :scale => 2
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
-  end
-
   create_table "users", :force => true do |t|
     t.string   "username"
     t.string   "password_digest"
@@ -75,6 +79,7 @@ ActiveRecord::Schema.define(:version => 20121217134745) do
     t.decimal  "wallet",          :precision => 10, :scale => 2, :default => 10000.0
     t.datetime "created_at",                                                          :null => false
     t.datetime "updated_at",                                                          :null => false
+    t.boolean  "super",                                          :default => false
   end
 
 end
