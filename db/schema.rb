@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121219053123) do
+ActiveRecord::Schema.define(:version => 20121219142634) do
+
+  create_table "addresses", :force => true do |t|
+    t.string   "street no"
+    t.string   "area"
+    t.string   "city"
+    t.integer  "postal_code"
+    t.string   "country"
+    t.integer  "user_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "brands", :force => true do |t|
     t.string   "brand"
@@ -53,11 +64,11 @@ ActiveRecord::Schema.define(:version => 20121219053123) do
 
   create_table "orders", :force => true do |t|
     t.integer  "user_id"
-    t.decimal  "amount",          :precision => 11, :scale => 2, :default => 0.0
-    t.text     "shiping_address"
-    t.datetime "created_at",                                                      :null => false
-    t.datetime "updated_at",                                                      :null => false
+    t.decimal  "amount",     :precision => 11, :scale => 2, :default => 0.0
+    t.datetime "created_at",                                                 :null => false
+    t.datetime "updated_at",                                                 :null => false
     t.string   "state"
+    t.integer  "address_id"
   end
 
   create_table "products", :force => true do |t|

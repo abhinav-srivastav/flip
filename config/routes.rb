@@ -9,7 +9,10 @@ Flip::Application.routes.draw do
   namespace :admin do
     resources :categories, :users, :products, :brands, :sessions, :orders
   end
-  resources :users, :products, :line_items, :orders
+  resources :users, :products, :line_items
+  resources :orders do
+    post 'pay', :on => :member
+  end
   resources :categories do
     resources :brands do
       get 'show_all', :on => :collection

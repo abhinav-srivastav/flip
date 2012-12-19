@@ -17,7 +17,7 @@
             <% @order.line_items.each do |line| %>
             <tr id="<%= line.id%>">
               <td><%= line.product.product %> :<%= line.product.brand.brand %> </td>
-              <td><%= line.quantity %></td>
+              <td><div><%= line.quantity %>&nbsp;&nbsp;&nbsp;<span><%= link_to 'change'%></span></div></td>
               <!-- <td><%= line.price %><button type="button" class="close remove_line_item" >×</button></td> -->
               <td><%= line.price %>  <%= link_to '×', line_item_path(line),  method: :delete, data: { confirm: 'Are you sure?' } %></td>                
             </tr>

@@ -1,11 +1,14 @@
 class Order < ActiveRecord::Base
-  has_many :line_items, :dependent => :destroy, :autosave => true#, :before_remove => :update_order
-  belongs_to :user
-  attr_accessible :amount, :shipping_address, :user_id
+  has_many :line_items, :dependent => :destroy, :autosave => true#, :after_remove => :line_items_left
+  belongs_to :address
+  belongs_to :user, :inverse_of => :orders, :autosave => true
+  
+
+  attr_accessible :amount, :address, :user_id
   accepts_nested_attributes_for :line_items
 
   state_machine initial: :open do
-  	event :book_order do
+  	event :pay do
   		transition :open => :booked
   	end
     event :ship do
@@ -14,13 +17,30 @@ class Order < ActiveRecord::Base
     event :cancel do
       transition :booked => :cancel
     end    
+  
+    before_transition :open => :booked do |order|
+      if order.amount <= order.user.wallet
+        order.user.wallet -= order.amount        
+      else
+        false
+      end
+    end
   end
 
   scope :open_order, with_state(:open)
   scope :current_user_open_orders, lambda { |id| open_order.where(:user_id => id) }
-
+  
   def self.current_user_open_order(id)
     current_user_open_orders(id).first
   end 
+
   
+  def line_item_left(order)
+    if order.line_items.empty?
+      order.delete
+    end
+  end
+
+
+
 end

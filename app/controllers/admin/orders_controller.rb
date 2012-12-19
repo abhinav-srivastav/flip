@@ -1,6 +1,6 @@
 class Admin::OrdersController < ApplicationController
   def index 
-    @orders = Order.all
+    @orders = Order.order('updated_at desc')
     respond_to do |format|
       format.html 
     end

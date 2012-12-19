@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-  has_many :order, :dependent => :destroy
+  has_many :orders, :dependent => :destroy, :inverse_of => :user
+  # has_may :addresses, :dependent => :destroy
   attr_accessible :username, :password, :admin, :super, :password_confirmation, :email, :wallet
   # attr_accessor :modified
   has_secure_password

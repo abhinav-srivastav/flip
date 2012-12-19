@@ -13,5 +13,6 @@
  *= require bootstrap
  */
 
- .nav-collapse ul.nav { padding-top: 10px;   }
+ .nav-collapse ul.nav { padding-top: 10px; }
  ul { list-style-type: none;}
+ table.table tr td div span { font-size: smaller; }
