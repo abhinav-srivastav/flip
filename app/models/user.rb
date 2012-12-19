@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :order
+  has_many :order, :dependent => :destroy
   attr_accessible :username, :password, :admin, :super, :password_confirmation, :email, :wallet
   # attr_accessor :modified
   has_secure_password
@@ -11,14 +11,14 @@ class User < ActiveRecord::Base
   scope :super, where(:super => false)
 
   private
-  def check_if_admin?
-    logger.info(modified)
-    logger.info('sfvv')
-    if modified 
-      return false
-    end
-    true
-  end
+  # def check_if_admin?
+  #   logger.info(modified)
+  #   logger.info('sfvv')
+  #   if modified 
+  #     return false
+  #   end
+  #   true
+  # end
 
   def self.authorize(username, password)
     user = User.find_by_username(username)

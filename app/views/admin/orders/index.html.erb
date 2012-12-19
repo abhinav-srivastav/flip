@@ -1,0 +1,20 @@
+<div>
+  <h3>Orders</h3>
+  <table class = 'table'>
+    <tr>
+      <td><b>Order's by</b></td>
+      <td><b>Order Status</b></td>
+      <td><b>Actions</b></td>
+    </tr>
+    <% @orders.each do |order| %>
+    <tr>
+      <td><%= order.user.username %></td>
+      <td><%= order.state %></td>
+      <td>
+        <%= link_to "show details", admin_order_path(order), :class => "btn btn-small" %>
+        <%= link_to "remove", admin_order_path(order), method: :delete, data: { confirm: "Are u sure ?" },:class =>"btn btn-danger btn-small" %>
+       </td>
+    </tr>
+    <% end %>
+  </table>
+</div>
