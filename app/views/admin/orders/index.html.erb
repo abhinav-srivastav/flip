@@ -14,8 +14,8 @@
       <td><%= order.created_at.to_date %></td>
       <td>
         <%= link_to "show details", admin_order_path(order), :class => "btn btn-small" %>
-        <%= link_to "remove", admin_order_path(order), method: :delete, data: { confirm: "Are u sure ?" },:class =>"btn btn-danger btn-small" %>
-       </td>
+        <%= link_to "Cancel", admin_order_path(order), method: :delete, data: { confirm: "Are u sure ?" },:class =>"btn btn-danger btn-small" %>
+      </td>
     </tr>
     <% end %>
   </table>

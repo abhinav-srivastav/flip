@@ -3,6 +3,22 @@
     <dt>Order For:</dt>
     <dd><%= @order.user.username %></dd>
   </dl>
+  <dl class  = "dl-horizontal" >      
+    <dt>Order Status:</dt>
+    <dd><%= @order.state %></dd>
+  </dl>
+  <% if @order.address %>
+  <dl class  = "dl-horizontal" >      
+    <dt>Address:</dt>
+    <dd>
+      <%= @order.address.name %><br/>
+      <%= @order.address.street_no %><br/>
+      <%= @order.address.area %><br/>
+      <%= @order.address.city %><br/>
+      <%= @order.address.postal_code %>     
+    </dd>
+  </dl>
+  <% end %>
   <table class='table'>
     <tr>
       <th>Product</th>
@@ -13,11 +29,7 @@
     <tr id="<%= line.id%>">
       <td><%= line.product.product %> :<%= line.product.brand.brand %> </td>
       <td><%= line.quantity %></td>
-      <td><%= line.price %>
-        <span>
-          <%= link_to '×', line_item_path(line), method: :delete, data: { confirm: 'Are you sure?' } %>
-        </span>
-      </td>                
+      <td><%= line.price %></td>                
     </tr>
     <%end%>
     <tr>

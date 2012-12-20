@@ -7,6 +7,7 @@ class OrdersController < ApplicationController
   	@order = Order.current_user_open_order(current_user.id)
     if @order
       @order.amount = order_amount(@order.line_items)
+      @order.save
     end
   	respond_to do |format|
   	  if @order.nil?

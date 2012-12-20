@@ -12,7 +12,7 @@
             <tr>
               <th>Product</th>
               <th>Quantity</th>
-              <th>Price</th>
+              <th>Price/Unit</th>
             </tr>
             <% @order.line_items.each do |line| %>
             <tr>
@@ -30,8 +30,7 @@
             <tr>
               <td></td>
               <td></td>
-              <td><%= link_to 'Confirm Order', confirm_order_path(@order), :class => 'btn btn-small btn-success' %></td>
-              <%#= button_to 'Pay', pay_order_path(@order), :class=> 'btn btn-success' %>
+              <td><%= link_to 'Next', confirm_order_path(@order), :class => 'btn btn-small btn-success' %></td>
             </tr>
           </table>          
         </li>
