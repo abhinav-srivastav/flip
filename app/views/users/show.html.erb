@@ -15,6 +15,11 @@
     <dt><%= link_to 'My Orders', orders_path %></dt>
   </dl>
 
-  <%= link_to 'edit', edit_user_path(@user), :class => "btn" %>
-  <%= link_to 'back', request.referrer, :class => "btn btn-inverse" %>
+  <dl class='dl-horizontal'>
+    <dt></dt>
+    <dd>
+      <%= link_to 'edit', edit_user_path(@user), :class => "btn" %>
+      <%= link_to 'back', :root, :class => "btn btn-inverse" %>
+    </dd>
+  </dl>
 </div>

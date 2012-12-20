@@ -55,10 +55,14 @@ class OrdersController < ApplicationController
         flash[:success] = 'Payment made successfully!'
         format.html { redirect_to :root }
       else
-        flash[:error] = 'Not enough balance in your wallet!'
+        flash[:error] = 'Not enough balance in your wallet/address required!'
         format.html { redirect_to request.referrer }
       end
     end
+  end
+
+  def booked
+    @orders = Order.user_current(current_user.id)
   end
 
  private

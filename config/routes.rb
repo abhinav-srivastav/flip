@@ -11,6 +11,7 @@ Flip::Application.routes.draw do
   end
   resources :users, :products, :line_items, :addresses
   resources :orders do
+    get 'booked', :on => :collection
     post 'pay', :on => :member
     get 'confirm', :on => :member
   end
