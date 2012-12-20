@@ -13,7 +13,6 @@
     <tr id="<%= line.id%>">
       <td><%= line.product.product %> :<%= line.product.brand.brand %> </td>
       <td><%= line.quantity %></td>
-      <!-- <td><%= line.price %><button type="button" class="close remove_line_item" >×</button></td> -->
       <td><%= line.price %>
         <span>
           <%= link_to '×', line_item_path(line), method: :delete, data: { confirm: 'Are you sure?' } %>

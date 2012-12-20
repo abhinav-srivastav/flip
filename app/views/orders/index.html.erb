@@ -15,9 +15,9 @@
               <th>Price</th>
             </tr>
             <% @order.line_items.each do |line| %>
-            <tr id="<%= line.id%>">
+            <tr>
               <td><%= line.product.product %> :<%= line.product.brand.brand %> </td>
-              <td><%= line.quantity %></td>
+              <td id="<%= line.id %>"><div><span><%= line.quantity %></span>&nbsp;&nbsp;&nbsp;<%= link_to 'change', edit_line_item_path(line), :remote => true  %></div></td>
               <!-- <td><%= line.price %><button type="button" class="close remove_line_item" >×</button></td> -->
               <td><%= line.price %>  <%= link_to '×', line_item_path(line),  method: :delete, data: { confirm: 'Are you sure?' } %></td>                
             </tr>
@@ -30,7 +30,7 @@
             <tr>
               <td></td>
               <td></td>
-              <td><%= link_to 'Confirm Order', edit_order_path(@order), :class => 'btn btn-small btn-success' %></td>
+              <td><%= link_to 'Confirm Order', confirm_order_path(@order), :class => 'btn btn-small btn-success' %></td>
               <%#= button_to 'Pay', pay_order_path(@order), :class=> 'btn btn-success' %>
             </tr>
           </table>          

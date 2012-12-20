@@ -5,7 +5,9 @@ class OrdersController < ApplicationController
 
   def index 
   	@order = Order.current_user_open_order(current_user.id)
-    @order.amount = order_amount(@order.line_items)
+    if @order
+      @order.amount = order_amount(@order.line_items)
+    end
   	respond_to do |format|
   	  if @order.nil?
   	  	flash[:error] = 'No Items in your trolley !'
@@ -30,16 +32,20 @@ class OrdersController < ApplicationController
     end
   end
   
-  def edit
+  def confirm
     @order = Order.find(params[:id])
   end
 
-
-
-
-
-
-
+  def update 
+    @order = Order.find(params[:id])
+    if @order.update_attributes(params[:order]) 
+       flash[:success] = 'order placed successfully'
+    else
+      flash[:error] = 'error updating order'
+    end  
+    render :confirm
+    
+  end
 
   def pay
     @order = Order.find(params[:id])

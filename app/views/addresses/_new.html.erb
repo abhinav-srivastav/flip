@@ -1,0 +1,10 @@
+<%= simple_form_for (@address), :html => { :class => 'form-horizontal'} do |f| %>
+  <%= f.input :name %>
+  <%= f.input :street_no %>
+  <%= f.input :area %>
+  <%= f.input :city %>
+  <%= f.input :postal_code %>
+  <%#= f.input :country %>
+  <%= f.submit :class => "btn btn-success btn-mini"%>
+  <%= link_to 'cancel','',:class => "btn btn-mini btn-inverse" %>
+<% end %> 

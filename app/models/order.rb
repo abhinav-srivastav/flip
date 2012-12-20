@@ -4,7 +4,7 @@ class Order < ActiveRecord::Base
   belongs_to :user, :inverse_of => :orders, :autosave => true
   
 
-  attr_accessible :amount, :address, :user_id
+  attr_accessible :amount, :address_id, :user_id
   accepts_nested_attributes_for :line_items
 
   state_machine initial: :open do
