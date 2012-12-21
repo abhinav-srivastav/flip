@@ -18,7 +18,6 @@ class OrdersController < ApplicationController
 
   def create 
     @order = Order.current_user_open_order(current_user.id)
-    @order = Order.create(:user_id => current_user.id) if @order.nil?
     @order = add_line_item(@order, params[:id],params[:price])
     respond_to do |format|
       if @order.save

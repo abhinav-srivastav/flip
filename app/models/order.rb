@@ -32,7 +32,12 @@ class Order < ActiveRecord::Base
   scope :user_orders, lambda { |id| where("user_id = ? AND state = 'booked'", id).order('updated_at desc') }
   
   def self.current_user_open_order(id)
-    current_user_open_orders(id).first
+    order = current_user_open_orders(id).first
+    if order
+      order
+    else
+      create(:user_id => id)
+    end
   end 
 
   
