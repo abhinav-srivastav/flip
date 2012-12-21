@@ -5,12 +5,6 @@ class OrdersController < ApplicationController
 
   def index 
   	@order = Order.current_user_open_order(current_user.id)
-    if @order
-      @order.amount = order_amount(@order.line_items)
-      @order.save
-    else
-      flash.now[:error] = 'No Items in your trolley !'
-    end
   	respond_to do |format|
   	  format.html
   	end
@@ -50,7 +44,7 @@ class OrdersController < ApplicationController
         flash[:success] = 'Payment made successfully!'
         format.html { redirect_to :root }
       else
-        flash[:error] = 'Not enough balance in your wallet/address left blank!'
+        flash[:error] = 'Not enough credit in your wallet/address left blank!'
         format.html { redirect_to request.referrer }
       end
     end

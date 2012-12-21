@@ -35,6 +35,7 @@
   <dl class  = "dl-horizontal" >      
     <dt>Address:</dt>
     <dd>
+      <%= spinner_tag %>
       <div class='order_address' id="<%= @order.id %>">
         <% @order.user.addresses.each do |address| %>
         <% selected = (address.id == @order.address_id) ? 'selected': ''  %>
@@ -50,8 +51,6 @@
       </div><br/>
     <div id='add_address'></div>
     <%= link_to 'add new address', new_address_path, :remote => true, :class => "btn btn-small btn-warning" %>
-    <%= link_to 'save address','', :class => 'btn btn-primary btn-small', :id => 'save_address' %>
-    <%= spinner_tag %><br/><br/>
     <%= button_to 'Pay', pay_order_path(@order), :class => 'btn btn-small btn-success' %>
     </dd>
   </dl>  
