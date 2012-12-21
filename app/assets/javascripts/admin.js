@@ -11,7 +11,12 @@ $(document).ready(function() {
   	new_div.append(text_box);
   	new_div.append(button);
   	parent_div.append(new_div)
-  	
-
   });
 });
+
+function add_images(link, association, content) {
+  var new_id = new Date().getTime();
+  var regexp = new RegExp("new_" + association, "g" )
+  console.log($(link))
+  $(link).parent().before(content.replace(regexp, new_id));
+}

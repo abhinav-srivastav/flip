@@ -8,6 +8,7 @@ class Admin::ProductsController < ApplicationController
 
   def new
     @product = Product.new
+    @product.images.build
   end
 
   def create 
@@ -23,12 +24,14 @@ class Admin::ProductsController < ApplicationController
 
 	def edit 
 		@product = Product.find(params[:id])
+    @product.images.build
 	end
 	
   def update
 		@product = Product.find(params[:id])
 		respond_to do |format|
       if @product.update_attributes(params[:product])
+        flash[:success] = "Product updated !"
         format.html { redirect_to admin_products_path }
       else
         format.html { render action: "edit"}
