@@ -8,12 +8,10 @@ class OrdersController < ApplicationController
     if @order
       @order.amount = order_amount(@order.line_items)
       @order.save
+    else
+      flash.now[:error] = 'No Items in your trolley !'
     end
   	respond_to do |format|
-  	  if @order.nil?
-  	  	flash[:error] = 'No Items in your trolley !'
-        format.html { redirect_to request.referrer  }
-  	  end
   	  format.html
   	end
   end
@@ -40,12 +38,11 @@ class OrdersController < ApplicationController
   def update 
     @order = Order.find(params[:id])
     if @order.update_attributes(params[:order]) 
-       flash[:success] = 'order placed successfully'
-    else
-      flash[:error] = 'error updating order'
+      #flash[:success] = 'order details updated '
+    #else
+      #flash[:error] = 'error updating order'
     end  
-    render :confirm
-    
+    render :confirm    
   end
 
   def pay
@@ -55,7 +52,7 @@ class OrdersController < ApplicationController
         flash[:success] = 'Payment made successfully!'
         format.html { redirect_to :root }
       else
-        flash[:error] = 'Not enough balance in your wallet/address required!'
+        flash[:error] = 'Not enough balance in your wallet/address left blank!'
         format.html { redirect_to request.referrer }
       end
     end
@@ -63,6 +60,9 @@ class OrdersController < ApplicationController
 
   def booked
     @orders = Order.user_current(current_user.id)
+    respond_to do |format|
+      format.html
+    end
   end
 
  private

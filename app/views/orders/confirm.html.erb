@@ -37,8 +37,9 @@
     <dd>
       <div class='order_address' id="<%= @order.id %>">
         <% @order.user.addresses.each do |address| %>
-        <% selected= (address.id == @order.address_id) ? 'selected': ''  %>
-        <div id="<%= address.id%>" class='<%= selected%>'>
+        <% selected = (address.id == @order.address_id) ? 'selected': ''  %>
+        <div id="<%= address.id %>" class='<%= selected %>'>
+          <%= link_to '×', address_path(address), method: :delete, data: { confirm: 'Delete Address ?' } ,:class => 'pull-right' %>
           <%= address.name %><br/>
           <%= address.street_no %><br/>
           <%= address.area %><br/>

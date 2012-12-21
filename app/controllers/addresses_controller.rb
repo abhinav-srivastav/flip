@@ -20,4 +20,12 @@ class AddressesController < ApplicationController
     end
   end
 
+  def destroy
+    @address = Address.find(params[:id])
+    @address.destroy
+    respond_to do |format|
+      format.html { redirect_to request.referrer, :notice => 'Address deleted !'  }
+    end 
+  end
+
 end
