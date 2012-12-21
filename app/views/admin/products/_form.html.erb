@@ -15,7 +15,12 @@
   <div class='control-group'>
     <div class='controls'>
       <% @product.images.each do |img| %>
-        <%= image_tag(img.image.url(:thumb)) if img.persisted? %>
+        <% if img.persisted? %>
+          <div class='product_image'  id="<%= img.id %>">
+            <%= link_to (image_tag('delete.png')),admin_image_path(img), method: :delete, :data => { :confirm => 'Delete this image ?' }, :class=> 'pull-right'%>
+            <%= image_tag(img.image.url(:thumb), :class => 'img-polaroid') %>
+          </div>
+        <% end %>
       <% end %> 
     </div>
   </div>

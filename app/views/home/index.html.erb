@@ -1,15 +1,17 @@
-<div >
-  <ul  >	
-    <% @categories.each do |cat| %>
-      <li>
-        <%= link_to cat.category, category_path(cat) %>
-        <!-- <ul>
-          <%# cat.brands.each do |br| %>
-            <li><%#= link_to br.brand, category_brand_path(cat,br) %></li>
-          <%# end %>
-          <li><%#= link_to 'All', show_all_category_brands_path(cat) %></li>
-        </ul> -->
-      </li>     
-    <% end %>
-  </ul>
+<div class='span3'>
+  <div class='well sidebar-nav'>
+    <ul >	<h3 >Categories</h3>
+      <% @categories.each do |cat| %>
+        <li>
+          <%= link_to cat.category, category_path(cat) %>
+          <!-- <ul>
+            <%# cat.brands.each do |br| %>
+              <li><%#= link_to br.brand, category_brand_path(cat,br) %></li>
+            <%# end %>
+            <li><%#= link_to 'All', show_all_category_brands_path(cat) %></li>
+          </ul> -->
+        </li>     
+      <% end %>
+    </ul>
+  </div>
 </div>

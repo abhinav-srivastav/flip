@@ -64,6 +64,15 @@ class OrdersController < ApplicationController
     end
   end
 
+  def cancel
+    @order = Order.find(params[:id])
+    @order.user.wallet += @order.amount
+    @order.cancel
+    respond_to do |format|      
+      format.html { redirect_to request.referrer, :notice => 'Order Cancelled.Credit refunded to wallet !'    }
+    end
+  end
+
  private
   def add_line_item(order, product_id, product_price)
     line_item = order.line_items.find_by_product_id(product_id)

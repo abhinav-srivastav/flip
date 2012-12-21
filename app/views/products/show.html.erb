@@ -15,6 +15,13 @@
     <dt>Product type:</dt>
     <dd><%= @product.product_type %></dd>
   </dl>
+  <dl class  = "dl-horizontal" >      
+    <dd>
+      <% @product.images.each do |img| %>
+        <%= image_tag(img.image.url(:thumb)) %>
+      <% end %>
+    </dd>
+  </dl>
   <%= button_to 'grab in trolley',orders_path(:id => @product.id, :price => @product.price), :class => "btn"  %>
 
 </div>

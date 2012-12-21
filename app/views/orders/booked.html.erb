@@ -40,6 +40,7 @@
           <td><b><%= order.amount %></b></td>
         <tr>
       </table>
+      <%= link_to 'cancel order', cancel_order_path(order), :class => 'btn btn-danger' %>
       <hr><hr>
     </li>
   <% end %>

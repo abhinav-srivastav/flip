@@ -1,4 +1,6 @@
 Flip::Application.routes.draw do
+  get "images/destroy"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -7,10 +9,11 @@ Flip::Application.routes.draw do
 
 
   namespace :admin do
-    resources :categories, :users, :products, :brands, :sessions, :orders
+    resources :categories, :users, :products, :brands, :sessions, :orders, :images
   end
   resources :users, :products, :line_items, :addresses
   resources :orders do
+    get 'cancel', :on => :member
     get 'booked', :on => :collection
     post 'pay', :on => :member
     get 'confirm', :on => :member

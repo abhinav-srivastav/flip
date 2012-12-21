@@ -29,7 +29,7 @@ class Order < ActiveRecord::Base
 
   scope :open_order, with_state(:open)
   scope :current_user_open_orders, lambda { |id| open_order.where(:user_id => id) }
-  scope :user_orders, lambda { |id| where("user_id = ? AND state = 'booked'", id)  }
+  scope :user_orders, lambda { |id| where("user_id = ? AND state = 'booked'", id).order('updated_at desc') }
   
   def self.current_user_open_order(id)
     current_user_open_orders(id).first

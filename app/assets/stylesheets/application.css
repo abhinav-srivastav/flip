@@ -10,20 +10,8 @@
  *
  *
  *= require_self
+ *= require admin
+ *= require public
  *= require bootstrap
  */
 
- .nav-collapse ul.nav { padding-top: 10px; }
- ul { list-style-type: none;}
- table.table tr td div .change_quantity { font-size: smaller; }
- .order_address div { display: inline-block; border: 1px solid; padding: 5px 20px; }
- .order_address div.selected { border-color: rgba(236, 73, 82, 0.9);
-  outline: 0;
-  outline: thin dotted \9;
-  /* IE6-9 */
-
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(236, 37, 82, 0.6);
-     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(236, 37, 82, 0.6);
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(236, 37, 82, 0.6);   }
-.order_address div.selected a { display: none; }
-div#add_address div.new_address_form { margin: 10px; padding : 10px; border: 2px dotted   ; display: inline-block;  }
