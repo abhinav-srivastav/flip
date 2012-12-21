@@ -11,11 +11,11 @@
   <dl class  = "dl-horizontal" >      
     <dt>Address:</dt>
     <dd>
-      <%= @order.address.name %><br/>
-      <%= @order.address.street_no %><br/>
-      <%= @order.address.area %><br/>
-      <%= @order.address.city %><br/>
-      <%= @order.address.postal_code %>     
+      <%= @order.address.name %>, 
+      <%= @order.address.street_no %>,
+      <%= @order.address.area %>, 
+      <%= @order.address.city %>-<%= @order.address.postal_code %> ,
+      <%= @order.address.country %>   
     </dd>
   </dl>
   <% end %>

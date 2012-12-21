@@ -19,8 +19,7 @@ class OrdersController < ApplicationController
   def create 
     @order = Order.current_user_open_order(current_user.id)
     @order = Order.create(:user_id => current_user.id) if @order.nil?
-    @line_item = @order.line_items.new(:product_id => params[:id], :price => params[:price])
-    @order.amount =  order_amount(@order.line_items)
+    @order = add_line_item(@order, params[:id],params[:price])
     respond_to do |format|
       if @order.save
         flash[:notice] = 'Added to order'
@@ -30,7 +29,7 @@ class OrdersController < ApplicationController
       format.html { redirect_to request.referrer}
     end
   end
-  
+
   def confirm
     @order = Order.find(params[:id])
   end
@@ -59,13 +58,24 @@ class OrdersController < ApplicationController
   end
 
   def booked
-    @orders = Order.user_current(current_user.id)
+    @orders = Order.user_orders(current_user.id)
     respond_to do |format|
       format.html
     end
   end
 
  private
+  def add_line_item(order, product_id, product_price)
+    line_item = order.line_items.find_by_product_id(product_id)
+    if line_item.nil?
+      order.line_items.new(:product_id => product_id, :price => product_price)
+    else
+      line_item.quantity += 1
+      line_item.save
+    end
+    order.amount = order_amount(order.line_items)
+    order    
+  end
 
   def order_amount(line_items)
     amount = 0
