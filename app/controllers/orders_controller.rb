@@ -46,7 +46,7 @@ class OrdersController < ApplicationController
         flash[:success] = 'Payment made successfully!'
         format.html { redirect_to :root }
       else
-        flash[:error] = 'Not enough credit in your wallet/address left blank!'
+        flash[:error] = 'Invalid details to place an order !'
         format.html { redirect_to request.referrer }
       end
     end

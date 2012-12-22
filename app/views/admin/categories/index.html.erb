@@ -4,11 +4,13 @@
   <table class = 'table table-striped'>
     <tr>
       <td><b>Category</b></td>
+      <td><b>Parent Category</b></td>      
       <td class='shift_right'><b>Actions</b></td>
     </tr>
     <% @categories.each do |cat| %>
     <tr>
       <td><%= cat.category %></td>
+      <td><%= cat.parent.category unless cat.parent.nil? %></td>
       <td class='shift_right'>
         <%#= link_to "show", admin_category_path(cat), :class => "btn btn-small" %>
         <%= link_to "edit", edit_admin_category_path(cat), :class => "btn btn-small" %>

@@ -10,8 +10,8 @@
  *
  *
  *= require_self
+ *= require bootstrap
  *= require admin
  *= require public
- *= require bootstrap
  */
 

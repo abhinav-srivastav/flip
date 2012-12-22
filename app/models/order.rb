@@ -19,9 +19,7 @@ class Order < ActiveRecord::Base
     end    
   
     before_transition :open => :booked do |order|
-      return false if  order.amount <= 0
-      return false unless  order.address <= 0
-      if order.amount <= order.user.wallet
+      if  order.amount > 0 && order.amount <= order.user.wallet && order.address
         order.user.wallet -= order.amount        
       else
         false
