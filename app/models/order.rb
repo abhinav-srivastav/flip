@@ -19,7 +19,9 @@ class Order < ActiveRecord::Base
     end    
   
     before_transition :open => :booked do |order|
-      if order.amount <= order.user.wallet && order.address
+      return false if  order.amount <= 0
+      return false unless  order.address <= 0
+      if order.amount <= order.user.wallet
         order.user.wallet -= order.amount        
       else
         false
@@ -29,7 +31,7 @@ class Order < ActiveRecord::Base
 
   scope :open_order, with_state(:open)
   scope :current_user_open_orders, lambda { |id| open_order.where(:user_id => id) }
-  scope :user_orders, lambda { |id| where("user_id = ? AND state = 'booked'", id).order('updated_at desc') }
+  scope :user_orders, lambda { |id,state| where("user_id = ? AND state = ? ", id, state).order('updated_at desc ') }
   
   def self.current_user_open_order(id)
     order = current_user_open_orders(id).first

@@ -1,7 +1,9 @@
 <div>
-  <ol>
+  <%= render 'order_navigation' %>
+  <h3><u>Booked Orders</u></h3>
+  <div class='table odd_color'>
   <% @orders.each do |order|  %>
-    <li>
+    <div>
       <dl class  = "dl-horizontal" >      
         <dt>Booked Order For:</dt>
         <dd><%= order.user.username %></dd>
@@ -40,9 +42,8 @@
           <td><b><%= order.amount %></b></td>
         <tr>
       </table>
-      <%= link_to 'cancel order', cancel_order_path(order), :class => 'btn btn-danger' %>
-      <hr><hr>
-    </li>
+      <%= link_to 'cancel order', cancel_order_path(order), method: :post, :class => 'btn btn-danger' %>
+    </div>
   <% end %>
-  </ol>          
+  </div>          
   </div>

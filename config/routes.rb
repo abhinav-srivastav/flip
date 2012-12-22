@@ -13,7 +13,8 @@ Flip::Application.routes.draw do
   end
   resources :users, :products, :line_items, :addresses
   resources :orders do
-    get 'cancel', :on => :member
+    get 'cancel', :on => :collection
+    post 'cancel', :on => :member
     get 'booked', :on => :collection
     post 'pay', :on => :member
     get 'confirm', :on => :member

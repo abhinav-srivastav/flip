@@ -10,8 +10,9 @@ gem 'simple_form'
 gem "friendly_id", "~> 4.0.1"
 gem 'state_machine'
 gem "country-select", "~> 1.1.1"
-gem "paperclip", "~> 3.0"
 gem 'cocaine', '0.3.2'
+gem "paperclip", "~> 3.0"
+gem "acts_as_tree", "~> 1.2.0"
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

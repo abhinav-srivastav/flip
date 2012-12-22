@@ -1,5 +1,6 @@
 <div>
-  <%= link_to 'Booked Orders', booked_orders_path %>
+  <%= render 'order_navigation' %>
+  <h3><u>Open Order</u></h3>
   <% if @order %>
     <dl class  = "dl-horizontal" >      
       <dt>Order For:</dt>

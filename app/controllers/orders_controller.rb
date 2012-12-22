@@ -5,6 +5,8 @@ class OrdersController < ApplicationController
 
   def index 
   	@order = Order.current_user_open_order(current_user.id)
+    @order.amount = order_amount(@order.line_items)
+    @order.save
   	respond_to do |format|
   	  format.html
   	end
@@ -51,18 +53,22 @@ class OrdersController < ApplicationController
   end
 
   def booked
-    @orders = Order.user_orders(current_user.id)
+    @orders = Order.user_orders(current_user.id,'booked')
     respond_to do |format|
       format.html
     end
   end
 
   def cancel
-    @order = Order.find(params[:id])
-    @order.user.wallet += @order.amount
-    @order.cancel
-    respond_to do |format|      
-      format.html { redirect_to request.referrer, :notice => 'Order Cancelled.Credit refunded to wallet !'    }
+    if request.post?
+      @order = Order.find(params[:id])
+      @order.user.wallet += @order.amount
+      @order.cancel
+      respond_to do |format|      
+        format.html { redirect_to request.referrer, :notice => 'Order Cancelled.Credit refunded to wallet !'    }
+      end
+    else
+      @orders = Order.user_orders(current_user.id,'cancel')
     end
   end
 
