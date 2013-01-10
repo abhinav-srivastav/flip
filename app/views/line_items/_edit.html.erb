@@ -1,5 +1,5 @@
 <%= simple_form_for (@line_item), :html => { :class => 'form-horizontal'} do |f| %>
-  <%= f.input :quantity, :input_html => { :class => 'input-mini' } %>
+  <%= f.input :quantity, :input_html => { :class => 'input-mini pull_left' } %>
   <%=f.submit :class => "btn btn-success btn-mini"%>
   <%= link_to 'cancel','',:class => "btn btn-mini btn-inverse" %>
 <% end %> 

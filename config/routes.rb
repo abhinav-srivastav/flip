@@ -9,7 +9,7 @@ Flip::Application.routes.draw do
 
 
   namespace :admin do
-    resources :categories, :users, :products, :brands, :sessions, :orders, :images
+    resources :categories, :users, :products, :brands, :sessions, :orders, :images, :attributes
   end
   resources :users, :products, :line_items, :addresses
   resources :orders do
