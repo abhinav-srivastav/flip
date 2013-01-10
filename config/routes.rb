@@ -4,12 +4,12 @@ Flip::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
- match 'login' => "admin/sessions#new"
- match "logout" => "admin/sessions#destroy"
-
+  match 'login' => "admin/sessions#new"
+  match "logout" => "admin/sessions#destroy"
+  match 'admin' => "admin/categories#index"
 
   namespace :admin do
-    resources :categories, :users, :products, :brands, :sessions, :orders, :images, :attributes
+    resources :categories, :users, :products, :brands, :sessions, :orders, :images, :product_attributes, :product_details
   end
   resources :users, :products, :line_items, :addresses
   resources :orders do

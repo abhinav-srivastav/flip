@@ -25,12 +25,6 @@ ActiveRecord::Schema.define(:version => 20130110054145) do
     t.string   "name"
   end
 
-  create_table "attributes", :force => true do |t|
-    t.string   "product_attributes"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-  end
-
   create_table "brands", :force => true do |t|
     t.string   "brand"
     t.datetime "created_at", :null => false
@@ -89,12 +83,18 @@ ActiveRecord::Schema.define(:version => 20130110054145) do
     t.integer  "address_id"
   end
 
+  create_table "product_attributes", :force => true do |t|
+    t.string   "product_attributes"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
   create_table "product_details", :force => true do |t|
-    t.integer  "attribute_id"
+    t.integer  "product_attribute_id"
     t.integer  "product_id"
     t.text     "details"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
   end
 
   create_table "products", :force => true do |t|

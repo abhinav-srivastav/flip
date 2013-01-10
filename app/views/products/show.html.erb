@@ -1,4 +1,10 @@
 <div>
+  <dl class = "dl-horizontal" >      
+    <dd>
+      <% @product.images.each do |img| %>
+        <%= image_tag(img.image.url(:thumb)) %>
+      <% end %>
+    </dd>
   <dl class  = "dl-horizontal" >      
     <dt>Product Name:</dt>
     <dd><%= @product.product %></dd>
@@ -15,13 +21,22 @@
     <dt>Product type:</dt>
     <dd><%= @product.product_type %></dd>
   </dl>
+  </dl>
   <dl class  = "dl-horizontal" >      
     <dd>
-      <% @product.images.each do |img| %>
-        <%= image_tag(img.image.url(:thumb)) %>
-      <% end %>
+      <table class='table table-striped'>
+        <tr>
+          <td><b>Attributes</b></td>
+          <td><b>Details</b></td>
+        </tr>
+        <% @product.product_details.each do |pro_detail| %>
+        <tr>
+          <td><%= pro_detail.product_attribute.product_attributes %></td>
+          <td><%= pro_detail.details %></td>
+        </tr>
+        <% end %>
+      </table>
     </dd>
   </dl>
   <%= button_to 'grab in trolley',orders_path(:id => @product.id, :price => @product.price), :class => "btn"  %>
-
 </div>

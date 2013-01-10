@@ -20,3 +20,10 @@ function add_images(link, association, content) {
   console.log($(link))
   $(link).parent().before(content.replace(regexp, new_id));
 }
+
+function add_product_attributes(link, association, content) {
+  var new_id = new Date().getTime();
+  var regexp = new RegExp("new_" + association, "g" )
+  console.log($(link))
+  $(link).parent().append(content.replace(regexp, new_id));
+}
