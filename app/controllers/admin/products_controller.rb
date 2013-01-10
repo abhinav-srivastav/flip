@@ -9,6 +9,7 @@ class Admin::ProductsController < ApplicationController
   def new
     @product = Product.new
     @product.images.build
+    @product.product_attributes.build.product_details.build
   end
 
   def create 
@@ -25,6 +26,7 @@ class Admin::ProductsController < ApplicationController
 	def edit 
 		@product = Product.find(params[:id])
     @product.images.build
+    @product.product_attributes.build.product_details.build
 	end
 	
   def update

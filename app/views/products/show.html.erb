@@ -26,8 +26,8 @@
     <dd>
       <table class='table table-striped'>
         <tr>
-          <td><b>Attributes</b></td>
-          <td><b>Details</b></td>
+          <td><b>General Description</b></td>
+          <td></td>
         </tr>
         <% @product.product_details.each do |pro_detail| %>
         <tr>
@@ -38,5 +38,5 @@
       </table>
     </dd>
   </dl>
-  <%= button_to 'grab in trolley',orders_path(:id => @product.id, :price => @product.price), :class => "btn"  %>
+  <%= button_to 'grab in trolley',orders_path(:id => @product.id, :price => @product.price), :class => "btn btn-primary"  %>
 </div>

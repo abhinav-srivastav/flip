@@ -11,7 +11,7 @@ class Admin::ProductAttributesController < ApplicationController
   end
 
   def create 
-    @attribute  = ProductAttribute.new(params[:attribute])
+    @attribute  = ProductAttribute.new(params[:product_attribute])
     respond_to do |format|
       if @attribute.save
         format.html {redirect_to admin_product_attributes_path}
@@ -28,7 +28,7 @@ class Admin::ProductAttributesController < ApplicationController
   def update
     @attribute = ProductAttribute.find(params[:id])
     respond_to do |format|
-      if @attribute.update_attributes(params[:attribute])
+      if @attribute.update_attributes(params[:product_attribute])
         format.html { redirect_to admin_product_attributes_path }
       else
         format.html { render action: "edit"}

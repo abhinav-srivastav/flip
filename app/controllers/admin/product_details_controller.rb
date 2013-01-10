@@ -7,4 +7,19 @@ class Admin::ProductDetailsController < ApplicationController
   	end
   end
 
+  def edit
+    @pd = ProductDetail.find(params[:id])
+  end
+
+  def update
+  	@pd = ProductDetail.find(params[:id])
+  	respond_to do |format|
+  	  if @pd.update_attributes(params[:product_detail])
+  	  	format.html { redirect_to admin_products_path }
+  	  else
+  	  	format.html { render action: 'edit' } 
+  	  end
+  	end
+  end
+
 end
