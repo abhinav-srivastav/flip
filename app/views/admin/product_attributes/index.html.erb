@@ -1,0 +1,19 @@
+<div>
+  <h3>Attributes</h3>
+  <%= link_to "New Attributes", new_admin_product_attribute_path,:class => "btn btn-primary" %><br/><br/>
+  <table class = 'table table-striped'>
+    <tr>
+      <td><b>Attributes</b></td>
+      <td class='shift_right'><b>Actions</b></td>
+    </tr>
+    <% @attributes.each do |attribute| %>
+    <tr>
+      <td><%= attribute.product_attributes %></td>
+      <td class='shift_right'>
+        <%= link_to "edit", edit_admin_product_attribute_path(attribute), :class => "btn btn-small" %>
+        <%= link_to "remove", admin_product_attribute_path(attribute), method: :delete, data: { confirm: "Are u sure ?" },:class =>"btn btn-danger btn-small" %>
+       </td>
+    </tr>
+    <% end %>
+  </table>
+</div>
