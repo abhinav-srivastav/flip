@@ -15,7 +15,7 @@
   </dl>
   <dl class  = "dl-horizontal" >      
     <dt>Price:</dt>
-    <dd><%= @product.price %></dd>
+    <dd><strike><%= @product.cost_price if @product.cost_price %></strike> <%= @product.price %></dd>
   </dl>
   <dl class  = "dl-horizontal" >      
     <dt>Product type:</dt>
