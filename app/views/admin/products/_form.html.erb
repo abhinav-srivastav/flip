@@ -27,9 +27,9 @@
   <%= f.association :brand, :label_method => :brand, :as => :radio_buttons %>
   <%= f.association :categories, :label_method => :category, :as => :check_boxes %>
   <%#= f.association :product_attributes, :label_method => :product_attributes, :as => :select %>
-
-  <div>
-    <%= link_to_add_attributes 'Add Attribute', f, :product_attributes %>
+  
+  <div class='add_attributes'>
+    <%= link_to 'Add Attribute', new_admin_product_attribute_path, :remote => true %>
   </div><br/>
   <% unless @product.product_details.empty? %>
     <table class='table table-striped'>
@@ -41,10 +41,10 @@
       <% @product.product_details.each do |pro_detail| %>
       <tr>
         <td><%= pro_detail.product_attribute.product_attributes %></td>
-        <td><%= pro_detail.details %></td>
+        <td id="<%= pro_detail.id %>"><div><%= pro_detail.details %></div></td>
         <td class ='shift_right'>
-          <%= link_to 'edit', edit_admin_product_detail_path(pro_detail) %>
-          <%= link_to 'delete', admin_product_detail_path(pro_detail), method: :delete, :data => { :confirm => 'Delete attribute ?' } %>
+          <%= link_to 'edit', edit_admin_product_detail_path(pro_detail), :remote => true, :class => 'edit_attribute btn btn-mini' %>
+          <%= link_to 'delete', admin_product_detail_path(pro_detail), method: :delete, :data => { :confirm => 'Delete attribute ?'}, :class => 'btn btn-mini btn-danger' %>
         </td>
       </tr>
       <% end %>

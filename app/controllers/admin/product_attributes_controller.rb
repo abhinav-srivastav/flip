@@ -8,13 +8,14 @@ class Admin::ProductAttributesController < ApplicationController
 
   def new
   	@attribute = ProductAttribute.new
+    @attribute.product_details.build
   end
 
   def create 
     @attribute  = ProductAttribute.new(params[:product_attribute])
     respond_to do |format|
       if @attribute.save
-        format.html {redirect_to admin_product_attributes_path}
+        format.html {redirect_to admin_product_attributes_path }
       else
         format.html {render action: 'new'}
       end

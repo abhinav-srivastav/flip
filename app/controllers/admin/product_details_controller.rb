@@ -15,7 +15,8 @@ class Admin::ProductDetailsController < ApplicationController
   	@pd = ProductDetail.find(params[:id])
   	respond_to do |format|
   	  if @pd.update_attributes(params[:product_detail])
-  	  	format.html { redirect_to admin_products_path }
+        flash[:success] = 'Attribute updated !'
+  	  	format.html { redirect_to edit_admin_product_path(@pd.product) }
   	  else
   	  	format.html { render action: 'edit' } 
   	  end

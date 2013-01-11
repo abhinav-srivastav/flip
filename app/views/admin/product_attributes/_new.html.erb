@@ -1,0 +1,12 @@
+<div>
+  <%= simple_form_for ([:admin,@attribute]), :html => { :class => 'form-horizontal'} do |f| %>
+	  <%= f.input :product_attributes, :input_html => { :class => "pull_left" } %>
+	  <%= f.fields_for :product_details do |pd| %>
+	    <% if pd.object.new_record? %>
+          <%= render 'product_detail', :f => pd %>
+	    <% end %>
+	  <% end %>
+	  <%= f.submit :class => "btn btn-success btn-mini"%>
+	  <%= link_to 'cancel','',:class => "btn btn-mini btn-inverse" %>
+  <% end %>
+</div>

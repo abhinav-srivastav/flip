@@ -1,0 +1,3 @@
+$("td#<%= @pd.id %>")
+.children("div").hide().end()
+.append("<%= escape_javascript(render :partial => 'admin/product_details/edit', :locals => {:pro_detail => @pd} )%>")
