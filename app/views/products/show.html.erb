@@ -51,4 +51,15 @@
       </dd>
     </dl>
   <% end %>
+  <% unless @product.comments.empty? %>
+    Comments:
+    <% @product.comments.each do |comment|   %>
+      <dl class  = "dl-horizontal" >      
+        <dt><%= comment.user.username %></dt>
+        <dd><%= comment.comment %>
+        </dd>
+      </dl>
+    <% end %>  
+  <% end %>
+
 </div>
