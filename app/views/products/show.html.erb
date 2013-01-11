@@ -24,25 +24,31 @@
   </dl>
   <dl class = 'dl-horizontal'>
     <dd>
-      <%= link_to 'Rate this product', '' , :class => 'btn btn-warning' %>
-      <%= link_to 'Comment', '', :class => 'btn btn-success' %>
+      <div><%= button_to 'grab in trolley',orders_path(:id => @product.id, :price => @product.price), :class => "btn btn-primary" %></div>
+      <div class = 'rate' >
+        <%= link_to 'Rate this product', '' , :class => 'btn btn-warning' %>
+      </div><br/>
+      <div class = 'comment'>
+        <%= link_to 'Comment', new_comment_path(:product_id => @product.id) , :remote => :true, :class => 'btn btn-success' %><br/><br/>
+      </div>
     </dd>
   </dl>
-  <dl class  = "dl-horizontal" >      
-    <dd>
-      <table class='table table-striped'>
-        <tr>
-          <td><b>Description</b></td>
-          <td></td>
-        </tr>
-        <% @product.product_details.each do |pro_detail| %>
-        <tr>
-          <td><%= pro_detail.product_attribute.product_attributes %></td>
-          <td><%= pro_detail.details %></td>
-        </tr>
-        <% end %>
-      </table>
-    </dd>
-  </dl>
-  <%= button_to 'grab in trolley',orders_path(:id => @product.id, :price => @product.price), :class => "btn btn-primary" %>
+  <% unless @product.product_details.empty? %>
+    <dl class  = "dl-horizontal" >      
+      <dd>
+        <table class='table table-striped'>
+          <tr>
+            <td><b>Description</b></td>
+            <td></td>
+          </tr>
+          <% @product.product_details.each do |pro_detail| %>
+          <tr>
+            <td><%= pro_detail.product_attribute.product_attributes %></td>
+            <td><%= pro_detail.details %></td>
+          </tr>
+          <% end %>
+        </table>
+      </dd>
+    </dl>
+  <% end %>
 </div>

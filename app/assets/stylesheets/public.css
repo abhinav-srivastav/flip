@@ -14,4 +14,4 @@ table.table tr td div .change_quantity { font-size: smaller; }
 div#add_address div.new_address_form { margin: 10px; padding : 10px; border: 2px dotted   ; display: inline-block;  }
 div.odd_color div { padding:10px 0 10px 5px; }
 div.odd_color div:nth-child(odd) { background-color: #f0f0f0; }
-div.pull_left { margin-left: -120px; }
+div.pull_left { margin-left: -110px; }
