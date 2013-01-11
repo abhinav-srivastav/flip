@@ -26,10 +26,9 @@
   </div>
   <%= f.association :brand, :label_method => :brand, :as => :radio_buttons %>
   <%= f.association :categories, :label_method => :category, :as => :check_boxes %>
-  <%#= f.association :product_attributes, :label_method => :product_attributes, :as => :select %>
   
   <div class='add_attributes'>
-    <%= link_to 'Add Attribute', new_admin_product_attribute_path, :remote => true %>
+    <%= link_to 'Add Attribute', new_admin_product_attribute_path(:product_id => @product.id), :remote => true, :class => 'btn btn-primary' %>
   </div><br/>
   <% unless @product.product_details.empty? %>
     <table class='table table-striped'>

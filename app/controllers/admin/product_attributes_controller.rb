@@ -7,15 +7,16 @@ class Admin::ProductAttributesController < ApplicationController
   end
 
   def new
+    @@reference = request.referrer
   	@attribute = ProductAttribute.new
-    @attribute.product_details.build
+    @attribute.product_details.build(:product_id => params[:product_id])
   end
 
   def create 
     @attribute  = ProductAttribute.new(params[:product_attribute])
     respond_to do |format|
       if @attribute.save
-        format.html {redirect_to admin_product_attributes_path }
+        format.html {redirect_to @@reference }
       else
         format.html {render action: 'new'}
       end
