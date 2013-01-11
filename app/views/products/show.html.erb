@@ -52,14 +52,15 @@
     </dl>
   <% end %>
   <% unless @product.comments.empty? %>
-    Comments:
-    <% @product.comments.each do |comment|   %>
-      <dl class  = "dl-horizontal" >      
-        <dt><%= comment.user.username %></dt>
-        <dd><%= comment.comment %>
-        </dd>
-      </dl>
-    <% end %>  
+    <div class = 'dl-horizontal'>
+      <table class  = "table" > 
+        <tr><td><h4>Comments:</h4></td><td></td></tr>
+        <% @product.comments.each do |comment|   %>
+          <tr>
+            <td><%= comment.user.username %></td>
+            <td><%= comment.comment %></td>
+          </tr>
+        <% end %>  
+      </table>
   <% end %>
-
 </div>
