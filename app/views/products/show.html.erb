@@ -5,6 +5,7 @@
         <%= image_tag(img.image.url(:thumb)) %>
       <% end %>
     </dd>
+  </dl>
   <dl class  = "dl-horizontal" >      
     <dt>Product Name:</dt>
     <dd><%= @product.product %></dd>
@@ -21,12 +22,17 @@
     <dt>Product type:</dt>
     <dd><%= @product.product_type %></dd>
   </dl>
+  <dl class = 'dl-horizontal'>
+    <dd>
+      <%= link_to 'Rate this product', '' , :class => 'btn btn-warning' %>
+      <%= link_to 'Comment', '', :class => 'btn btn-success' %>
+    </dd>
   </dl>
   <dl class  = "dl-horizontal" >      
     <dd>
       <table class='table table-striped'>
         <tr>
-          <td><b>General Description</b></td>
+          <td><b>Description</b></td>
           <td></td>
         </tr>
         <% @product.product_details.each do |pro_detail| %>
@@ -38,5 +44,5 @@
       </table>
     </dd>
   </dl>
-  <%= button_to 'grab in trolley',orders_path(:id => @product.id, :price => @product.price), :class => "btn btn-primary"  %>
+  <%= button_to 'grab in trolley',orders_path(:id => @product.id, :price => @product.price), :class => "btn btn-primary" %>
 </div>

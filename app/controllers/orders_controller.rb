@@ -32,11 +32,11 @@ class OrdersController < ApplicationController
   def update 
     @order = Order.find(params[:id])
     if @order.update_attributes(params[:order]) 
-      #flash[:success] = 'order details updated '
-    #else
-      #flash[:error] = 'error updating order'
+      flash.now[:success] = 'order details updated '
+    else
+      flash.now[:error] = 'error updating order'
     end  
-    render :confirm    
+    render :action =>  'confirm' 
   end
 
   def pay

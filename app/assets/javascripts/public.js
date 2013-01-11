@@ -11,26 +11,11 @@ $(document).ready(function(){
 		params['order'] = order
 		order_url = "/orders/"+order['id']
 		$.ajax({
-			beforeSend: function() { $("#spinner_img").show();  },
+			beforeSend: function() { $("#spinner_img").show();},
 			type: 'PUT',
 			data: params,
 			url: order_url,
 			complete: function(){ $("#spinner_img").hide(); }
 		});
 	});
-
-//   $('.remove_line_item').click(function(){
-    
-//     tr = $(this).parents('tr');
-//     console.log($(tr).attr('id'));
-//     url_del = "line_items/"+$(tr).attr('id');
-//     $(tr).fadeOut();
-//     $.ajax({
-//       type: 'DELETE',
-//       data: {_method:'delete'},
-//       url: url_del,
-//       success: function(){console.log("sdvkyugfuv")}
-//     });
-//   });
-
 });

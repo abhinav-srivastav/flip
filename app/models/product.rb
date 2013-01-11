@@ -6,6 +6,8 @@ class Product < ActiveRecord::Base
   has_many :images, :dependent => :destroy, :autosave => true
   has_many :product_details, :dependent => :destroy
   has_many :product_attributes, :through => :product_details
+  has_many :ratings, :dependent => :destroy
+  has_many :comments, :dependent => :destroy
   belongs_to :brand 
   attr_accessible :product, :product_type, :cost_price, :price, :category_ids, :brand_id, :images_attributes, :product_attributes_attributes
   accepts_nested_attributes_for :product_attributes
