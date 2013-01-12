@@ -1,0 +1,7 @@
+<%= simple_form_for (@rating), :html => { :class => 'form-horizontal'} do |f| %>
+  <div class = 'pull_left'>
+    <%= f.input :rating,:collection => 0..5, :as => :radio_buttons  %>
+  </div>
+  <%= f.submit :class => 'btn btn-success' %>
+  <%= link_to 'Cancel', '', :class => 'btn btn-inverse'  %>
+<% end %>

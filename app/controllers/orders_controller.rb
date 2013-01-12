@@ -21,7 +21,7 @@ class OrdersController < ApplicationController
       else
         flash[:error] = 'invalid addition to order'
       end
-      format.html { redirect_to request.referrer}
+      format.html { redirect_to request.referrer }
     end
   end
 

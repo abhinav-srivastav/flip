@@ -11,7 +11,7 @@ Flip::Application.routes.draw do
   namespace :admin do
     resources :categories, :users, :products, :brands, :sessions, :orders, :images, :product_attributes, :product_details
   end
-  resources :users, :products, :line_items, :addresses, :comments
+  resources :users, :products, :line_items, :addresses, :comments, :ratings
   resources :orders do
     get 'cancel', :on => :collection
     post 'cancel', :on => :member

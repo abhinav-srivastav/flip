@@ -15,3 +15,8 @@ div#add_address div.new_address_form { margin: 10px; padding : 10px; border: 2px
 div.odd_color div { padding:10px 0 10px 5px; }
 div.odd_color div:nth-child(odd) { background-color: #f0f0f0; }
 div.pull_left { margin-left: -110px; }
+div.comment_box { border : 1px solid; margin-bottom: 5px;}
+div.comment_user, div.comment_text { display:inline-block; padding-left: 5px; }
+div.comment_user { width: 200px; border-right: 1px solid;}
+div.comment_text { width: 700px; }
+textarea.comment_textarea { width: 300px; height: 150px;    }

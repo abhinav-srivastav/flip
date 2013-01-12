@@ -3,7 +3,6 @@ class Order < ActiveRecord::Base
   belongs_to :address
   belongs_to :user, :inverse_of => :orders, :autosave => true
   
-
   attr_accessible :amount, :address_id, :user_id
   accepts_nested_attributes_for :line_items
 

@@ -2,19 +2,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :admin_authorize
 
-  helper_method 
   helper_method :current_user
   helper_method :admin_logged_in?
   helper_method :logged_in?
   private
-
-  def create_trolley
-    unless Trolley.find(session[:trolley_id])
-      trolley = Trolley.create
-      session[:trolley_id] = trolley.id
-    end
-    session[:trolley_id]
-  end
 
   def admin_logged_in?
   	logged_in? && !!(current_user.admin)
