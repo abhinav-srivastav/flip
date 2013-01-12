@@ -1,6 +1,6 @@
 <%= simple_form_for ([:admin,@product]), :html => { :multipart => true, :class => 'form-horizontal'} do |f| %>
   <%= f.input :product %>
-  <%= f.input :product_type %>
+  <%= f.input :description, :input_html => { :class => 'product_description' } %>
   <%= f.input :cost_price %>
   <%= f.input :price %>
   <%= f.fields_for :images do |img|  %>

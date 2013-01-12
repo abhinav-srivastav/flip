@@ -9,16 +9,8 @@ class Product < ActiveRecord::Base
   has_many :ratings, :dependent => :destroy
   has_many :comments, :dependent => :destroy
   belongs_to :brand 
-  attr_accessible :product, :product_type, :cost_price, :price, :category_ids, :brand_id, :images_attributes, :product_attributes_attributes
+  attr_accessible :product, :product_type, :cost_price, :price, :category_ids, :brand_id, :images_attributes, :product_attributes_attributes, :description
   accepts_nested_attributes_for :product_attributes
   accepts_nested_attributes_for :categories
   accepts_nested_attributes_for :images, :allow_destroy => true
-  
-  def total_rating(product)
-    p = 0
-    product.rating.each do |rate|
-      p += rate.rating 
-    end
-    p /= rating.count
   end
-end

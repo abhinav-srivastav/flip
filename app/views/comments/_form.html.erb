@@ -1,7 +1,9 @@
-<%= simple_form_for (@comment), :html => { :class => 'form-horizontal'} do |f| %>
-  <div class = 'pull_left'>
-    <%= f.input :comment, :input_html => { :class => 'comment_textarea'} %>
-  </div>
-  <%= f.submit :class => 'btn btn-success' %>
-  <%= link_to 'Cancel', '', :class => 'btn btn-inverse'  %>
-<% end %>
+<div class = 'new_comment_form'>
+  <%= simple_form_for (@comment), :html => { :class => 'form-horizontal'} do |f| %>
+    <div class = 'pull_left'>
+      <%= f.input :comment, :input_html => { :class => 'comment_textarea'} %>
+    </div>
+    <%= f.submit :class => 'btn btn-mini btn-success' %>
+    <%= link_to 'Cancel', '', :class => 'btn btn-mini btn-inverse'  %>
+  <% end %>
+</div>

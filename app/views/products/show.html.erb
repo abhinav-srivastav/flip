@@ -19,12 +19,12 @@
     <dd><strike><%= @product.cost_price if @product.cost_price %></strike> <%= @product.price %></dd>
   </dl>
   <dl class  = "dl-horizontal" >      
-    <dt>Product type:</dt>
-    <dd><%= @product.product_type %></dd>
+    <dt>Rating:</dt>
+    <dd><%= total_rating(@product)%> (rated by <%= @product.ratings.count %> users)   </dd>
   </dl>
   <dl class  = "dl-horizontal" >      
-    <dt>Product rating:</dt>
-    <dd><%= total_rating(@product)%> (rated by <%= @product.ratings.count %> users)   </dd>
+    <dt>Description:</dt>
+    <dd><%= @product.description %>   </dd>
   </dl>
   <dl class = 'dl-horizontal'>
     <dd>
