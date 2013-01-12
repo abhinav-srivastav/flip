@@ -7,7 +7,7 @@ class RatingsController < ApplicationController
     @rating = Rating.new
     @@product_id = params[:product_id]
   end
-  
+
   def create
     @rating =  Rating.user_rating(current_user.id)
     rate = params[:rating]
@@ -22,4 +22,5 @@ class RatingsController < ApplicationController
       format.html { redirect_to request.referrer }
     end
   end
+  
 end

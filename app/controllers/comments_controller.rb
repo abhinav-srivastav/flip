@@ -21,6 +21,19 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @comment = Comment.find(params[:id])
+    if @comment.user_id == current_user.id || current_user.admin
+      @comment.destroy
+      flash[:notice] = 'Comment removed'
+    else
+      flash[:notice] = 'Not authorized to remove this comment'
+    end
+    respond_to do |format|
+      format.html { redirect_to request.referrer  } 
+    end
+  end
+
 
 
 
