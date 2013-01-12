@@ -3,7 +3,7 @@
 	  <div class = 'pull_left'>
 	    <%= f.input :rating,:collection => 1..5, :as => :radio_buttons  %>
 	  </div>
-	  <%= f.submit :class => 'btn btn-mini btn-success' %>
+	  <%= f.submit :value => "Submit" , :class => 'btn btn-mini btn-success' %>
 	  <%= link_to 'Cancel', '', :class => 'btn btn-mini btn-inverse'  %>
 	<% end %>
 </div>

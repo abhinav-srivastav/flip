@@ -19,8 +19,8 @@ class RatingsController < ApplicationController
       else
       	flash[:error] = 'Error recoring ratings'
       end  
-      format.html { redirect_to request.referrer }
+      format.html { redirect_to product_path(@rating.product_id) }
     end
   end
-  
+
 end

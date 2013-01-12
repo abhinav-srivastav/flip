@@ -4,6 +4,7 @@ class HomeController < ApplicationController
 
   def index 
   	@categories = Category.visible
+  	@product = Product.order('updated_at desc ')
   	respond_to do |format|
       format.html  # index.html.erb
     end

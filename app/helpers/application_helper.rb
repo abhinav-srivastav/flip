@@ -13,6 +13,7 @@ module ApplicationHelper
 
   def total_rating(product)
     p = 0
+    return p if product.ratings.empty?
     product.ratings.each do |rate|
       p += rate.rating 
     end

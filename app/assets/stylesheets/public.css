@@ -22,3 +22,5 @@ div.comment_text { width: 840px; border-left: 1px solid; vertical-align: top; }
 textarea.comment_textarea { width: 300px; height: 150px; }
 textarea.product_description { width: 600px; height: 250px; }
 .comment_delete { float: right; }
+
+div.left_div { display : inline-block;  }

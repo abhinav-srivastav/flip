@@ -12,7 +12,8 @@
     <% unless pro.nil? %>
       <dt>Products</dt>
       <% pro.each do |p|  %>
-        <dd><%= link_to p.product, product_path(p) %></dd>
+        <dd><%= link_to image_tag(p.images.first.image.url(:thumb)), product_path(p) %>
+          <%= p.product %></dd>
       <% end %>
     <% end %>
   </dl>  
