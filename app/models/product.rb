@@ -13,4 +13,12 @@ class Product < ActiveRecord::Base
   accepts_nested_attributes_for :product_attributes
   accepts_nested_attributes_for :categories
   accepts_nested_attributes_for :images, :allow_destroy => true
+  
+  def total_rating(product)
+    p = 0
+    product.rating.each do |rate|
+      p += rate.rating 
+    end
+    p /= rating.count
+  end
 end
