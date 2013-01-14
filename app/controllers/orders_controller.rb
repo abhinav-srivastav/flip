@@ -43,6 +43,7 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     respond_to do |format|
       if @order.pay
+        Notifier.booking(current_user.email, current_user.username ).deliver
         flash[:success] = 'Payment made successfully!'
         format.html { redirect_to user_path(current_user) }
       else
@@ -64,7 +65,8 @@ class OrdersController < ApplicationController
       @order = Order.find(params[:id])
       @order.user.wallet += @order.amount
       @order.cancel
-      respond_to do |format|      
+      respond_to do |format|    
+        Notifier.cancellation(current_user.email, current_user.username).deliver  
         format.html { redirect_to request.referrer, :notice => 'Order Cancelled.Credit refunded to wallet !'    }
       end
     else
