@@ -18,6 +18,4 @@ $(document).ready(function(){
 			complete: function(){ $("#spinner_img").hide(); }
 		});
 	});
-	// click on button gets a popover
-    $(".abc").popover();
 });
