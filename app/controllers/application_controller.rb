@@ -28,7 +28,10 @@ class ApplicationController < ActionController::Base
   def user_authorize
     unless logged_in?
       flash[:error] = 'Please log in first'
-      redirect_to login_path
+      respond_to do |format|
+       format.html { redirect_to login_path }
+       format.js {  }   
+      end
     end
   end
 
