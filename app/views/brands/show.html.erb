@@ -3,7 +3,7 @@
   <% pro = @brand.products & @cat.products %>
   <% unless pro.nil? %>
     <% pro.each do |p|  %>
-      <div>
+      <div class = 'product_div'>
         <%= link_to image_tag(p.images.first.image.url(:thumb)), product_path(p) %><br/>
         <%= p.product %><br/>
         Best buy: <%= p.price %>

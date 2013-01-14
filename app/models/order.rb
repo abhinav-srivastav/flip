@@ -1,5 +1,5 @@
 class Order < ActiveRecord::Base
-  has_many :line_items, :dependent => :destroy, :autosave => true#, :after_remove => :line_items_left
+  has_many :line_items, :dependent => :destroy, :autosave => true
   belongs_to :address
   belongs_to :user, :inverse_of => :orders, :autosave => true
   
