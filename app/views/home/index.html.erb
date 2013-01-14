@@ -1,27 +1,33 @@
 <div class='span3'>
-  <div class='well sidebar-nav'>
-    <ul >	<h3 >Categories</h3>
-      <% @categories.each do |cat| %>
-        <li>
-          <%= link_to cat.category, category_path(cat) %>
-          <!-- <ul>
-            <%# cat.brands.each do |br| %>
-              <li><%#= link_to br.brand, category_brand_path(cat,br) %></li>
-            <%# end %>
-            <li><%#= link_to 'All', show_all_category_brands_path(cat) %></li>
-          </ul> -->
-        </li>     
-      <% end %>
-    </ul>
+  <div class= 'sidebar-nav'>
+    <!-- adding tabbed navigation -->
+    <div class = 'tabbale tabs-left'>
+        <ul class = 'nav nav-tabs'>
+          <h3 >Categories</h3>
+          <% @categories.each do |cat| %>
+            <li><%= link_to cat.category, "##{cat.category.gsub(' ','')}", 'data-toggle' => 'tab' %></li>     
+          <% end %>
+      </ul>
+    </div>
   </div>
 </div>
 <div class ='span9'>
+  <!-- tabbed content for the navigation -->
+  <div class="tab-content">
+    <% @categories.each do |cat| %>
+      <div class = 'tab-pane' id = "<%= cat.category.gsub(' ','') %>">  
+        <p>Available brands:</p>
+        <% cat.brands.each do |br| %>
+          <li><%= link_to br.brand, category_brand_path(cat,br) %></li>
+        <% end %>
+        <%= link_to 'View all', show_all_category_brands_path(cat) %>
+      </div>
+    <% end %>
+  </div>
   <div class = 'new_arrivals'>
     <h5>Newly arrived:</h5>
     <% 3.times do |iter|%>
       <%= link_to (image_tag(@product[iter].images.first.image.url(:small))), product_path(@product[iter]) %>
     <% end %>  
   </div>
-
-
 </div>

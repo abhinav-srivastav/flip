@@ -1,20 +1,13 @@
 <div>
-  <dl class  = "dl-horizontal" >      
-    <dt>Category Name:</dt>
-    <dd><%= @cat.category %></dd>
-  </dl>
-  <dl class  = "dl-horizontal" >      
-    <dt>Brand Name:</dt>
-    <dd><%= @brand.brand %></dd>   
-  </dl>
-  <dl class  = "dl-horizontal" >      
-    <% pro = @brand.products & @cat.products %>
-    <% unless pro.nil? %>
-      <dt>Products</dt>
-      <% pro.each do |p|  %>
-        <dd><%= link_to image_tag(p.images.first.image.url(:thumb)), product_path(p) %>
-          <%= p.product %></dd>
-      <% end %>
+  <h4><%= @brand.brand.capitalize %></h4>
+  <% pro = @brand.products & @cat.products %>
+  <% unless pro.nil? %>
+    <% pro.each do |p|  %>
+      <div>
+        <%= link_to image_tag(p.images.first.image.url(:thumb)), product_path(p) %><br/>
+        <%= p.product %><br/>
+        Best buy: <%= p.price %>
+      </div>
     <% end %>
-  </dl>  
+  <% end %>  
 </div>

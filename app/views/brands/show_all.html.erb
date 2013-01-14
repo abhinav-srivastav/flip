@@ -1,15 +1,14 @@
 <div>
-  <dl class  = "dl-horizontal" >      
-    <dt>Category Name:</dt>
-    <dd><%= @cat.category %></dd>
-  </dl>
-  <dl class  = "dl-horizontal" >      
-    <% pro = @cat.products %>
-    <% unless pro.nil? %>
-      <dt>Products</dt>
-      <% pro.each do |p|  %>
-        <dd><%= link_to p.product, product_path(p) %> || <%= p.brand.brand %></dd>
-      <% end %>
+  <h4><%= @cat.category.capitalize %></h4>
+  <% pro = @cat.products %>
+  <% unless pro.nil? %>
+    <% pro.each do |p|  %>
+      <div class = 'product_div'>
+        <%= link_to image_tag(p.images.first.image.url(:thumb)), product_path(p) %><br/>
+        <%= p.product %><br/>
+        Brand : <%= p.brand.brand %><br/>
+        Price : <%= p.price %>
+      </div>
     <% end %>
-  </dl>  
+  <% end %>
 </div>
