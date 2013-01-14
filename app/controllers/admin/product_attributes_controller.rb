@@ -9,7 +9,7 @@ class Admin::ProductAttributesController < ApplicationController
   def new
     @@reference = request.referrer
   	@attribute = ProductAttribute.new
-    @attribute.product_details.build(:product_id => params[:product_id])
+    @attribute.product_details.build(:product_id => params[:product_id]) if params[:product_id]
   end
 
   def create 
