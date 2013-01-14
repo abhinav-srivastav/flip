@@ -19,6 +19,8 @@ div.comment_box { border : 1px solid; margin-bottom: 5px;}
 div.comment_user, div.comment_text { display: table-cell; padding-left: 5px; }
 div.comment_user { width: 200px;}
 div.comment_text { width: 840px; border-left: 1px solid; vertical-align: top; }
+div.comment_text a { display: none; }
+div.comment_box:hover div.comment_text a { display : inline;  }
 textarea.comment_textarea { width: 300px; height: 150px; }
 textarea.product_description { width: 600px; height: 250px; }
 .comment_delete { float: right; }
@@ -26,4 +28,6 @@ textarea.product_description { width: 600px; height: 250px; }
 div.left_div, div.product_div { display : inline-block;  }
 div.product_div { margin : 10px; }
 
-ul.nav-tabs li.active { margin: 10px;  }
+ul.nav-tabs li { margin: 15px;  }
+ul.child_category { display:none; }
+ul.nav-tabs li:hover ul.child_category { display: list-item; }

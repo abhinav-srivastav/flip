@@ -1,30 +1,37 @@
-<div class='span3'>
+<div class='span4'>
   <div class= 'sidebar-nav'>
     <!-- adding tabbed navigation -->
     <div class = 'tabbale tabs-left'>
-        <h3 >Categories</h3>
-        <ul class = 'nav nav-tabs'>
-          <% @categories.each do |cat| %>
-            <li><%= link_to cat.category, "##{cat.category.gsub(' ','')}", 'data-toggle' => 'tab' %></li>     
-          <% end %>
+      <h3 >Categories</h3>
+      <ul class = 'nav nav-tabs'>
+        <% @categories.root.each do |cat| %>
+          <li><%= link_to cat.category, "##{cat.slug}", 'data-toggle' => 'tab' %>
+            <ul class = 'child_category'>
+              <% unless cat.children.empty? %>
+                <% cat.children.each do |child_cat| %>
+                  <li><%= link_to child_cat.category, "##{child_cat.slug}", 'data-toggle' => 'tab' %></li> 
+                <% end %>                
+              <% end %>
+            </ul>
+          </li>     
+        <% end %>
       </ul>
+    </div>
+    <!-- tabbed content for the navigation -->
+    <div class="tab-content">
+      <% @categories.each do |cat| %>
+        <div class = 'tab-pane' id = "<%= cat.slug %>">  
+          <p>Available brands:</p>
+          <% cat.brands.each do |br| %>
+            <li><%= link_to br.brand, category_brand_path(cat,br) %></li>
+          <% end %>
+          <%= link_to 'View all', show_all_category_brands_path(cat) %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
-<div class ='span9'>
-  <%= link_to 'tap','#', :class => 'btn abc', :rel => 'popover', 'data-placement' => "right", 'data-content' => '123123123', 'data-original-title' => 'pop'  %>
-  <!-- tabbed content for the navigation -->
-  <div class="tab-content">
-    <% @categories.each do |cat| %>
-      <div class = 'tab-pane' id = "<%= cat.category.gsub(' ','') %>">  
-        <p>Available brands:</p>
-        <% cat.brands.each do |br| %>
-          <li><%= link_to br.brand, category_brand_path(cat,br) %></li>
-        <% end %>
-        <%= link_to 'View all', show_all_category_brands_path(cat) %>
-      </div>
-    <% end %>
-  </div>
+<div class ='span8'>
   <div class = 'new_arrivals'>
     <h5>Newly arrived:</h5>
     <% 3.times do |iter|%>
@@ -32,3 +39,4 @@
     <% end %>  
   </div>
 </div>
+ <%= link_to 'tap','#', :class => 'btn abc', :rel => 'popover', 'data-placement' => "right", 'data-content' => '123123123', 'data-original-title' => 'pop'  %>

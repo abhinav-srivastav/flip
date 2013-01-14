@@ -44,7 +44,7 @@ class OrdersController < ApplicationController
     respond_to do |format|
       if @order.pay
         flash[:success] = 'Payment made successfully!'
-        format.html { redirect_to :root }
+        format.html { redirect_to user_path(current_user) }
       else
         flash[:error] = 'Invalid details to place an order !'
         format.html { redirect_to request.referrer }
