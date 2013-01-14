@@ -1,4 +1,4 @@
-<div class='span4'>
+<div class='span5'>
   <div class= 'sidebar-nav'>
     <!-- adding tabbed navigation -->
     <div class = 'tabbale tabs-left'>
@@ -21,7 +21,7 @@
     <div class="tab-content">
       <% @categories.each do |cat| %>
         <div class = 'tab-pane' id = "<%= cat.slug %>">  
-          <p>Available brands:</p>
+          <p>Available <%= cat.category %> brands:</p>
           <% cat.brands.each do |br| %>
             <li><%= link_to br.brand, category_brand_path(cat,br) %></li>
           <% end %>
@@ -31,7 +31,7 @@
     </div>
   </div>
 </div>
-<div class ='span8'>
+<div class ='span6'>
   <div class = 'new_arrivals'>
     <h5>Newly arrived:</h5>
     <% 3.times do |iter|%>
@@ -39,4 +39,3 @@
     <% end %>  
   </div>
 </div>
- <%= link_to 'tap','#', :class => 'btn abc', :rel => 'popover', 'data-placement' => "right", 'data-content' => '123123123', 'data-original-title' => 'pop'  %>
