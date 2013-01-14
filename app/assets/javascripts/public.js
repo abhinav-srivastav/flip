@@ -18,4 +18,5 @@ $(document).ready(function(){
 			complete: function(){ $("#spinner_img").hide(); }
 		});
 	});
+    $(".abc").popover();
 });

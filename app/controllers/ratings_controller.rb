@@ -11,7 +11,7 @@ class RatingsController < ApplicationController
   def create
     @rating =  Rating.user_rating(current_user.id)
     rate = params[:rating]
-    @rating.rating = rate['rating']
+    @rating.rating = rate['rating'] 
     @rating.product_id = @@product_id 
     respond_to do |format|
       if @rating.save

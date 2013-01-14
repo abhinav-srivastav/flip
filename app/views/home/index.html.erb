@@ -2,8 +2,8 @@
   <div class= 'sidebar-nav'>
     <!-- adding tabbed navigation -->
     <div class = 'tabbale tabs-left'>
+        <h3 >Categories</h3>
         <ul class = 'nav nav-tabs'>
-          <h3 >Categories</h3>
           <% @categories.each do |cat| %>
             <li><%= link_to cat.category, "##{cat.category.gsub(' ','')}", 'data-toggle' => 'tab' %></li>     
           <% end %>
@@ -12,6 +12,7 @@
   </div>
 </div>
 <div class ='span9'>
+  <%= link_to 'tap','#', :class => 'btn abc', :rel => 'popover', 'data-placement' => "right", 'data-content' => '123123123', 'data-original-title' => 'pop'  %>
   <!-- tabbed content for the navigation -->
   <div class="tab-content">
     <% @categories.each do |cat| %>
