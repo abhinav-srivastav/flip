@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function() {	
 });
 
 function add_images(link, association, content) {
@@ -6,3 +6,4 @@ function add_images(link, association, content) {
   var regexp = new RegExp("new_" + association, "g" )
   $(link).parent().before(content.replace(regexp, new_id));
 }
+

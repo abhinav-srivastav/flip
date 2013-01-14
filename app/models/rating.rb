@@ -3,7 +3,7 @@ class Rating < ActiveRecord::Base
   belongs_to :user
   attr_accessible :rating, :user_id, :product_id
 
-  validate :rating, :presence => true
+  validates :rating, :presence => true
   scope :user_ratings, lambda { |u_id| where('user_id = ? ', u_id)   }
 
   def self.user_rating(id)

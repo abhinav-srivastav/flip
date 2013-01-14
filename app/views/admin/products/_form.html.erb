@@ -34,7 +34,16 @@
   <% unless @product.product_details.empty? %>
     <table class='table table-striped'>
       <tr>
-        <td><b>Attributes</b></td>
+        <td class = 'dropdown'>
+          <b><%#= f.association :product_attributes, :as => :check_boxes %>
+            <%= link_to 'Attributes', '#', :class => 'dropdown-toggle', :role => 'button', 'data-toggle' => 'dropdown', :id => 'attribute' %><b class='caret'></b>
+            <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="attribute">
+              <% ProductAttribute.all.each do |pa| %>
+                <li> <%= link_to pa.product_attributes, '' %> </li>
+              <% end %>
+            </ul>  
+          </b>
+        </td>
         <td><b>Details</b></td>
         <td class= 'shift_right'><b>Action</b></td>
       </tr>
