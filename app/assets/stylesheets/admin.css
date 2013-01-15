@@ -3,4 +3,5 @@ div.product_image a { color: #f00f0f;}
 td.shift_right { width: 150px; }
 label { display: inline-block; margin: 0 15px 0 10px; }
 div.child_category { display : none; }
-td.dropdown { width : 35%;  }
+td.dropdown { width : 25%;  }
+textarea.detail_textarea {  width : 400px; height : 100px; }

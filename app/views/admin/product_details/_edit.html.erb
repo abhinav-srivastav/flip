@@ -1,6 +1,8 @@
 <div class='attributes'>
   <%= simple_form_for ([:admin,@pd]), :html => { :class => 'form-horizontal'} do |f| %>
-	  <%= f.input :details, :input_html => { :rows => 7, :class => "pull_left" } %>
+	  <div class = 'pull_left'>
+	  	<%= f.input :details, :input_html => {:class => "detail_textarea" } %>
+	  </div>
 	  <%= f.submit :class => "btn btn-success btn-mini"%>
 	  <%= link_to 'cancel','',:class => "btn btn-mini btn-inverse" %>
   <% end %> 

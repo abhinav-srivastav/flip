@@ -3,5 +3,5 @@
   <%= f.association :products, :label_method => :product, :as => :check_boxes %>
   <%= f.association :categories, :label_method => :category, :as => :check_boxes %>
   <%= f.submit :class => "btn btn-success"%>
-  <%= link_to 'back', request.referrer, :class => 'btn btn-inverse'  %>
+  <%= link_to 'back', admin_brands_path, :class => 'btn btn-inverse'  %>
 <% end %> 

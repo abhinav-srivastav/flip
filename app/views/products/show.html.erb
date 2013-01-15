@@ -47,7 +47,7 @@
           </tr>
           <% @product.product_details.each do |pro_detail| %>
           <tr>
-            <td><%= pro_detail.product_attribute.product_attributes %></td>
+            <td class = 'attribute_name'><%= pro_detail.product_attribute.product_attributes %></td>
             <td><%= pro_detail.details %></td>
           </tr>
           <% end %>
