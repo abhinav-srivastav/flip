@@ -8,6 +8,7 @@ Flip::Application.routes.draw do
   match "logout" => "admin/sessions#destroy"
   match 'admin' => "admin/categories#index"
   post '/admin/product_details/:id' => 'admin/product_details#create' 
+
   namespace :admin do
     resources :categories, :users, :products, :brands, :sessions, :orders, :images, :product_attributes, :product_details
   end

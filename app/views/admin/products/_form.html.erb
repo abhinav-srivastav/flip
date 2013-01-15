@@ -26,8 +26,16 @@
     </div>
   </div>
   <%= f.association :brand, :label_method => :brand, :as => :radio_buttons %>
-  <%= f.association :categories, :label_method => :category, :as => :check_boxes %>
-
+  <div class = "root_category">
+    <%= f.association :categories, :collection => Category.root(), :label_method => :category, :as => :check_boxes %>
+  </div>
+  <% Category.root.each do |root|  %>
+    <% unless root.children.empty? %>  
+      <div class = 'child_category' id = "<%= root.id %>">
+        <%= f.association :categories, :label => "#{root.category}'s Sub-Category" , :collection => root.children, :label_method => :category, :as => :check_boxes %>
+      </div>
+    <% end %>
+  <% end %>
   <% unless @product.product_details.empty? %>
     <table class='table table-striped'>
       <tr>

@@ -1,4 +1,10 @@
 $(document).ready(function() {	
+  $("div.root_category [type = checkbox]").click(function(){ 
+     if( $(this).is(':checked') ) 
+      $('#'+$(this).attr('value')).removeClass('child_category');
+    else
+      $('#'+$(this).attr('value')).addClass('child_category');
+  });
 });
 
 function add_images(link, association, content) {
