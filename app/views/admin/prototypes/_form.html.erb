@@ -1,6 +1,6 @@
 <%= simple_form_for ([:admin,@prototype]), :html => { :class => 'form-horizontal'} do |f| %>
   <%= f.input :name %>
-  <%= f.association :product_attributes, :label_method => :product_attributes %>
+  <%= f.association :product_attributes, :label_method => :product_attributes, :input_html => { :size => 15   } %>
   <%= f.submit :class => "btn btn-success"%>
   <%= link_to 'back', request.referrer, :class => 'btn btn-inverse'  %>
 <% end %> 

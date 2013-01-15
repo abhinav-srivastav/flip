@@ -96,7 +96,11 @@ ActiveRecord::Schema.define(:version => 20130115091118) do
     t.string   "product_attributes"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
-    t.integer  "prototype_id"
+  end
+
+  create_table "product_attributes_prototypes", :id => false, :force => true do |t|
+    t.integer "prototype_id"
+    t.integer "product_attribute_id"
   end
 
   create_table "product_details", :force => true do |t|
