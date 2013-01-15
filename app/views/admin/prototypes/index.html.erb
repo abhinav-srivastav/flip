@@ -1,0 +1,20 @@
+<div>
+  <h3>Prototypes</h3>
+  <%= link_to "New Prototype", new_admin_prototype_path,:class => "btn btn-primary" %><br/><br/>
+  <table class = 'table table-striped'>
+    <tr>
+      <td><b>Prototype</b></td>
+      <td class='shift_right'><b>Actions</b></td>
+    </tr>
+    <% @prototypes.each do |prototype| %>
+    <tr>
+      <td><%= prototype.name %></td>
+      <td class='shift_right'>
+        <%#= link_to "show", admin_product_path(pro), :class => "btn btn-small" %>
+        <%= link_to "edit", edit_admin_prototype_path(prototype), :class => "btn btn-small" %>
+        <%= link_to "remove", admin_prototype_path(prototype), method: :delete, data: { confirm: "Are u sure ?" },:class =>"btn btn-danger btn-small" %>
+       </td>
+    </tr>
+    <% end %>
+  </table>
+</div>

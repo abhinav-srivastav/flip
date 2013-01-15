@@ -2,6 +2,7 @@ class Product < ActiveRecord::Base
   extend FriendlyId
   friendly_id :product, use: :slugged
   has_and_belongs_to_many :categories
+  has_and_belongs_to_many :prototypes
   has_many :line_items, :dependent => :destroy
   has_many :images, :dependent => :destroy, :autosave => true
   has_many :product_details, :dependent => :destroy
@@ -15,4 +16,8 @@ class Product < ActiveRecord::Base
   accepts_nested_attributes_for :images, :allow_destroy => true
   
   validates_presence_of :product, :price, :description
+  
+  def add_details(pa_id)
+    product_details.create(:product_attribute_id => pa_id)    
   end
+end

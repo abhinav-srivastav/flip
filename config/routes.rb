@@ -11,6 +11,9 @@ Flip::Application.routes.draw do
 
   namespace :admin do
     resources :categories, :users, :products, :brands, :sessions, :orders, :images, :product_attributes, :product_details
+    resources :prototypes do
+      get 'create_details', :on => :member
+    end
   end
   resources :users, :products, :line_items, :addresses, :comments, :ratings
   resources :orders do
