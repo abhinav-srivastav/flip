@@ -6,6 +6,18 @@ class Admin::ProductDetailsController < ApplicationController
       format.html { redirect_to request.referrer, notice: 'Attribute successfully removed' }
   	end
   end
+  
+  def create
+    @pd  = ProductDetail.new(params[:product_detail])
+    respond_to do |format|
+      if @pd.save
+        flash[:success] = 'Attribute added'
+      else
+        flash[:error] = 'Attribute already exist'
+      end
+      format.html { redirect_to edit_admin_product_path(@pd.product_id) }
+    end
+  end
 
   def edit
     @pd = ProductDetail.find(params[:id])

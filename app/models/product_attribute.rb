@@ -5,5 +5,5 @@ class ProductAttribute < ActiveRecord::Base
   accepts_nested_attributes_for :product_details
 
   validates_presence_of :product_attributes
-  #validates :product_attributes, :uniqueness => true
+  validates :product_attributes, :uniqueness => true
 end
