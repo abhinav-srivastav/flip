@@ -14,7 +14,7 @@
       <td class = 'dropdown'>
         <%= link_to 'Attributes', '#', :class => 'dropdown-toggle', :role => 'button', 'data-toggle' => 'dropdown', :id => 'attribute' %><b class='caret'></b>
         <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="attribute">
-          <% ProductAttribute.other_attributes(@product).each do |pa| %>
+          <% @other_attr.each do |pa| %>
             <li >
               <%= link_to pa.product_attributes, admin_product_detail_path({:product_detail => { :product_id => @product.id, :product_attribute_id => pa.id }}), method: :post %></li>
           <% end %>
@@ -29,8 +29,8 @@
         <td><%= pro_detail.product_attribute.product_attributes %></td>
         <td id="<%= pro_detail.id %>"><div><%= pro_detail.details %></div></td>
         <td class ='shift_right'>
-          <%= link_to 'edit', edit_admin_product_detail_path(pro_detail), :remote => true, :class => 'edit_attribute btn btn-mini' %>
-          <%= link_to 'delete', admin_product_detail_path(pro_detail), method: :delete, :data => { :confirm => 'Delete attribute ?'}, :class => 'btn btn-mini btn-danger' %>
+          <%= link_to 'edit', edit_admin_product_detail_path(pro_detail), :remote => true, :class => 'edit_attribute btn btn-small' %>
+          <%= link_to 'delete', admin_product_detail_path(pro_detail), method: :delete, :data => { :confirm => 'Delete attribute ?'}, :class => 'btn btn-small btn-danger' %>
         </td>
       </tr>
       <% end %>
