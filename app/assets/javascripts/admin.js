@@ -1,9 +1,13 @@
 $(document).ready(function() {	
+  
   $("div.root_category [type = checkbox]").click(function(){ 
+     category_id = $(this).attr('value')
      if( $(this).is(':checked') ) 
-      $('#'+$(this).attr('value')).removeClass('child_category');
-    else
-      $('#'+$(this).attr('value')).addClass('child_category');
+      $('#'+category_id).removeClass('child_category');
+    else{
+      console.log($("#"+category_id+" [type = checkbox]").attr('checked',false));
+      $('#'+category_id).addClass('child_category');	
+    }
   });
 });
 
