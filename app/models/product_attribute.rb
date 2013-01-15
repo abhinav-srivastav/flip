@@ -7,4 +7,15 @@ class ProductAttribute < ActiveRecord::Base
 
   validates_presence_of :product_attributes
   validates :product_attributes, :uniqueness => true
+
+  
+  def self.other_attributes(product)
+  	other_attr = []
+  	all.each do |pa|
+      unless pa.products.include?(product)
+        other_attr << pa
+      end
+  	end
+    other_attr
+  end
 end

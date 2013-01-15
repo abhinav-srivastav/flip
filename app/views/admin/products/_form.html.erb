@@ -41,7 +41,7 @@
     <% end %>
   <% end %>
 
-  <%= render 'attribute_form' if params[:action] == 'edit'  %>
+  <%= render 'attributes' if params[:action] == 'edit'  %>
   <%= f.submit :class => "btn btn-success"%>
   <%= link_to 'back', admin_products_path, :class => 'btn btn-inverse'  %>
 <% end %> 
