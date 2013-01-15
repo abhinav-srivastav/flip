@@ -24,7 +24,7 @@
   </dl>
   <dl class  = "dl-horizontal" >      
     <dt>Description:</dt>
-    <dd><div><%= sanitize @product.description %></div></dd>
+    <dd><div><%= sanitize @product.description, :tags => %w(b i a) %></div></dd>
   </dl>
   <dl class = 'dl-horizontal'>
     <dd>

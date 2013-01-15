@@ -41,49 +41,7 @@
     <% end %>
   <% end %>
 
-  <div class = 'dropdown'>
-    <%= link_to 'add prototype', '#', :class => 'dropdown-toggle', :role => 'button', 'data-toggle' => 'dropdown', :id => 'attribute' %><b class='caret'></b>
-    <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="prototype">
-      <% Prototype.all.each do |proto| %>
-        <li >
-          <%= link_to proto.name,create_details_admin_prototype_path(proto, { :product_id => @product.id }) %></li>
-      <% end %>
-    </ul>
-  </div>
-  
-  <table class='table table-striped'>
-    <tr>
-      <td class = 'dropdown'>
-        <%= link_to 'Attributes', '#', :class => 'dropdown-toggle', :role => 'button', 'data-toggle' => 'dropdown', :id => 'attribute' %><b class='caret'></b>
-        <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="attribute">
-          <% ProductAttribute.all.each do |pa| %>
-            <li >
-              <%= link_to pa.product_attributes, admin_product_detail_path({:product_detail => { :product_id => @product.id, :product_attribute_id => pa.id }}), method: :post %></li>
-          <% end %>
-        </ul>            
-      </td>
-      <td><b>Details</b></td>
-      <td class= 'shift_right'><b>Action</b></td>
-    </tr>
-    <% unless @product.product_details.empty? %>
-      <% @product.product_details.each do |pro_detail| %>
-      <tr>
-        <td><%= pro_detail.product_attribute.product_attributes %></td>
-        <td id="<%= pro_detail.id %>"><div><%= pro_detail.details %></div></td>
-        <td class ='shift_right'>
-          <%= link_to 'edit', edit_admin_product_detail_path(pro_detail), :remote => true, :class => 'edit_attribute btn btn-mini' %>
-          <%= link_to 'delete', admin_product_detail_path(pro_detail), method: :delete, :data => { :confirm => 'Delete attribute ?'}, :class => 'btn btn-mini btn-danger' %>
-        </td>
-      </tr>
-      <% end %>
-    <% end %>
-  </table>
-  
-
-  <div class='add_attributes'>
-    <%= link_to 'Create new Attribute', new_admin_product_attribute_path(:product_id => @product.id), :remote => true, :class => 'btn btn-primary' %>
-  </div><br/>
-  
+  <%= render 'attribute_form' if params[:action] == 'edit'  %>
   <%= f.submit :class => "btn btn-success"%>
   <%= link_to 'back', request.referrer, :class => 'btn btn-inverse'  %>
 <% end %> 

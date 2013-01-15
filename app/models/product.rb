@@ -15,7 +15,8 @@ class Product < ActiveRecord::Base
   accepts_nested_attributes_for :categories
   accepts_nested_attributes_for :images, :allow_destroy => true
   
-  validates_presence_of :product, :price, :description
+  validates_presence_of :product, :price
+  validates :description, :presence => true, :length => { :minimum => 50 }
   
   def add_details(pa_id)
     product_details.create(:product_attribute_id => pa_id)    

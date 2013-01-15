@@ -16,7 +16,7 @@ class Admin::ProductsController < ApplicationController
     @product  = Product.new(params[:product])
     respond_to do |format|
       if @product.save
-        format.html {redirect_to admin_products_path}
+        format.html {redirect_to edit_admin_product_path(@product) }
       else
         format.html {render action: 'new'}
       end
