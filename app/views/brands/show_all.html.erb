@@ -1,9 +1,18 @@
-<div>
-  <h4><%= @cat.category.capitalize %></h4>
+<h4><%= @cat.category.capitalize %></h4>
+<div class='span2'>
+  <div class= 'sidebar-nav'>
+    <h5>Sort By:</h5>
+    <ul class = 'sort'>
+      <li><input type="checkbox" name="sort" value="price"> Price</li>     
+      <li><input type="checkbox" name="sort" value="rating"> Rating</li>     
+    </ul>
+  </div>
+</div>
+<div class='span7'>
   <% pro = @cat.products %>
   <% unless pro.nil? %>
     <% pro.each do |p|  %>
-      <div class = 'product_div'>
+      <div class = 'product_div' price=<%= p.price %> rating=<%= total_rating(p) %>    >
         <% img = p.images.first ? p.images.first.image.url(:small) : 'no-image.jpg'  %>  
         <%= link_to image_tag(img), product_path(p) %><br/>
         <%= p.product %><br/>

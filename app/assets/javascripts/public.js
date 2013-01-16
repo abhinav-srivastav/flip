@@ -18,4 +18,11 @@ $(document).ready(function(){
 			complete: function(){ $("#spinner_img").hide(); }
 		});
 	});
+
+	$(".sort [type = checkbox] ").click(function(){
+		sort_by = $(this).attr('value')
+		$('div.product_div').each(function(){
+			console.log($(this).attr(sort_by))
+		});
+	});
 });

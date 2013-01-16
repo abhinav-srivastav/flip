@@ -40,8 +40,8 @@
       </div>
     <% end %>
   <% end %>
-  
-  <%= render 'attributes' if params[:action] == 'edit' || 'update'  %>
+
+  <%= render 'attributes' if params[:action] == 'edit' || params[:action] == 'update'  %>
   <%= f.submit :class => "btn btn-success"%>
   <%= link_to 'back', admin_products_path, :class => 'btn btn-inverse'  %>
 <% end %> 

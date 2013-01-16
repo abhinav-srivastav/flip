@@ -9,7 +9,7 @@ class RatingsController < ApplicationController
   end
 
   def create
-    @rating =  Rating.user_rating(current_user.id)
+    @rating =  Rating.user_rating(current_user.id, @@product_id)
     rate = params[:rating]
     @rating.rating = rate['rating'] 
     @rating.product_id = @@product_id 

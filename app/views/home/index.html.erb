@@ -37,12 +37,12 @@
 <div class ='span6'>
   <div class = 'new_arrivals'>
     <h5>Freshly arrived:</h5>
-    <% 5.times do |iter|%>
+    <% @product.each do |pro|%>
       <div class = 'product_div'>
-        <% img = @product[iter].images.first ? @product[iter].images.first.image.url(:small) : 'no-image.jpg'  %>  
-        <%= link_to image_tag(img), product_path(@product[iter]) %><br/>
-        <%= @product[iter].product %><br/>
-        Best buy: <%= @product[iter].price %>
+        <% img = pro.images.first ? pro.images.first.image.url(:small) : 'no-image.jpg'  %>  
+        <%= link_to image_tag(img), product_path(pro) %><br/>
+        <%= pro.product %><br/>
+        Best buy: <%= pro.price %>
       </div>
     <% end %>  
   </div>
