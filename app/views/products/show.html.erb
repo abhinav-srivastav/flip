@@ -20,7 +20,13 @@
   </dl>
   <dl class  = "dl-horizontal" >      
     <dt>Rating:</dt>
-    <dd><%= total_rating(@product)%> (rated by <%= @product.ratings.count %>) </dd>
+    <dd>
+      <%= total_rating(@product)%> (rated by <%= @product.ratings.count %>)<br/> 
+      <%  user_rating = current_user.ratings & @product.ratings  %>
+      <% if user_rating.first %>
+        <p> Your rated the product <%= user_rating.first.rating %></p>
+      <% end %>
+    </dd>
   </dl>
   <dl class  = "dl-horizontal" >      
     <dt>Description:</dt>
