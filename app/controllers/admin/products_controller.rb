@@ -37,7 +37,9 @@ class Admin::ProductsController < ApplicationController
         flash[:success] = "Product updated !"
         format.html { redirect_to admin_products_path }
       else
+        @other_attr = ProductAttribute.other_attributes(@product)
         @product.images.build
+        @product.product_attributes.build.product_details.build
         format.html { render action: "edit"}
       end
     end

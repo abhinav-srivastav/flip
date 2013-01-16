@@ -16,14 +16,15 @@ class LineItemsController < ApplicationController
 
   def update
     @line_item = LineItem.find(params[:id])
-    unless @line_item.update_attributes(params[:line_item])
-      flash[:error] = 'Invalid quantity'
+    if (params[:line_item][:quantity].to_i > @line_item.product.available) 
+      flash[:error] = 'Quantity asked for product '+@line_item.product.product+' is not available'
+    else
+      unless @line_item.update_attributes(params[:line_item]) 
+        flash[:error] = 'Invalid quantity'
+      end
     end
     respond_to do |format|
        format.html { redirect_to orders_path }
     end
   end
-
-
-
 end

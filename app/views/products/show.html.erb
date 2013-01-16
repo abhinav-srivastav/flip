@@ -4,6 +4,9 @@
       <% @product.images.each do |img| %>
         <%= link_to (image_tag(img.image.url(:thumb))), img.image.url(:original) %>
       <% end %>
+      <%  if @product.available < 1  %>
+        <p class = 'text-error'>OUT OF STOCK</p>
+      <% end %>
     </dd>
   </dl>
   <dl class  = "dl-horizontal" >      
@@ -30,7 +33,7 @@
   </dl>
   <dl class  = "dl-horizontal" >      
     <dt>Description:</dt>
-    <dd><div><%= sanitize @product.description, :tags => %w(b i a) %></div></dd>
+    <dd><div class = 'product_description'><%= sanitize @product.description %></div></dd>
   </dl>
   <dl class = 'dl-horizontal'>
     <dd>
@@ -40,7 +43,7 @@
       <div class = 'comment'>
         <%= link_to 'Comment', new_comment_path(:product_id => @product.id) , :remote => :true, :class => 'btn btn-success' %><br/><br/>
       </div>
-      <div><%= button_to 'grab in trolley',orders_path(:id => @product.id, :price => @product.price), :class => "btn btn-primary" %></div>
+      <div><%= button_to 'grab in trolley',orders_path(:id => @product.id, :price => @product.price), :class => "btn btn-primary" if @product.available > 0%></div>
     </dd>
   </dl>
   <% unless @product.product_details.empty? %>

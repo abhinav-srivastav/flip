@@ -6,6 +6,7 @@
   <%= f.input :description, :input_html => { :class => 'product_description' } %>
   <%= f.input :cost_price %>
   <%= f.input :price %>
+  <%= f.input :available %>
   <%= f.fields_for :images do |img|  %>
   	<% if img.object.new_record? %>
   	  <%= render 'image_form', :f => img %>
@@ -39,8 +40,8 @@
       </div>
     <% end %>
   <% end %>
-
-  <%= render 'attributes' if params[:action] == 'edit'  %>
+  
+  <%= render 'attributes' if params[:action] == 'edit' || 'update'  %>
   <%= f.submit :class => "btn btn-success"%>
   <%= link_to 'back', admin_products_path, :class => 'btn btn-inverse'  %>
 <% end %> 

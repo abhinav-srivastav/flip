@@ -78,10 +78,7 @@ class OrdersController < ApplicationController
   def add_line_item(order, product_id, product_price)
     line_item = order.line_items.find_by_product_id(product_id)
     if line_item.nil?
-      order.line_items.new(:product_id => product_id, :price => product_price)
-    else
-      line_item.quantity += 1
-      line_item.save
+      line_item = order.line_items.new(:product_id => product_id, :price => product_price)
     end
     order.amount = order_amount(order.line_items)
     order    

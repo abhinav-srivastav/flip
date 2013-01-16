@@ -32,3 +32,4 @@ ul.nav-tabs li { margin: 15px;  }
 ul.child_category { display:none; }
 ul.nav-tabs li:hover ul.child_category { display: list-item; }
 td.attribute_name { width : 37%; }
+div.product_description { width : 700px; }

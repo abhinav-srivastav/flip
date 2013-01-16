@@ -20,7 +20,11 @@
               <% @order.line_items.each do |line| %>
               <tr>
                 <td><%= line.product.product %> :<%= line.product.brand.brand %> </td>
-                <td id="<%= line.id %>"><div><span><%= line.quantity %></span>&nbsp;&nbsp;&nbsp;<%= link_to 'change', edit_line_item_path(line), :remote => true  %></div></td>
+                <td id="<%= line.id %>">
+                  <div><span><%= line.quantity %></span>&nbsp;&nbsp;&nbsp;
+                    <%= link_to 'change', edit_line_item_path(line), :remote => true  %>
+                  </div>
+                </td>
                 <td><%= line.price %>  <%= link_to '×', line_item_path(line),  method: :delete, data: { confirm: 'Are you sure?' } %></td>                
               </tr>
               <%end%>
