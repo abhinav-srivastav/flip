@@ -36,7 +36,8 @@
     <h5>Freshly arrived:</h5>
     <% 5.times do |iter|%>
       <div class = 'product_div'>
-        <%= link_to image_tag(@product[iter].images.first.image.url(:small)), product_path(@product[iter]) %><br/>
+        <% img = @product[iter].images.first ? @product[iter].images.first.image.url(:small) : 'no-image.jpg'  %>  
+        <%= link_to image_tag(img), product_path(@product[iter]) %><br/>
         <%= @product[iter].product %><br/>
         Best buy: <%= @product[iter].price %>
       </div>

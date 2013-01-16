@@ -4,7 +4,8 @@
   <% unless pro.nil? %>
     <% pro.each do |p|  %>
       <div class = 'product_div'>
-        <%= link_to image_tag(p.images.first.image.url(:thumb)), product_path(p) %><br/>
+        <% img = p.images.first ? p.images.first.image.url(:small) : 'no-image.jpg'  %>  
+        <%= link_to image_tag(img), product_path(p) %><br/>
         <%= p.product %><br/>
         Brand : <%= p.brand.brand %><br/>
         Price : <%= p.price %>

@@ -9,7 +9,6 @@ class Admin::ProductsController < ApplicationController
   def new
     @product = Product.new
     @product.images.build
-    @product.product_attributes.build.product_details.build
   end
 
   def create 
@@ -18,6 +17,7 @@ class Admin::ProductsController < ApplicationController
       if @product.save
         format.html {redirect_to edit_admin_product_path(@product) }
       else
+        @product.images.build
         format.html {render action: 'new'}
       end
     end
@@ -37,6 +37,7 @@ class Admin::ProductsController < ApplicationController
         flash[:success] = "Product updated !"
         format.html { redirect_to admin_products_path }
       else
+        @product.images.build
         format.html { render action: "edit"}
       end
     end

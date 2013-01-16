@@ -1,7 +1,6 @@
 <%= javascript_tag do %>
   bkLib.onDomLoaded(function() { nicEditors.DescriptionTextArea() });
 <% end %>
-
 <%= simple_form_for ([:admin,@product]), :html => { :multipart => true, :class => 'form-horizontal'} do |f| %>
   <%= f.input :product %>
   <%= f.input :description, :input_html => { :class => 'product_description' } %>

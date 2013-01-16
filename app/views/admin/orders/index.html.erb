@@ -1,6 +1,6 @@
 <div>
   <h3>Orders</h3>
-  <table class = 'table table-striped'>
+  <table class = 'table'>
     <tr>
       <td><b>Order's by</b></td>
       <td><b>Order Status</b></td>
@@ -8,13 +8,12 @@
       <td class='shift_right'><b>Actions</b></td>
     </tr>
     <% @orders.each do |order| %>
-    <tr>
+    <tr class = <%= order.state %>>
       <td><%= order.user.username %></td>
       <td><%= order.state %></td>
       <td><%= order.created_at %></td>
       <td class='shift_right'>
         <%= link_to "Details", admin_order_path(order), :class => "btn btn-small" %>
-        <%= link_to "Cancel", cancel_order_path(order), data: { confirm: "Are u sure ?" },:class =>"btn btn-danger btn-small" if order.state == 'booked'%>
       </td>
     </tr>
     <% end %>
