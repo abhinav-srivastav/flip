@@ -9,10 +9,10 @@
             <ul class = 'child_category'>
               <% unless cat.children.empty? %>
                 <% cat.children.each do |child_cat| %>
-                  <li><%= link_to child_cat.category, "##{child_cat.slug}", 'data-toggle' => 'tab' %></li> 
+                  <li><%= link_to_if child_cat.products.any?, child_cat.category, "##{child_cat.slug}", 'data-toggle' => 'tab' %></li> 
                 <% end %>                
               <% end %>
-              <li><%= link_to 'View all', "##{cat.slug}", 'data-toggle' => 'tab' %></li>
+              <li><%= link_to_if cat.products.any?, 'View all', "##{cat.slug}", 'data-toggle' => 'tab' %></li>
             </ul>
           </li>     
         <% end %>
@@ -44,7 +44,9 @@
     <% end %>
   </div>
   <div class = 'new_arrivals'>
-    <h3><u>Freshly arrived:</u></h3>
+    <div class = 'category_header'>
+      <h3>Freshly arrived:</h3>
+    </div>
     <% @product.each do |pro|%>
       <div class = 'product_div'>
         <% img = pro.images.first ? pro.images.first.image.url(:small) : 'no_image-small.jpg'  %>  
