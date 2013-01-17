@@ -9,6 +9,9 @@
         <div class = 'product_div' price=<%= p.price %> rating=<%= total_rating(p) %>    >
           <% img = p.images.first ? p.images.first.image.url(:small) : 'no_image-small.jpg'  %>  
           <%= link_to image_tag(img), product_path(p) %><br/>
+          <% if p.available < 1  %>
+            <b class = 'text-error'>OUT OF STOCK</b><br/>
+          <% end %>
           <%= link_to p.brand.brand+' '+p.product, product_path(p) %><br/>
           Price: <%= p.price %>
         </div>
