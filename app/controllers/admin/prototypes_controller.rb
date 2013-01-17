@@ -29,6 +29,11 @@ class Admin::PrototypesController < ApplicationController
     @prototype = Prototype.find(params[:id])
     respond_to do |format|
       if @prototype.update_attributes(params[:prototype])
+        @prototype.products.each do |pro|
+          @prototype.product_attributes.each do |pa|
+            pro.add_details(pa.id)
+          end
+        end
         flash[:success] = "Prototype updated !"
         format.html { redirect_to admin_prototypes_path }
       else
@@ -48,6 +53,7 @@ class Admin::PrototypesController < ApplicationController
   def create_details
     @prototype = Prototype.find(params[:id])
     @product = Product.find(params[:product_id])
+    @prototype.products << @product
     @prototype.product_attributes.each do |pa|
       @product.add_details(pa.id)
     end

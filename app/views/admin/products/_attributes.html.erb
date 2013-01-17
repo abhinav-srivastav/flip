@@ -2,7 +2,7 @@
     <%= link_to 'add prototype', '#', :class => 'dropdown-toggle', :role => 'button', 'data-toggle' => 'dropdown', :id => 'attribute' %><b class='caret'></b>
     <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="prototype">
       <% Prototype.all.each do |proto| %>
-        <li >
+        <li>
           <%= link_to proto.name,create_details_admin_prototype_path(proto, { :product_id => @product.id}) %></li>
       <% end %>
     </ul>
