@@ -25,21 +25,21 @@
   <div class="tab-content">
     <% @categories.each do |cat| %>
       <div class = 'tab-pane' id = "<%= cat.slug %>">  
-        <h3><u><%=link_to cat.category, category_path(cat) %></u></h3>
-            <% product = cat.products.take(3)  %>
-              <% product.each do |pro|%>
-                <div class = 'product_div'>
-                <% img = pro.images.first ? pro.images.first.image.url(:small) : 'no_image-small.jpg'  %>  
-                <%= link_to image_tag(img), product_path(pro) %><br/>
-                <%  if pro.available < 1  %>
-                  <b class = 'text-error'>OUT OF STOCK</b><br/>
-                <% end %>
-                <%= pro.brand.brand+' '+pro.product %><br/>
-                Price: <%= pro.price %>
-                </div>
-              <% end %>
-        <%= link_to 'View all', category_path(cat) %>
-        <span class = 'muted'>(<%= cat.products.count %>)</span>
+        <div class = 'category_header'>
+          <h3><%=cat.category%></h3> (<%= link_to 'View more', category_path(cat) %>)
+        </div>
+        <% product = cat.products.take(3)  %>
+        <% product.each do |pro|%>
+          <div class = 'product_div'>
+            <% img = pro.images.first ? pro.images.first.image.url(:small) : 'no_image-small.jpg'  %>  
+            <%= link_to image_tag(img), product_path(pro) %><br/>
+            <%  if pro.available < 1  %>
+              <b class = 'text-error'>OUT OF STOCK</b><br/>
+            <% end %>
+            <%= pro.brand.brand+' '+pro.product %><br/>
+            Price: <%= pro.price %>
+          </div>
+        <% end %>
       </div>
     <% end %>
   </div>
