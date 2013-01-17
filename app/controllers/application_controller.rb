@@ -6,6 +6,24 @@ class ApplicationController < ActionController::Base
   helper_method :admin_logged_in?
   helper_method :logged_in?
   private
+  
+  def credit_to_admin(amount, buyer)
+    admin = User.super
+    admin.wallet += amount
+    if admin.save
+      return true 
+    else
+      buyer.wallet += amount
+      buyer.save
+      return false
+    end     
+  end
+
+  def debit_from_admin(amount)
+    admin = User.super
+    admin.wallet -= amount
+    admin.save
+  end
 
   def admin_logged_in?
   	logged_in? && !!(current_user.admin)

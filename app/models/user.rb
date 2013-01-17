@@ -9,12 +9,15 @@ class User < ActiveRecord::Base
   validates :username, presence: true, uniqueness: true
   validates :password, presence: true, :if => :password
   validates :email, uniqueness: true
-  validates :wallet, :numericality => true
+  validates :wallet, :numericality => { :greater_than => 0   }
   
-  scope :super, where(:super => false)
-
+  scope :normal_users, where(:super => false)
+  scope :super_user, where(:super => true).limit(1)
   private
 
+  def self.super
+    super_user.first
+  end
   def self.authorize(username, password)
     user = User.find_by_username(username)
     return user if user && user.authenticate(password)
