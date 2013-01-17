@@ -1,40 +1,53 @@
-<div class='span5'>
+<div class='span3'>
   <div class= 'sidebar-nav'>
     <!-- adding tabbed navigation -->
     <div class = 'tabbale tabs-left'>
       <h3 >Categories</h3>
       <ul class = 'nav nav-tabs'>
         <% @categories.root.each do |cat| %>
-          <li><%= link_to cat.category, "##{cat.slug}", 'data-toggle' => 'tab' %>
+          <li><%= cat.category %>
             <ul class = 'child_category'>
               <% unless cat.children.empty? %>
                 <% cat.children.each do |child_cat| %>
                   <li><%= link_to child_cat.category, "##{child_cat.slug}", 'data-toggle' => 'tab' %></li> 
                 <% end %>                
               <% end %>
+              <li><%= link_to 'View all', "##{cat.slug}", 'data-toggle' => 'tab' %></li>
             </ul>
           </li>     
         <% end %>
       </ul>
     </div>
-    <!-- tabbed content for the navigation -->
+  </div>
+</div>
+<div class ='span6'>
+  <!-- tabbed content for the navigation -->
     <div class="tab-content">
       <% @categories.each do |cat| %>
         <div class = 'tab-pane' id = "<%= cat.slug %>">  
-          <p>Available <%= cat.category %> brands:</p>
+          <p><b><%= cat.category %></b></p>
           <% cat.brands.each do |br| %>
-            <li><%= link_to br.brand, category_brand_path(cat,br) %> 
+            <ul>
+              <%= link_to br.brand, category_brand_path(cat,br) %> 
               <span class = 'muted'>(<%= (br.products & cat.products).count %>)</span>
-            </li>
+              <% product = br.products & cat.products  %>
+              <li>  
+                <% product.each do |pro|%>
+                  <div class = 'product_div'>
+                  <% img = pro.images.first ? pro.images.first.image.url(:small) : 'no-image.jpg'  %>  
+                  <%= link_to image_tag(img), product_path(pro) %><br/>
+                  <%= pro.product %><br/>
+                  Best buy: <%= pro.price %>
+                  </div>
+                <% end %>
+              </li>
+            </ul>
           <% end %>
           <%= link_to 'View all', show_all_category_brands_path(cat) %>
           <span class = 'muted'>(<%= cat.products.count %>)</span>
         </div>
       <% end %>
     </div>
-  </div>
-</div>
-<div class ='span6'>
   <div class = 'new_arrivals'>
     <h5>Freshly arrived:</h5>
     <% @product.each do |pro|%>
