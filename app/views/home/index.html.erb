@@ -22,37 +22,30 @@
 </div>
 <div class ='span6'>
   <!-- tabbed content for the navigation -->
-    <div class="tab-content">
-      <% @categories.each do |cat| %>
-        <div class = 'tab-pane' id = "<%= cat.slug %>">  
-          <p><b><%= cat.category %></b></p>
-          <% cat.brands.each do |br| %>
-            <ul>
-              <%= link_to br.brand, category_brand_path(cat,br) %> 
-              <span class = 'muted'>(<%= (br.products & cat.products).count %>)</span>
-              <% product = br.products & cat.products  %>
-              <li>  
-                <% product.each do |pro|%>
-                  <div class = 'product_div'>
-                  <% img = pro.images.first ? pro.images.first.image.url(:small) : 'no-image.jpg'  %>  
-                  <%= link_to image_tag(img), product_path(pro) %><br/>
-                  <%= pro.product %><br/>
-                  Best buy: <%= pro.price %>
-                  </div>
-                <% end %>
-              </li>
-            </ul>
-          <% end %>
-          <%= link_to 'View all', show_all_category_brands_path(cat) %>
-          <span class = 'muted'>(<%= cat.products.count %>)</span>
-        </div>
-      <% end %>
-    </div>
+  <div class="tab-content">
+    <% @categories.each do |cat| %>
+      <div class = 'tab-pane' id = "<%= cat.slug %>">  
+        <p><b><%=link_to cat.category, category_path(cat) %></b></p>
+            <% product = cat.products.take(3)  %>
+              <% product.each do |pro|%>
+                <div class = 'product_div'>
+                <% img = pro.images.first ? pro.images.first.image.url(:small) : 'no_image-small.jpg'  %>  
+                <%= link_to image_tag(img), product_path(pro) %><br/>
+                <%= pro.product %><br/>
+                <%= pro.brand.brand %><br/>
+                Best buy: <%= pro.price %>
+                </div>
+              <% end %>
+        <%= link_to 'View all', show_all_category_brands_path(cat) %>
+        <span class = 'muted'>(<%= cat.products.count %>)</span>
+      </div>
+    <% end %>
+  </div>
   <div class = 'new_arrivals'>
     <h5>Freshly arrived:</h5>
     <% @product.each do |pro|%>
       <div class = 'product_div'>
-        <% img = pro.images.first ? pro.images.first.image.url(:small) : 'no-image.jpg'  %>  
+        <% img = pro.images.first ? pro.images.first.image.url(:small) : 'no_image-small.jpg'  %>  
         <%= link_to image_tag(img), product_path(pro) %><br/>
         <%= pro.product %><br/>
         Best buy: <%= pro.price %>

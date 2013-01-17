@@ -1,16 +1,18 @@
-<div class = 'left_div'>
-  <dl class  = "dl-horizontal" >      
-    <dt>Category:</dt>
-    <dd><%= @category.category %></dd>
-  </dl>
-  <% brands = @category.brands %>
-  <% unless brands.nil? %>
-    <dl class  = "dl-horizontal" >      
-      <dt>View Products by</dt>
-      <% brands.each do |brand| %>
-        <dd> <%= link_to brand.brand, category_brand_path(@category,brand)  %></dd>
+<h2><%= @category.category.capitalize %> </h2>
+<div>
+  <% products = @category.products %>
+  <% if products.empty? %>
+    <h3> There are no products in this category </h3>
+  <% else %>
+    <div class ='product_container'>
+      <% products.each do |p|  %>
+        <div class = 'product_div' price=<%= p.price %> rating=<%= total_rating(p) %>    >
+          <% img = p.images.first ? p.images.first.image.url(:small) : 'no_image-small.jpg'  %>  
+          <%= link_to image_tag(img), product_path(p) %><br/>
+          <%= link_to p.brand.brand+' '+p.product, product_path(p) %><br/>
+          Price: <%= p.price %>
+        </div>
       <% end %>
-      <dd><%= link_to "View All", show_all_category_brands_path(@category) %></dd>
-    </dl>
+    </div>
   <% end %>
 </div>

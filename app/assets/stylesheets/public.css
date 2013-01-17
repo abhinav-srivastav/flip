@@ -26,7 +26,8 @@ textarea.product_description { width: 600px; height: 250px; }
 .comment_delete { float: right; }
 
 div.left_div, div.product_div { display : inline-block;  }
-div.product_div { margin : 10px; }
+div.product_div { margin : 10px; width : 150px; }
+div.product_container { width : 700px;  }
 
 ul.nav-tabs li { margin: 15px;  }
 ul.child_category { display:none; }
