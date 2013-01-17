@@ -20,29 +20,28 @@
     </div>
   </div>
 </div>
-<div class ='span6'>
+<div class ='span7'>
   <!-- tabbed content for the navigation -->
   <div class="tab-content">
     <% @categories.each do |cat| %>
       <div class = 'tab-pane' id = "<%= cat.slug %>">  
-        <p><b><%=link_to cat.category, category_path(cat) %></b></p>
+        <h3><u><%=link_to cat.category, category_path(cat) %></u></h3>
             <% product = cat.products.take(3)  %>
               <% product.each do |pro|%>
                 <div class = 'product_div'>
                 <% img = pro.images.first ? pro.images.first.image.url(:small) : 'no_image-small.jpg'  %>  
                 <%= link_to image_tag(img), product_path(pro) %><br/>
-                <%= pro.product %><br/>
-                <%= pro.brand.brand %><br/>
-                Best buy: <%= pro.price %>
+                <%= pro.brand.brand+' '+pro.product %><br/>
+                Price: <%= pro.price %>
                 </div>
               <% end %>
-        <%= link_to 'View all', show_all_category_brands_path(cat) %>
+        <%= link_to 'View all', category_path(cat) %>
         <span class = 'muted'>(<%= cat.products.count %>)</span>
       </div>
     <% end %>
   </div>
   <div class = 'new_arrivals'>
-    <h5>Freshly arrived:</h5>
+    <h3><u>Freshly arrived:</u></h3>
     <% @product.each do |pro|%>
       <div class = 'product_div'>
         <% img = pro.images.first ? pro.images.first.image.url(:small) : 'no_image-small.jpg'  %>  

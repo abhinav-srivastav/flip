@@ -13,7 +13,7 @@
   <% unless pro.nil? %>
     <% pro.each do |p|  %>
       <div class = 'product_div' price=<%= p.price %> rating=<%= total_rating(p) %>    >
-        <% img = p.images.first ? p.images.first.image.url(:small) : 'no-image.jpg'  %>  
+        <% img = p.images.first ? p.images.first.image.url(:small) : 'no_image.jpg'  %>  
         <%= link_to image_tag(img), product_path(p) %><br/>
         <%= p.product %><br/>
         Best buy: <%= p.price %>

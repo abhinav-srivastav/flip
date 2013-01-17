@@ -1,3 +1,4 @@
+/*body.public { background-image:url('pattern.jpg'); color:#fdfdfd; }*/
 .nav-collapse ul.nav { padding-top: 10px; }
 ul { list-style-type: none;}
 table.table tr td div .change_quantity { font-size: smaller; }
@@ -34,3 +35,4 @@ ul.child_category { display:none; }
 ul.nav-tabs li:hover ul.child_category { display: list-item; }
 td.attribute_name { width : 37%; }
 div.product_description { width : 700px; }
+/*div.new_arrivals { border: 2px solid    }*/

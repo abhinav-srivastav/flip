@@ -32,7 +32,22 @@ class Order < ActiveRecord::Base
   scope :open_order, with_state(:open)
   scope :current_user_open_orders, lambda { |id| open_order.where(:user_id => id) }
   scope :user_orders, lambda { |id,state| where("user_id = ? AND state = ? ", id, state).order('updated_at desc ') }
-  
+  scope :to_be_shipped, where('updated_at < ? and updated_at > ? and state = ?', Time.now-2.hours, Time.now-3.hours,:booked)
+
+  def line_item_left(order)
+    if order.line_items.empty?
+      order.delete
+    end
+  end
+
+  def self.dispatch_shipment
+    booked = Order.to_be_shipped
+    booked.each do |order|
+      order.ship
+    end
+  end
+
+
   def self.current_user_open_order(id)
     order = current_user_open_orders(id).first
     if order
@@ -41,14 +56,4 @@ class Order < ActiveRecord::Base
       create(:user_id => id)
     end
   end 
-
-  
-  def line_item_left(order)
-    if order.line_items.empty?
-      order.delete
-    end
-  end
-
-
-
 end

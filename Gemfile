@@ -13,6 +13,7 @@ gem "country-select", "~> 1.1.1"
 gem 'cocaine', '0.3.2'
 gem "paperclip", "~> 3.0"
 gem "acts_as_tree", "~> 1.2.0"
+gem 'whenever', :require => false
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
