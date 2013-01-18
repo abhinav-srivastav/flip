@@ -4,9 +4,8 @@
  </div>
   <dl class = "dl-horizontal" >      
     <dd>
-      
       <% @product.images.each do |img| %>
-        <%= image_tag(img.image.url(:small)) %>
+        <%= image_tag(img.image.url(:small), :class => 'small_image') %>
       <% end %>
     </dd>
   </dl>

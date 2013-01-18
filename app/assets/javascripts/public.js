@@ -21,10 +21,17 @@ $(document).ready(function(){
     
     //zoom effect 
     $(".thumb_image").addimagezoom({ 
-		zoomrange: [3, 6],
-		magnifiersize: [900,500],
-		imagevertcenter: true
-	})
+		zoomrange: [3, 4],
+		magnifiersize: [900,500]
+	});
+
+	$(".small_image").hover(function(e){
+      $(".thumb_image").attr('src',$(this).attr('src').replace('/small/','/thumb/'))    
+      $(".thumb_image").addimagezoom({ 
+		zoomrange: [3, 4],
+		magnifiersize: [900,500]
+	});
+	});
 
 
 

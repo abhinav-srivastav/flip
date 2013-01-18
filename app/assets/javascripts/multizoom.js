@@ -17,7 +17,7 @@
 // Nov 28th, 2012: Version 2.1 w/Multi Zoom, updates - new features and bug fixes
 
 var featuredimagezoomer = { // the two options for Featured Image Zoomer:
-	loadinggif: 'assets/spinner.gif', // full path or URL to "loading" gif
+	loadinggif: '/assets/spinner.gif', // full path or URL to "loading" gif
 	magnifycursor: 'crosshair' // value for CSS's 'cursor' property when over the zoomable image
 };
 
@@ -131,7 +131,6 @@ jQuery(document).ready(function($){
 
 		showimage: function($tracker, $mag, showstatus){
 			var specs=$tracker.data('specs'), d=specs.magpos, fiz=this;
-			console.log(specs)
 			var coords=$tracker.data('specs').coords //get coords of tracker (from upper corner of document)
 			specs.windimensions={w:$(window).width(), h:$(window).height()}; //remember window dimensions
 			var magcoords={} //object to store coords magnifier DIV should move to
@@ -233,7 +232,7 @@ jQuery(document).ready(function($){
 				return;
 			}
 			$img.css({visibility: 'visible'});
-			setting.largeimage = setting.largeimage || $img.get(0).src;
+			setting.largeimage = $(".thumb_image").attr('src');
 			$magnifier=$('<div class="magnifyarea" style="position:absolute;z-index:'+basezindex+';width:'+setting.magnifiersize[0]+'px;height:'+setting.magnifiersize[1]+'px;left:-10000px;top:-10000px;visibility:hidden;overflow:hidden;border:1px solid black;" />')
 				.append('<div style="position:relative;left:0;top:0;z-index:'+basezindex+';" />')
 				.appendTo(document.body) //create magnifier container
@@ -284,18 +283,19 @@ jQuery(document).ready(function($){
 				return {left:offset.left, top:offset.top}
 			}
 
-			$tracker.mouseover(function(e){
-						$cursorshade.add($magnifier).add($statusdiv).removeClass('featuredimagezoomerhidden');
-						$tracker.data('premouseout', false);
-				}).mouseout(function(e){
-						$cursorshade.add($magnifier).add($statusdiv.not('.preloadevt')).addClass('featuredimagezoomerhidden');
-						$tracker.data('premouseout', true);
-				}).mousemove(function(e){ //save tracker mouse position for initial magnifier appearance, if needed
-					lastpage.pageX = e.pageX;
-					lastpage.pageY = e.pageY;
-				});
+			// $tracker.mouseover(function(e){
+			// 			$cursorshade.add($magnifier).add($statusdiv).removeClass('featuredimagezoomerhidden');
+			// 			$tracker.data('premouseout', false);
+			// 	}).mouseout(function(e){
+			// 			$cursorshade.add($magnifier).add($statusdiv.not('.preloadevt')).addClass('featuredimagezoomerhidden');
+			// 			$tracker.data('premouseout', true);
+			// 	}).mousemove(function(e){ //save tracker mouse position for initial magnifier appearance, if needed
+			// 		lastpage.pageX = e.pageX;
+			// 		lastpage.pageY = e.pageY;
+			// 	});
 
-			$tracker.one('mouseover', function(e){
+			$tracker.mouseover(function(e){
+				console.log(setting.largeimage)
 				var $maginner=$magnifier.find('div:eq(0)')
 				var $bigimage=$('<img src="'+setting.largeimage+'"/>').appendTo($maginner)
 				var largeloaded = featuredimagezoomer.loaded[$('<a href="'+setting.largeimage+'"></a>').get(0).href];
@@ -330,7 +330,6 @@ jQuery(document).ready(function($){
 					$magnifier.css({display:'none', visibility:'visible'})
 					$tracker.mouseover(function(e){ //image onmouseover
 						$tracker.data('specs').coords=getcoords() //refresh image coords (from upper left edge of document)
-						console.log(fiz)
 						fiz.showimage($tracker, $magnifier, showstatus)
 					})
 					$tracker.mousemove(function(e){ //image onmousemove
