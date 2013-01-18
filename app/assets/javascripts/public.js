@@ -21,16 +21,18 @@ $(document).ready(function(){
     
     //zoom effect 
     $(".thumb_image").addimagezoom({ 
-		zoomrange: [3, 4],
+		zoomrange: [3],
+		imagevertcenter : true,
 		magnifiersize: [900,500]
 	});
 
-	$(".small_image").hover(function(e){
+	$(".small_image").click(function(e){
       $(".thumb_image").attr('src',$(this).attr('src').replace('/small/','/thumb/'))    
       $(".thumb_image").addimagezoom({ 
-		zoomrange: [3, 4],
+		zoomrange: [3],
+		imagevertcenter : true,
 		magnifiersize: [900,500]
-	});
+	  });
 	});
 
 

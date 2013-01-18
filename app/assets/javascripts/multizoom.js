@@ -188,8 +188,6 @@ jQuery(document).ready(function($){
 			});
 			var newx=-x*specs.curpower+specs.magsize.w/2 //calculate x coord to move enlarged image
 			var newy=-y*specs.curpower+specs.magsize.h/2
-			// console.log(newx);
-			// console.log(newy);
 			$maginner.css({left:fiz.getboundary('left', newx, specs), top:fiz.getboundary('top', newy, specs)})
 			specs.$statusdiv.css({left:pagex-10, top:pagey+20})
 			specs.lastpagex=pagex //cache last pagex value (either e.pageX or lastpagex), as FF1.5 returns undefined for e.pageX for "DOMMouseScroll" event
@@ -232,7 +230,7 @@ jQuery(document).ready(function($){
 				return;
 			}
 			$img.css({visibility: 'visible'});
-			setting.largeimage = $(".thumb_image").attr('src');
+			setting.largeimage = $(".thumb_image").attr('src').replace('/thumb/', '/original/');
 			$magnifier=$('<div class="magnifyarea" style="position:absolute;z-index:'+basezindex+';width:'+setting.magnifiersize[0]+'px;height:'+setting.magnifiersize[1]+'px;left:-10000px;top:-10000px;visibility:hidden;overflow:hidden;border:1px solid black;" />')
 				.append('<div style="position:relative;left:0;top:0;z-index:'+basezindex+';" />')
 				.appendTo(document.body) //create magnifier container
@@ -295,7 +293,6 @@ jQuery(document).ready(function($){
 			// 	});
 
 			$tracker.mouseover(function(e){
-				console.log(setting.largeimage)
 				var $maginner=$magnifier.find('div:eq(0)')
 				var $bigimage=$('<img src="'+setting.largeimage+'"/>').appendTo($maginner)
 				var largeloaded = featuredimagezoomer.loaded[$('<a href="'+setting.largeimage+'"></a>').get(0).href];
