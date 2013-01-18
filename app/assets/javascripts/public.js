@@ -20,11 +20,10 @@ $(document).ready(function(){
 	});
     
     //zoom effect 
-    $(".thumb_image").addimagezoom({ // single image zoom
-		zoomrange: [3, 10],
-		magnifiersize: [300,300],
-		largeimage : '/system/images/26/original/adidas1'
-		// imagevertcenter: false
+    $(".thumb_image").addimagezoom({ 
+		zoomrange: [3, 6],
+		magnifiersize: [900,500],
+		imagevertcenter: true
 	})
 
 
