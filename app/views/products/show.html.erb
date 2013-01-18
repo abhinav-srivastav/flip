@@ -1,14 +1,18 @@
+
 <div>
+  <%= image_tag(@product.images.first.image.url(:thumb), :class => 'thumb_image') %><br/>
+ </div>
   <dl class = "dl-horizontal" >      
     <dd>
+      
       <% @product.images.each do |img| %>
-        <%= link_to (image_tag(img.image.url(:thumb))), img.image.url(:original) %>
-      <% end %>
-      <%  if @product.available < 1  %>
-        <p class = 'text-error'>OUT OF STOCK</p>
+        <%= image_tag(img.image.url(:small)) %>
       <% end %>
     </dd>
   </dl>
+  <%  if @product.available < 1  %>
+        <p class = 'text-error'>OUT OF STOCK</p>
+      <% end %>
   <dl class  = "dl-horizontal" >      
     <dt>Product Name:</dt>
     <dd><%= @product.product %></dd>
@@ -19,7 +23,7 @@
   </dl>
   <dl class  = "dl-horizontal" >      
     <dt>Price:</dt>
-    <dd><strike><%= @product.cost_price if @product.cost_price %></strike> <%= @product.price %></dd>
+    <dd><strike><%= @product.mrp if @product.mrp %></strike> <%= @product.price %></dd>
   </dl>
   <dl class  = "dl-horizontal" >      
     <dt>Rating:</dt>

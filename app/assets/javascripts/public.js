@@ -18,6 +18,17 @@ $(document).ready(function(){
 			complete: function(){ $("#spinner_img").hide(); }
 		});
 	});
+    
+    //zoom effect 
+    $(".thumb_image").addimagezoom({ // single image zoom
+		zoomrange: [3, 10],
+		magnifiersize: [300,300],
+		largeimage : '/system/images/26/original/adidas1'
+		// imagevertcenter: false
+	})
+
+
+
 
 	$(".sort [type = checkbox] ").click(function(){
 		sort_by = $(this).attr('value')
@@ -25,4 +36,5 @@ $(document).ready(function(){
 			console.log($(this).attr(sort_by))
 		});
 	});
+
 });

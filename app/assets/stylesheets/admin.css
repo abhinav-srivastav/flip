@@ -7,4 +7,5 @@ td.dropdown { width : 25%;  }
 textarea.detail_textarea {  width : 400px; height : 100px; }
 tr.cancel { background-color:  #FFB2B2 }
 tr.open { background-color: #ADE48D } 
-tr.booked { background-color : #B2D7FF;    }
+tr.booked { background-color : #B2D7FF; }
+tr.shipped { background-color: #BBBBBB;  }

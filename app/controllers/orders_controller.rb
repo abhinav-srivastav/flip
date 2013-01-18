@@ -92,6 +92,7 @@ class OrdersController < ApplicationController
     amount = 0
     line_items.each do |item|
       amount += item.price * item.quantity
+      amount += 30
     end
     amount
   end
