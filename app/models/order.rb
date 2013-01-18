@@ -32,7 +32,7 @@ class Order < ActiveRecord::Base
   scope :open_order, with_state(:open)
   scope :current_user_open_orders, lambda { |id| open_order.where(:user_id => id) }
   scope :user_orders, lambda { |id,state| where("user_id = ? AND state = ? ", id, state).order('updated_at desc ') }
-  scope :to_be_shipped, where('updated_at < ? and updated_at > ? and state = ?', Time.now-2.hours, Time.now-3.hours,:booked)
+  scope :to_be_shipped, where('updated_at < ? and state = ?', Time.now-2.hours, :booked)
 
   def line_item_left(order)
     if order.line_items.empty?
