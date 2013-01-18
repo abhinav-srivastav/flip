@@ -14,6 +14,13 @@ $(document).ready(function() {
       $('#'+root_category_id).addClass('child_category');	
     }
   });
+
+  $("#remove_prototype").click(function(){
+    if($(this).is(':checked'))
+      $(".remove_prototype").removeClass('hidden')
+    else
+      $(".remove_prototype").addClass('hidden')
+  }); 
 });
 
 function add_images(link, association, content) {

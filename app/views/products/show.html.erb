@@ -1,6 +1,6 @@
 
 <div>
-  <%= image_tag(@product.images.first.image.url(:thumb), :class => 'thumb_image') %><br/>
+  <%= image_tag(@product.images.first.image.url(:thumb), :class => 'thumb_image') if @product.images.any?  %><br/>
  </div>
   <dl class = "dl-horizontal" >      
     <dd>

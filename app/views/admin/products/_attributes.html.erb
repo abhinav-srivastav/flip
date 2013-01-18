@@ -1,3 +1,9 @@
+  <div>
+    <input type = 'checkbox' id = 'remove_prototype'> Remove Prototype
+  </div>
+  <div class = 'remove_prototype hidden'>
+    <%= f.association :prototypes, :as => :check_boxes %>
+  </div>
   <div class = 'dropdown'>
     <%= link_to 'add prototype', '#', :class => 'dropdown-toggle', :role => 'button', 'data-toggle' => 'dropdown', :id => 'attribute' %><b class='caret'></b>
     <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="prototype">

@@ -9,3 +9,4 @@ tr.cancel { background-color:  #FFB2B2 }
 tr.open { background-color: #ADE48D } 
 tr.booked { background-color : #B2D7FF; }
 tr.shipped { background-color: #BBBBBB;  }
+.hidden { display : none;  }
