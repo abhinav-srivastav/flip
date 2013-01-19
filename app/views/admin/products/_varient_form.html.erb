@@ -1,0 +1,5 @@
+<%= f.input :mrp %>
+<%= f.input :price %>
+<%= f.input :available %>
+<%= f.association :colour, :collection => Colour.all, :label_method => :colour  %>
+<%= f.association :size, :collection => Size.all, :label_method => :size %>

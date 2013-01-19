@@ -1,0 +1,9 @@
+<%= simple_form_for ([:admin,@varient]), :html => { :multipart => true, :class => 'form-horizontal'} do |f| %>
+<%= f.input :mrp %>
+<%= f.input :price %>
+<%= f.input :available %>
+<%= f.association :colour, :collection => Colour.all, :label_method => :colour  %>
+<%= f.association :size, :collection => Size.all, :label_method => :size %>
+<%= f.submit :class => "btn btn-success"%>
+<%= link_to 'back', request.referrer , :class => 'btn btn-inverse'  %>
+<% end %>

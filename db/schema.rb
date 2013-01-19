@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130118055931) do
+ActiveRecord::Schema.define(:version => 20130118135926) do
 
   create_table "addresses", :force => true do |t|
     t.string   "street_no"
@@ -54,6 +54,10 @@ ActiveRecord::Schema.define(:version => 20130118055931) do
   create_table "categories_products", :id => false, :force => true do |t|
     t.integer "category_id"
     t.integer "product_id"
+  end
+
+  create_table "colours", :force => true do |t|
+    t.string "colour"
   end
 
   create_table "comments", :force => true do |t|
@@ -144,6 +148,10 @@ ActiveRecord::Schema.define(:version => 20130118055931) do
     t.datetime "updated_at",                :null => false
   end
 
+  create_table "sizes", :force => true do |t|
+    t.string "size"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "username"
     t.string   "password_digest"
@@ -153,6 +161,17 @@ ActiveRecord::Schema.define(:version => 20130118055931) do
     t.datetime "created_at",                                                          :null => false
     t.datetime "updated_at",                                                          :null => false
     t.boolean  "super",                                          :default => false
+  end
+
+  create_table "varients", :force => true do |t|
+    t.integer  "product_id"
+    t.decimal  "mrp",        :precision => 10, :scale => 2
+    t.decimal  "price",      :precision => 10, :scale => 2
+    t.integer  "available",                                 :default => 0
+    t.integer  "colour_id"
+    t.integer  "size_id"
+    t.datetime "created_at",                                               :null => false
+    t.datetime "updated_at",                                               :null => false
   end
 
 end

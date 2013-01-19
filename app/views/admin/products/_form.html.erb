@@ -1,48 +1,45 @@
 <%= javascript_tag do %>
   bkLib.onDomLoaded(function() { nicEditors.DescriptionTextArea() });
 <% end %>
-<%= simple_form_for ([:admin,@product]), :html => { :multipart => true, :class => 'form-horizontal'} do |f| %>
-  <%= f.input :product %>
-  <%= f.input :description, :input_html => { :class => 'product_description' } %>
-  <%= f.input :mrp %>
-  <%= f.input :price %>
-  <%= f.input :available %>
-  <%= f.fields_for :images do |img|  %>
-  	<% if img.object.new_record? %>
-  	  <%= render 'image_form', :f => img %>
-  	<% end %>
-  <%end%>
-  <div class='control-group'>
-    <div class='controls'>
-      <%= link_to_add_images 'Add More Images', f, :images %>
+<div class='span2'>
+  <div class= 'sidebar-nav'>
+    <div class = 'tabbale tabs-left'>
+      <ul class = 'nav nav-tabs product_nav'>
+        <li class = 'active'><%= link_to 'product', '#product', 'data-toggle' => 'tab' %></li>
+        <li><%= link_to 'images', '#images', 'data-toggle' => 'tab' %></li>
+        <li><%= link_to 'varients','#varients', 'data-toggle' => 'tab' if params[:action] == 'edit' || params[:action] == 'update' %></li>
+        <li><%= link_to 'attributes','#attributes', 'data-toggle' => 'tab' if params[:action] == 'edit' || params[:action] == 'update' %></li>
+      </ul>
     </div>
   </div>
-  <div class='control-group'>
-    <div class='controls'>
-      <% @product.images.each do |img| %>
-        <% if img.persisted? %>
-          <div class='product_image'  id="<%= img.id %>">
-            <%= link_to (image_tag('delete.png')),admin_image_path(img), method: :delete, :data => { :confirm => 'Delete this image ?' }, :class=> 'pull-right'%>
-            <%= image_tag(img.image.url(:thumb), :class => 'img-polaroid') %>
+</div>
+<div class='span9 tab-content'>
+  <%= simple_form_for ([:admin,@product]), :html => { :multipart => true, :class => 'form-horizontal'} do |f| %>
+    <div id='product' class='tab-pane main_form '>
+      <%= f.input :product %>
+      <%= f.input :description, :input_html => { :class => 'product_description' } %>
+      <%= f.association :brand, :label_method => :brand, :as => :radio_buttons %>
+      <div class = "root_category">
+        <%= f.association :categories, :collection => Category.root(), :label_method => :category, :as => :check_boxes %>
+      </div>
+      <% Category.root.each do |root|  %>
+        <% unless root.children.empty? %>  
+          <div class = 'child_category' id = "<%= root.id %>">
+            <%= f.association :categories, :label => "#{root.category}'s Sub-Category" , :collection => root.children, :label_method => :category, :as => :check_boxes %>
           </div>
         <% end %>
-      <% end %> 
+      <% end %>
     </div>
-  </div>
-  <%= f.association :brand, :label_method => :brand, :as => :radio_buttons %>
-  <div class = "root_category">
-    <%= f.association :categories, :collection => Category.root(), :label_method => :category, :as => :check_boxes %>
-  </div>
-  <% Category.root.each do |root|  %>
-    <% unless root.children.empty? %>  
-      <div class = 'child_category' id = "<%= root.id %>">
-        <%= f.association :categories, :label => "#{root.category}'s Sub-Category" , :collection => root.children, :label_method => :category, :as => :check_boxes %>
-      </div>
-    <% end %>
-  <% end %>
-
-  <%= render 'attributes', :f => f if params[:action] == 'edit' || params[:action] == 'update'  %>
-  <%= f.submit :class => "btn btn-success"%>
-  <%= link_to 'back', admin_products_path, :class => 'btn btn-inverse'  %>
-<% end %> 
-
+    <div id='images' class='tab-pane main_form'>
+      <%= render 'images', :f => f %>     
+    </div>
+    <div id='attributes' class='tab-pane main_form'>
+      <%= render 'attributes', :f => f if params[:action] == 'edit' || params[:action] == 'update'  %>
+    </div>
+    <div id='varients' class='tab-pane main_form'>
+      <%= render 'varients', :f => f if params[:action] == 'edit' || params[:action] == 'update'  %>
+    </div>
+    <%= f.submit :class => "btn btn-success"%>
+    <%= link_to 'back', admin_products_path, :class => 'btn btn-inverse'  %>
+  <% end %> 
+</div>

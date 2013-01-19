@@ -1,0 +1,22 @@
+<%= f.fields_for :images do |img|  %>
+	<% if img.object.new_record? %>
+    <%= img.input :image %>
+	<% end %>
+<%end%>
+<div class='control-group'>
+  <div class='controls'>
+    <%= link_to_add_images 'Add More Images', f, :images %>
+  </div>
+</div>
+<div class='control-group'>
+  <div class='controls'>
+    <% @product.images.each do |img| %>
+      <% if img.persisted? %>
+        <div class='product_image'  id="<%= img.id %>">
+          <%= link_to (image_tag('delete.png')),admin_image_path(img), method: :delete, :data => { :confirm => 'Delete this image ?' }, :class=> 'pull-right'%>
+          <%= image_tag(img.image.url(:small), :class => 'img-polaroid') %>
+        </div>
+      <% end %>
+    <% end %> 
+  </div>
+</div>
