@@ -9,4 +9,7 @@ class Varient < ActiveRecord::Base
   validates :colour_id, :uniqueness => { :scope => [:size_id , :product_id], :message => 'This combination already exist !' } 
   validates :size_id, :uniqueness => { :scope => [:colour_id, :product_id], :message => 'This combination already exist !' }
   # accepts_nested_attributes_for :colour
+  scope :with_colour, select("group_concat(distinct size_id)").group('colour_id')
+  scope :with_size, select("group_concat(distinct colour_id)").group('size_id')
+
 end

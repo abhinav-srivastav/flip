@@ -17,8 +17,6 @@ class Admin::VarientsController < ApplicationController
     end
   end
 
-
-
   def edit
     @varient = Varient.find(params[:id])
   end
@@ -33,5 +31,13 @@ class Admin::VarientsController < ApplicationController
       	format.html { render action: 'edit' }
       end
     end
+  end
+  def destroy
+    @varient = Varient.find(params[:id])
+    @varient.destroy
+    respond_to do |format|
+      format.html { redirect_to request.referrer, :notice => 'varient deleted' } 
+    end
+    
   end
 end

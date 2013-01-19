@@ -1,0 +1,19 @@
+<div>
+  <h3>Size</h3>
+  <%= link_to "New size", new_admin_size_path,:class => "btn btn-primary" %><br/><br/>
+  <table class = 'table table-striped'>
+    <tr>
+      <td><b>Size</b></td>
+      <td class='shift_right'><b>Actions</b></td>
+    </tr>
+    <% @sizes.each do |size| %>
+    <tr>
+      <td><%= size.size %></td>
+      <td class='shift_right'>
+        <%= link_to "edit", edit_admin_size_path(size), :class => "btn btn-small" %>
+        <%= link_to "remove", admin_size_path(size), method: :delete, data: { confirm: "Are u sure ?" },:class =>"btn btn-danger btn-small" %>
+       </td>
+    </tr>
+    <% end %>
+  </table>
+</div>

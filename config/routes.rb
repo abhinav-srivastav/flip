@@ -10,7 +10,7 @@ Flip::Application.routes.draw do
   post '/admin/product_details/:id' => 'admin/product_details#create' 
 
   namespace :admin do
-    resources :categories, :users, :products, :brands, :sessions, :orders, :images, :product_attributes, :product_details, :varients
+    resources :categories, :users, :products, :brands, :sessions, :orders, :images, :product_attributes, :product_details, :varients, :colours, :sizes
     resources :prototypes do
       get 'create_details', :on => :member
     end

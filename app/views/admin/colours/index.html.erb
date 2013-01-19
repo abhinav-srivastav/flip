@@ -1,0 +1,19 @@
+<div>
+  <h3>Colour</h3>
+  <%= link_to "New Colour", new_admin_colour_path,:class => "btn btn-primary" %><br/><br/>
+  <table class = 'table table-striped'>
+    <tr>
+      <td><b>Colour</b></td>
+      <td class='shift_right'><b>Actions</b></td>
+    </tr>
+    <% @colours.each do |colour| %>
+    <tr>
+      <td><%= colour.colour %></td>
+      <td class='shift_right'>
+        <%= link_to "edit", edit_admin_colour_path(colour), :class => "btn btn-small" %>
+        <%= link_to "remove", admin_colour_path(colour), method: :delete, data: { confirm: "Are u sure ?" },:class =>"btn btn-danger btn-small" %>
+       </td>
+    </tr>
+    <% end %>
+  </table>
+</div>

@@ -10,8 +10,8 @@
     </dd>
   </dl>
   <%  if @product.available < 1  %>
-        <p class = 'text-error'>OUT OF STOCK</p>
-      <% end %>
+    <p class = 'text-error'>OUT OF STOCK</p>
+  <% end %>
   <dl class  = "dl-horizontal" >      
     <dt>Product Name:</dt>
     <dd><%= @product.product %></dd>
@@ -20,6 +20,18 @@
     <dt>Brand name:</dt>
     <dd><%= @product.brand.brand %></dd>
   </dl>
+  <div class ='varients'>
+    <div class='colour'>
+      <% @product.varients.with_colour.each do |col_var| %>
+        <%= col_var["group_concat(distinct size_id)"] %>
+      <% end %>
+    </div>
+    <div class='size'>
+      <% @product.varients.with_size.each do |size_var| %>
+        <%= size_var["group_concat(distinct colour_id)"] %>
+      <% end %>
+    </div>
+  </div>
   <dl class  = "dl-horizontal" >      
     <dt>Price:</dt>
     <dd><strike><%= @product.mrp if @product.mrp %></strike> <%= @product.price %></dd>

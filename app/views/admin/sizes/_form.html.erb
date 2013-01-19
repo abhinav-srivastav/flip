@@ -1,0 +1,5 @@
+<%= simple_form_for ([:admin,@size]), :html => { :class => 'form-horizontal'} do |f| %>
+  <%= f.input :size %>
+  <%= f.submit :class => "btn btn-success"%>
+  <%= link_to 'back', admin_colours_path, :class => 'btn btn-inverse'  %>
+<% end %> 
