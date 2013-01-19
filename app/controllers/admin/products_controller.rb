@@ -9,7 +9,6 @@ class Admin::ProductsController < ApplicationController
   def new
     @product = Product.new
     @product.images.build
-    @product.varients.build
   end
 
   def create 
@@ -19,7 +18,6 @@ class Admin::ProductsController < ApplicationController
         format.html {redirect_to edit_admin_product_path(@product) }
       else
         @product.images.build
-        @product.varients.build
         format.html {render action: 'new'}
       end
     end
@@ -29,7 +27,6 @@ class Admin::ProductsController < ApplicationController
 		@product = Product.find(params[:id])
     @other_attr = ProductAttribute.other_attributes(@product)
     @product.images.build
-    @product.varients.build
     @product.product_attributes.build.product_details.build
 	end
 	
@@ -42,7 +39,6 @@ class Admin::ProductsController < ApplicationController
       else
         @other_attr = ProductAttribute.other_attributes(@product)
         @product.images.build
-        @product.varients.build
         @product.product_attributes.build.product_details.build
         format.html { render action: "edit"}
       end

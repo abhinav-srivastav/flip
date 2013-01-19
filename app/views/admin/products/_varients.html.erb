@@ -1,40 +1,29 @@
-<ul id="myTab" class="nav nav-tabs">
-  <li class="active"><%= link_to 'View All', '#view_all', 'data-toggle' => 'tab'%></li>
-  <li><%= link_to 'Add new', '#add_new', 'data-toggle' => 'tab'%></li>
-</ul>
-<div id="myTabContent" class="tab-content">
-  <div class="tab-pane fade in active" id="view_all">
-    <%= link_to_add_varients 'Add varient', f, :varients %>
+    <div class='new_varient'>
+      <%= link_to 'Add varient', new_admin_varient_path(:product_id => @product.id), :remote => true, :class => 'btn btn-primary' %><br/><br/>
+    </div>
     <table class='table table-striped'>
       <tr>
-        <td><b>Mrp</b></td>
+        <td><b>MRP</b></td>
         <td><b>Price</b></td>
+        <td><b>Available</b></td>
         <td><b>Colour</b></td>
         <td><b>Size</b></td>
         <td class='shift_right'><b>Actions</b></td>
       </tr>
       <% @product.varients.each do |var| %>
         <% if var.persisted? %>
-          <tr>
-            <td><%= var.mrp %></td>
-            <td><%= var.price %></td>
-            <td><%= var.colour.colour if var.colour %></td>
-            <td><%= var.size.size if var.size %></td>
-            <td class='shift_right'>
-              <%= link_to "edit", edit_admin_varient_path(var), :class => "btn btn-small" %>
+          <tr class = '<%= var.id %>'>
+            <td ><%= var.mrp %></td>
+            <td ><%= var.price %></td>
+            <td ><%= var.available %></td>
+            <td ><%= var.colour.colour if var.colour %></td>
+            <td ><%= var.size.size if var.size %></td>
+            <td class='shift_right' >
+              <%= link_to "edit", edit_admin_varient_path(var), :remote => true, :class => "btn btn-small" %>
               <%= link_to "remove", admin_varient_path(var), method: :delete, data: { confirm: "Are u sure ?" },:class =>"btn btn-danger btn-small" %>
             </td>
-
           </tr>
         <% end %>
       <% end %>
     </table>
-  </div>
-  <div class="tab-pane fade" id="add_new">
-    <div class='control-group'>
-      <div class='controls'>
-        <%= link_to_add_varients 'Add varients', f, :varients %>
-      </div>
-    </div>
-  </div>
-</div>
+  

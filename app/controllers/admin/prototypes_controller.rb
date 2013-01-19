@@ -58,7 +58,7 @@ class Admin::PrototypesController < ApplicationController
       @product.add_details(pa.id)
     end
     respond_to do |format|
-      format.html { redirect_to request.referrer }
+      format.html { redirect_to request.referrer, :notice => 'Attributes updated' }
     end
   end
 

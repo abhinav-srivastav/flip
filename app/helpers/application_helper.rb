@@ -11,14 +11,6 @@ module ApplicationHelper
     link_to_function(name, "add_images(this,\"#{association}\",\"#{escape_javascript(fields)}\")")
   end
 
-  def link_to_add_varients(name, f, association)
-    new_object = f.object.class.reflect_on_association(association).klass.new
-    fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |var|
-      render(association.to_s.singularize + "_form", :f => var)
-    end
-    link_to_function(name, "add_varients(this,\"#{association}\",\"#{escape_javascript(fields)}\")")
-  end
-
   def total_rating(product)
     p = 0
     return p if product.ratings.empty?
