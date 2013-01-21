@@ -8,14 +8,9 @@ class Varient < ActiveRecord::Base
   validates_presence_of :price, :available
   validates :colour_id, :uniqueness => { :scope => [:size_id , :product_id], :message => 'This combination already exist !' } 
   validates :size_id, :uniqueness => { :scope => [:colour_id, :product_id], :message => 'This combination already exist !' }
-  # accepts_nested_attributes_for :colour
+
   scope :with_colour, joins(:colour, :size).select("colours.colour, group_concat(distinct sizes.size) as size").group('colours.colour')
   scope :with_size, joins(:size, :colour).select("sizes.size, group_concat(distinct colours.colour) as colour").group('sizes.size')
-
-
-
-
-
 
   def self.size_for_colour(col)
     joint_string = joins(:size, :colour).select('group_concat(distinct sizes.size) as size').group('colours.colour').having('colours.colour = ?', col).first
@@ -27,7 +22,6 @@ class Varient < ActiveRecord::Base
     joint_string['colour'].split(',')
   end
   
-
   def self.get_varient(product, var=nil)
     var ||= { 'colour' => product.varients.first.colour.colour   }
     pro_var = Hash.new { |hash, key| hash[key] = [] }
@@ -39,7 +33,4 @@ class Varient < ActiveRecord::Base
     end
     pro_var
   end
-
-
-
 end

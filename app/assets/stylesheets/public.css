@@ -37,4 +37,4 @@ td.attribute_name { width : 37%; }
 div.product_description { width : 700px; }
 div.category_header {  padding: 0 15px; border-bottom : 2px solid #aaaaaa;}
 div.category_header h3 { display: inline;}
-div.varients div { display : inline-block;  }
+div.varients div { display : inline-block; vertical-align: top;  }

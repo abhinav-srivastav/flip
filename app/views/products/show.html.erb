@@ -21,21 +21,21 @@
   </dl>
   <dl class = "dl-horizontal">
     <dd>  
-      <div class = 'sidebar-nav'>
-        <div class = 'tabbale tabs-left' >
-          <ul class = 'nav nav-tabs' >
+      <div class = 'varients'>
+        <div class ='Size'>
+          <ul>
             Sizes:
             <% @varient['size'].each do |size_var| %>              
               <li><%= link_to size_var, product_path(@product, :varient => { :size => size_var }) %></li>
             <% end %>
           </ul>
         </div>
-      </div>
-      <div class ='tab-content'>
-        Colour:
-        <% @varient['colour'].each do |colour_var| %>
-          <%= link_to colour_var, product_path(@product, :varient => { :colour => colour_var }) %>            
-        <% end %>
+        <div class = 'colour'>
+          <ul>Colour:
+          <% @varient['colour'].each do |colour_var| %>
+            <li><%= link_to colour_var, product_path(@product, :varient => { :colour => colour_var }) %></li>
+          <% end %>
+        </div>
       </div>
     </dd>
   </dl>
@@ -47,7 +47,7 @@
     <dt>Rating:</dt>
     <dd>
       <%= total_rating(@product)%> (rated by <%= @product.ratings.count %>)<br/> 
-      <%  user_rating = (current_user.ratings & @product.ratings).first if logged_in?   %>
+      <% user_rating = (current_user.ratings & @product.ratings).first if logged_in? %>
       <% if user_rating %>
         <p> Your rated this product <%= user_rating.rating %></p>
       <% end %>

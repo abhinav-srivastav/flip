@@ -78,6 +78,13 @@ class OrdersController < ApplicationController
     end
   end
 
+  def shipped
+    @orders = Order.user_orders(current_user.id,'shipped')
+    respond_to do |format|
+      format.html
+    end
+  end
+
  private
   def add_line_item(order, product_id, product_price)
     line_item = order.line_items.find_by_product_id(product_id)
