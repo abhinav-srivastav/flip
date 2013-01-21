@@ -28,11 +28,13 @@
                 <td><%= line.price %>  <%= link_to '×', line_item_path(line),  method: :delete, data: { confirm: 'Are you sure?' } %></td>                
               </tr>
               <%end%>
-              <tr>
-                <td></td>
-                <td><span class = 'pull-right'><b>Shipping Charges:</b></span></td>
-                <td >30.0</td>
-              </tr>
+              <% if @order.line_items.any?  %>
+                <tr>
+                  <td></td>
+                  <td><span class = 'pull-right'><b>Shipping Charges:</b></span></td>
+                  <td >30.0</td>
+                </tr>
+              <% end %>
               <tr>
                 <td></td>
                 <td><span class = 'pull-right'><b>Total Amount:</b></span></td>

@@ -2,5 +2,16 @@
   <body>
   	Hi,<%= @user_name %>
     This is a Booking Acknowledgement mail from Grab-ur-Trolley.
+    Your order details:
+  <% @order.line_items.each do |line| %>
+	Product Name : <%= line.product.product %>
+	Quantity : <%= line.quantity %>
+	Amount : <%= line.price %>
+  <% end %>
+    Total amount: <%= @order.amount %>
+    Order Address: <%= @order.address.name %>, 
+                  <%= @order.address.street_no %>,
+                  <%= @order.address.area %>, 
+                  <%= @order.address.city %>-<%= @order.address.postal_code %>     
   </body>
 </html>

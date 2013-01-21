@@ -1,4 +1,3 @@
-
 <div>
   <%= image_tag(@product.images.first.image.url(:thumb), :class => 'thumb_image') if @product.images.any?  %><br/>
  </div>
@@ -20,18 +19,26 @@
     <dt>Brand name:</dt>
     <dd><%= @product.brand.brand %></dd>
   </dl>
-  <div class ='varients'>
-    <div class='colour'>
-      <% @product.varients.with_colour.each do |col_var| %>
-        <%= col_var["group_concat(distinct size_id)"] %>
-      <% end %>
-    </div>
-    <div class='size'>
-      <% @product.varients.with_size.each do |size_var| %>
-        <%= size_var["group_concat(distinct colour_id)"] %>
-      <% end %>
-    </div>
-  </div>
+  <dl class = "dl-horizontal">
+    <dd>  
+      <div class = 'sidebar-nav'>
+        <div class = 'tabbale tabs-left' >
+          <ul class = 'nav nav-tabs' >
+            Sizes:
+            <% @varient['size'].each do |size_var| %>              
+              <li><%= link_to size_var, product_path(@product, :varient => { :size => size_var }) %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+      <div class ='tab-content'>
+        Colour:
+        <% @varient['colour'].each do |colour_var| %>
+          <%= link_to colour_var, product_path(@product, :varient => { :colour => colour_var }) %>            
+        <% end %>
+      </div>
+    </dd>
+  </dl>
   <dl class  = "dl-horizontal" >      
     <dt>Price:</dt>
     <dd><strike><%= @product.mrp if @product.mrp %></strike> <%= @product.price %></dd>
