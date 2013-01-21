@@ -35,14 +35,8 @@ $(document).ready(function(){
 	  });
 	});
 
-
-
-
-	$(".sort [type = checkbox] ").click(function(){
-		sort_by = $(this).attr('value')
-		$('div.product_div').each(function(){
-			console.log($(this).attr(sort_by))
-		});
+	$(".select_varient").click(function(){
+	  $(this).addClass('active').siblings().removeClass('active')
 	});
 
 });

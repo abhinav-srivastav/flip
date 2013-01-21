@@ -23,6 +23,7 @@ class Varient < ActiveRecord::Base
   end
   
   def self.get_varient(product, var=nil)
+    # var ||= product.varients.first
     var ||= { 'colour' => product.varients.first.colour.colour   }
     pro_var = Hash.new { |hash, key| hash[key] = [] }
     pro_var[var.keys.first] << var[var.keys.first]

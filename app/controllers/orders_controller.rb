@@ -92,7 +92,7 @@ class OrdersController < ApplicationController
       line_item = order.line_items.new(:product_id => product_id, :price => product_price)
     end
     order.amount = order_amount(order.line_items)
-    order    
+    order
   end
 
   def order_amount(line_items)
