@@ -14,8 +14,6 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require bootstrap
-//= require nicEdit
-//= require multizoom.js
-//= require admin
+//= require multizoom
 //= require public
 

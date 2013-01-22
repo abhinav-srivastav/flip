@@ -1,4 +1,4 @@
-class Admin::ColoursController < ApplicationController
+class Admin::ColoursController < Admin::BaseController
   def index
     @colours = Colour.all
     respond_to do |format|

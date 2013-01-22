@@ -1,4 +1,4 @@
-class Admin::ImagesController < ApplicationController
+class Admin::ImagesController < Admin::BaseController
 
   def destroy
   	@image = Image.find(params[:id])

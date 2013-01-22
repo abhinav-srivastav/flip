@@ -1,4 +1,4 @@
-class Admin::ProductDetailsController < ApplicationController
+class Admin::ProductDetailsController < Admin::BaseController
   def destroy
   	@pd = ProductDetail.find(params[:id])
   	@pd.destroy

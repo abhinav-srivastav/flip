@@ -1,4 +1,4 @@
-class Admin::PrototypesController < ApplicationController
+class Admin::PrototypesController < Admin::BaseController
   def index 
 		@prototypes = Prototype.all
 		respond_to do |format|

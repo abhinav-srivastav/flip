@@ -21,7 +21,7 @@ class Order < ActiveRecord::Base
       if  order.amount > 0 && order.amount <= order.user.wallet && order.address
         order.user.wallet -= order.amount
         order.line_items.each do |li|
-          li.decrement_available
+          li.decrement_available_quantity
         end
       else
         false

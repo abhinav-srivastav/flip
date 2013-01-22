@@ -1,4 +1,4 @@
-class Admin::SessionsController < ApplicationController
+class Admin::SessionsController < Admin::BaseController
   layout 'public'
   skip_before_filter :admin_authorize
   @@from_page

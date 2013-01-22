@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  layout 'public'
-  skip_before_filter :admin_authorize
+
   before_filter :user_authorize, :except => [:new, :create]
   def show
   	@user = User.find(params[:id])

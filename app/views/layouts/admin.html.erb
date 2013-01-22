@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Flip</title>
+  <%= stylesheet_link_tag "admin_base", :media => "all" %>
+  <%= javascript_include_tag "admin_base" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>    
+<div class="navbar navbar-inverse">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <%= link_to 'Grab-Ur-Trolley', root_path, :class => 'brand' %>
+      <div class="nav-collapse collapse">
+        <div class="navbar-text pull-right">
+          Hi,<%= link_to current_user.username, user_path(current_user)%>! |
+          <%= link_to 'Log out', logout_path   %>
+        </div>
+        <ul class='nav'>
+          <li><%= link_to 'Categories', admin_categories_path %></li>
+          <li><%= link_to 'Brands', admin_brands_path %></li>
+          <li><%= link_to 'Products', admin_products_path %></li>
+          <li><%= link_to 'Users', admin_users_path %></li>
+          <li><%= link_to 'Orders', admin_orders_path %></li>
+          <li><%= link_to 'Attributes', admin_product_attributes_path %></li>
+          <li><%= link_to 'Prototypes', admin_prototypes_path %></li>
+          <li><%= link_to 'Colours', admin_colours_path %></li>
+          <li><%= link_to 'Sizes', admin_sizes_path %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+  <div class = "container-fluid">
+    <div class = "row-fluid">
+      <% flash.each do |name,msg|    %>
+        <div class = "alert alert-<%= name %>">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          <p id =  "notice" ><%= msg %></p>
+        </div>
+      <% end %>
+      <%= yield %>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-class Admin::VarientsController < ApplicationController
+class Admin::VarientsController < Admin::BaseController
   def new
     @varient = Varient.new
     @@product_id = params[:product_id]

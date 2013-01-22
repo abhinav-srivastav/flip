@@ -1,4 +1,4 @@
-class Admin::ProductAttributesController < ApplicationController
+class Admin::ProductAttributesController < Admin::BaseController
   def index 
   	@attributes = ProductAttribute.all
   	respond_to do |format|

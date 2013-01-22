@@ -6,27 +6,24 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body>    
+<body class = 'public' >    
 <div class="navbar navbar-inverse">
   <div class="navbar-inner">
     <div class="container-fluid">
       <%= link_to 'Grab-Ur-Trolley', root_path, :class => 'brand' %>
       <div class="nav-collapse collapse">
         <div class="navbar-text pull-right">
-          Hi,<%= link_to current_user.username, user_path(current_user)%>! |
-          <%= link_to 'Log out', logout_path   %>
+          <% if logged_in? %>
+            <%= link_to 'View My Trolley', orders_path %> | Hi,<%= link_to current_user.username, user_path(current_user) %> ! | <%= link_to 'Log out', logout_path %>
+          <% else %>
+            <%= link_to 'Sign Up', new_user_path %> | <%= link_to 'Log in', login_path%>
+          <% end %>
         </div>
-        <ul class='nav'>
-          <li><%= link_to 'Categories', admin_categories_path %></li>
-          <li><%= link_to 'Brands', admin_brands_path %></li>
-          <li><%= link_to 'Products', admin_products_path %></li>
-          <li><%= link_to 'Users', admin_users_path %></li>
-          <li><%= link_to 'Orders', admin_orders_path %></li>
-          <li><%= link_to 'Attributes', admin_product_attributes_path %></li>
-          <li><%= link_to 'Prototypes', admin_prototypes_path %></li>
-          <li><%= link_to 'Colours', admin_colours_path %></li>
-          <li><%= link_to 'Sizes', admin_sizes_path %></li>
-        </ul>
+        <% if current_user.admin %> 
+          <ul class='nav'>
+            <li><%= link_to "Admin Section", admin_categories_path  %></li>
+          </ul>
+        <% end %>
       </div>
     </div>
   </div>

@@ -1,4 +1,4 @@
-class Admin::SizesController < ApplicationController
+class Admin::SizesController < Admin::BaseController
   def index
     @sizes = Size.all
     respond_to do |format|

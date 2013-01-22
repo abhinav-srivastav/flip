@@ -1,4 +1,4 @@
-class Admin::UsersController < ApplicationController
+class Admin::UsersController < Admin::BaseController
   def index
   	@users = User.normal_users
     respond_to do |format|

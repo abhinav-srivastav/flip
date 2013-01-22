@@ -4,8 +4,9 @@ class LineItem < ActiveRecord::Base
   attr_accessible :varient_id, :quantity, :price
 
   validates :quantity, :numericality => { :greater_than => 0 }
-  
-  def decrement_available
+  validates :price, :presence => true, :numericality => true
+
+  def decrement_available_quantity
      varient.available -= quantity
      varient.save
   end

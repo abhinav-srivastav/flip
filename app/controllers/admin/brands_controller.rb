@@ -1,4 +1,4 @@
-class Admin::BrandsController < ApplicationController
+class Admin::BrandsController < Admin::BaseController
   def index
   	@brands = Brand.all
     respond_to do |format|
