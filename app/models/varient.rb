@@ -10,7 +10,6 @@ class Varient < ActiveRecord::Base
   validates :available, :numericality => { :greater_than => -1 }
   validates :colour_id, :uniqueness => { :scope => [:size_id , :product_id], :message => 'This combination already exist !' } 
   validates :size_id, :uniqueness => { :scope => [:colour_id, :product_id], :message => 'This combination already exist !' }
-  
-  scope :availables , where('available > 0')
 
+  scope :availables , where('available > 0')
 end

@@ -1,4 +1,5 @@
 class Admin::ColoursController < Admin::BaseController
+  before_filter(:only => [:destroy, :edit, :update]) { @colour = Colour.find(params[:id]) }
   def index
     @colours = Colour.all
     respond_to do |format|

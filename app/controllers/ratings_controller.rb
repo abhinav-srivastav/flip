@@ -8,10 +8,7 @@ class RatingsController < ApplicationController
   end
 
   def create
-    @rating =  Rating.user_rating(current_user.id, @@product_id)
-    rate = params[:rating]
-    @rating.rating = rate['rating'] 
-    @rating.product_id = @@product_id 
+    @rating =  current_user.ratings.find_or_create(@@product_id, params[:rating][:rating])
     respond_to do |format|
       if @rating.save
         flash[:success] = 'Your ratings have been recorded'

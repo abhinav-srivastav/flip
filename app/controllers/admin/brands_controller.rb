@@ -1,4 +1,5 @@
 class Admin::BrandsController < Admin::BaseController
+  before_filter(:only => [:destroy, :edit, :update]) { @brand = Brand.find(params[:id]) }
   def index
   	@brands = Brand.all
     respond_to do |format|
@@ -21,11 +22,9 @@ class Admin::BrandsController < Admin::BaseController
   end
 
 	def edit 
-		@brand = Brand.find(params[:id])
 	end
 	
   def update
-		@brand = Brand.find(params[:id])
 		respond_to do |format|
       if @brand.update_attributes(params[:brand])
         format.html { redirect_to admin_brands_path }
@@ -36,7 +35,6 @@ class Admin::BrandsController < Admin::BaseController
 	end
 
 	def destroy
-    @brand = Brand.find(params[:id])
     @brand.destroy
     respond_to do |format|
       format.html { redirect_to request.referer }

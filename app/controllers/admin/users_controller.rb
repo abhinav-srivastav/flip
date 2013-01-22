@@ -1,4 +1,5 @@
 class Admin::UsersController < Admin::BaseController
+  before_filter(:only => [:destroy, :edit, :update]) { @user = User.find(params[:id]) }
   def index
   	@users = User.normal_users
     respond_to do |format|
@@ -21,11 +22,9 @@ class Admin::UsersController < Admin::BaseController
   end
 
 	def edit 
-		@user = User.find(params[:id])
 	end
 	
   def update
-		@user = User.find(params[:id])
 		respond_to do |format|
       if @user.update_attributes(params[:user])
         format.html { redirect_to admin_users_path, :notice => "user updated !" }
@@ -36,12 +35,9 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def destroy
-    @user = User.find(params[:id])
     @user.destroy
-
     respond_to do |format|
       format.html { redirect_to request.referrer }
     end
   end
-
 end

@@ -7,9 +7,10 @@ class Category < ActiveRecord::Base
   has_and_belongs_to_many :products
 
   attr_accessible :category, :visible, :product_ids, :brand_ids, :parent_id
-  
   accepts_nested_attributes_for :products
   accepts_nested_attributes_for :brands
+
+  validates :category, :presence => true
   
   scope :visible, where(:visible => true)
   scope :root, visible.where(:parent_id => nil)

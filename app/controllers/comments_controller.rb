@@ -8,9 +8,8 @@ class CommentsController < ApplicationController
   end
 
   def create 
-    @comment = Comment.new(params[:comment])
+    @comment = current_user.comments.new(params[:comment])
     @comment.product_id = @@product_id
-    @comment.user_id = current_user.id
     respond_to do |format|
       if @comment.save
         format.html {redirect_to product_path(@comment.product) }
@@ -32,8 +31,4 @@ class CommentsController < ApplicationController
       format.html { redirect_to request.referrer  } 
     end
   end
-
-
-
-
 end

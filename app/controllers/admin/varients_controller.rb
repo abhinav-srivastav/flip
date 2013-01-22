@@ -1,4 +1,5 @@
 class Admin::VarientsController < Admin::BaseController
+  before_filter(:only => [:destroy, :edit, :update]) { @varient = Varient.find(params[:id]) }
   def new
     @varient = Varient.new
     @@product_id = params[:product_id]
@@ -18,11 +19,9 @@ class Admin::VarientsController < Admin::BaseController
   end
 
   def edit
-    @varient = Varient.find(params[:id])
   end
 
   def update
-    @varient = Varient.find(params[:id])
     respond_to do |format|
       if @varient.update_attributes(params[:varient])
       	flash[:success] = 'varient updated'
@@ -33,11 +32,9 @@ class Admin::VarientsController < Admin::BaseController
     end
   end
   def destroy
-    @varient = Varient.find(params[:id])
     @varient.destroy
     respond_to do |format|
       format.html { redirect_to request.referrer, :notice => 'varient deleted' } 
     end
-    
   end
 end

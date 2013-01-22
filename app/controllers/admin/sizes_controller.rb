@@ -1,4 +1,5 @@
 class Admin::SizesController < Admin::BaseController
+  before_filter(:only => [:destroy, :edit, :update]) { @size = Size.find(params[:id]) }
   def index
     @sizes = Size.all
     respond_to do |format|
@@ -23,11 +24,9 @@ class Admin::SizesController < Admin::BaseController
   end
 
   def edit
-    @size = Size.find(params[:id])
   end
 
   def update
-    @size = Size.find(params[:id])
     respond_to do |format|
       if @size.update_attributes(params[:size])
         flash[:success] = 'size updated'
@@ -39,10 +38,10 @@ class Admin::SizesController < Admin::BaseController
   end
 
   def destroy
-    @size = Size.find(params[:id])
     @size.destroy
     respond_to do |format|
       format.html { redirect_to request.referrer, notice: 'size deleted'  }
     end
   end
 end
+  

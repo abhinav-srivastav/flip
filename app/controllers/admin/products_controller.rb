@@ -1,4 +1,5 @@
 class Admin::ProductsController < Admin::BaseController
+  before_filter(:only => [:destroy, :edit, :update]) { @product = Product.find(params[:id])  }
   def index
   	@products = Product.all
     respond_to do |format|
@@ -24,14 +25,12 @@ class Admin::ProductsController < Admin::BaseController
   end
 
 	def edit 
-		@product = Product.find(params[:id])
     @other_attr = ProductAttribute.other_attributes(@product)
     @product.images.build
     @product.product_attributes.build.product_details.build
 	end
 	
   def update
-		@product = Product.find(params[:id])
 		respond_to do |format|
       if @product.update_attributes(params[:product])
         flash[:success] = "Product updated !"
@@ -46,11 +45,9 @@ class Admin::ProductsController < Admin::BaseController
   end
 
   def destroy
-    @product = Product.find(params[:id])
     @product.destroy
     respond_to do |format|
       format.html { redirect_to request.referer }
     end
   end
-
 end

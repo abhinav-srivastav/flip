@@ -5,6 +5,7 @@ class LineItem < ActiveRecord::Base
 
   validates :quantity, :numericality => { :greater_than => 0 }
   validates :price, :presence => true, :numericality => true
+  validates :varient_id, :presence => true
 
   def decrement_available_quantity
      varient.available -= quantity

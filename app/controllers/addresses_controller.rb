@@ -3,14 +3,13 @@ class AddressesController < ApplicationController
   before_filter :authorize_user
 
   def new
-  	@@order_page_path = request.referrer
     @address = Address.new()
+  	@@order_page_path = request.referrer
   end
 
   def create 
-  	@@order_page_path ||= '/orders'
-    @address = Address.new(params[:address])
-    @address.user_id = current_user.id
+    @address = current_user.addresses.new(params[:address])
+    @@order_page_path ||= '/orders'
     unless @address.save
       flash[:error] = 'Invalid address'
     end

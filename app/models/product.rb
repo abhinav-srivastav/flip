@@ -10,14 +10,14 @@ class Product < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   has_many :varients, :dependent => :destroy
   belongs_to :brand 
-  attr_accessible :product, :mrp, :price, :category_ids, :brand_id, :images_attributes, :varients_attributes,
-                  :product_attributes_attributes, :description, :available, :prototype_ids
+  attr_accessible :product, :category_ids, :brand_id, :images_attributes, :varients_attributes,
+                  :product_attributes_attributes, :description, :prototype_ids
   accepts_nested_attributes_for :product_attributes
   accepts_nested_attributes_for :categories
   accepts_nested_attributes_for :images, :allow_destroy => true
   accepts_nested_attributes_for :varients, :allow_destroy => true
   
-  validates_presence_of :product, :price
+  validates_presence_of :product
   validates :description, :presence => true, :length => { :minimum => 50 }
   
   def add_details(pa_id)

@@ -1,4 +1,5 @@
 class Admin::OrdersController < Admin::BaseController
+  before_filter(:only => [:show, :destroy]) { @order = Order.find(params[:id]) }
   def index 
     @orders = Order.order('updated_at desc')
     respond_to do |format|

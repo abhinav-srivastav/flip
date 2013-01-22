@@ -1,4 +1,5 @@
 class Admin::CategoriesController < Admin::BaseController
+  before_filter(:only => [:destroy, :edit, :update]) { @category = Category.find(params[:id]) }
 	def index 
 		@categories = Category.all
 		respond_to do |format|

@@ -1,4 +1,5 @@
 class Admin::PrototypesController < Admin::BaseController
+  before_filter(:only => [:destroy, :edit, :update, :create_details]) { @prototype = Prototype.find(params[:id])  }
   def index 
 		@prototypes = Prototype.all
 		respond_to do |format|
@@ -22,11 +23,9 @@ class Admin::PrototypesController < Admin::BaseController
   end
 
   def edit
-    @prototype = Prototype.find(params[:id])
   end
   
   def update
-    @prototype = Prototype.find(params[:id])
     respond_to do |format|
       if @prototype.update_attributes(params[:prototype])
         @prototype.products.each do |pro|
@@ -43,7 +42,6 @@ class Admin::PrototypesController < Admin::BaseController
   end
 
   def destroy
-    @prototype = Prototype.find(params[:id])
     @prototype.destroy
     respond_to do |format|
       format.html { redirect_to request.referrer, :notice => 'Prototype deleted' }
@@ -51,16 +49,9 @@ class Admin::PrototypesController < Admin::BaseController
   end
 
   def create_details
-    @prototype = Prototype.find(params[:id])
-    @product = Product.find(params[:product_id])
-    @prototype.products << @product
-    @prototype.product_attributes.each do |pa|
-      @product.add_details(pa.id)
-    end
+    @prototype.add_attributes_to_product(params[:product_id])
     respond_to do |format|
       format.html { redirect_to request.referrer, :notice => 'Attributes updated' }
     end
   end
-
-
 end

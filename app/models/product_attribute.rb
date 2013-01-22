@@ -5,8 +5,7 @@ class ProductAttribute < ActiveRecord::Base
   attr_accessible :product_attributes, :product_details_attributes
   accepts_nested_attributes_for :product_details
 
-  validates_presence_of :product_attributes
-  validates :product_attributes, :uniqueness => true
+  validates :product_attributes, :uniqueness => true, :presence => true
 
   
   def self.other_attributes(product)

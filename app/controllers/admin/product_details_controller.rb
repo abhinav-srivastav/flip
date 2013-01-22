@@ -1,6 +1,6 @@
 class Admin::ProductDetailsController < Admin::BaseController
+  before_filter(:only => [:destroy, :edit, :update]) { @pd = ProductDetail.find(params[:id])  }
   def destroy
-  	@pd = ProductDetail.find(params[:id])
   	@pd.destroy
   	respond_to do |format|
       format.html { redirect_to request.referrer, notice: 'Attribute successfully removed' }
@@ -20,11 +20,9 @@ class Admin::ProductDetailsController < Admin::BaseController
   end
 
   def edit
-    @pd = ProductDetail.find(params[:id])
   end
 
   def update
-  	@pd = ProductDetail.find(params[:id])
   	respond_to do |format|
   	  if @pd.update_attributes(params[:product_detail])
         flash[:success] = 'Attribute updated !'
@@ -34,5 +32,4 @@ class Admin::ProductDetailsController < Admin::BaseController
   	  end
   	end
   end
-
 end
