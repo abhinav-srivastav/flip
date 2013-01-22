@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
-  def user_authorize
+  def authorize_user
     unless logged_in?
       flash[:error] = 'Please log in first'
       respond_to do |format|

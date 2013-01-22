@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
 
-  before_filter :user_authorize
+  before_filter :authorize_user
   
   def new
     @comment = Comment.new

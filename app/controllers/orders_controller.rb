@@ -1,7 +1,6 @@
 class OrdersController < ApplicationController
 
-  before_filter :user_authorize
-
+  before_filter :authorize_user
   def index 
   	@order = Order.current_user_open_order(current_user.id)
     @order.amount = order_amount(@order.line_items)

@@ -1,12 +1,12 @@
 class Admin::BaseController < ActionController::Base
  layout 'admin'
 
- before_filter :admin_authorize
+ before_filter :authorize_admin
  helper_method :admin_logged_in?, :current_user
 
  private
 
-  def admin_authorize
+  def authorize_admin
   	unless admin_logged_in?
   		redirect_to :root
   	end

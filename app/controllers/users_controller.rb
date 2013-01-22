@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :user_authorize, :except => [:new, :create]
+  before_filter :authorize_user, :except => [:new, :create]
   def show
   	@user = User.find(params[:id])
   	respond_to do |format|

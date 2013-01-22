@@ -1,6 +1,6 @@
 class AddressesController < ApplicationController
 
-  before_filter :user_authorize
+  before_filter :authorize_user
 
   def new
   	@@order_page_path = request.referrer
