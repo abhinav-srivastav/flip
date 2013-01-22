@@ -1,18 +1,18 @@
 class OrdersController < ApplicationController
 
   before_filter :authorize_user
-  def index 
-  	@order = Order.user_order(current_user.id, 'open')
-    @order.amount = order_amount(@order.line_items)
+  before_filter(:only => [:confirm,:update,:pay]) { @order = Order.find(params[:id]) }
+  def open
+  	@order = current_user.orders.open_state
     @order.save
   	respond_to do |format|
   	  format.html
   	end
   end
 
-  def create 
-    @order = Order.user_order(current_user.id, 'open')
-    @order = add_line_item(@order, params[:id],params[:price])
+  def add_line_item_to_order 
+    @order = current_user.orders.open_state
+    @order.add_line_item(params[:id],params[:price])
     respond_to do |format|
       if @order.save
         flash[:notice] = 'Added to order'
@@ -24,11 +24,9 @@ class OrdersController < ApplicationController
   end
 
   def confirm
-    @order = Order.find(params[:id])
   end
 
   def update 
-    @order = Order.find(params[:id])
     if @order.update_attributes(params[:order]) 
       flash.now[:success] = 'order details updated '
     else
@@ -38,7 +36,6 @@ class OrdersController < ApplicationController
   end
 
   def pay
-    @order = Order.find(params[:id])
     respond_to do |format|
       if @order.pay
         Notifier.booking(@order.user.email, @order.user.username, @order).deliver
@@ -52,12 +49,11 @@ class OrdersController < ApplicationController
   end
 
   def booked
-    @orders = Order.user_orders(current_user.id,'booked')
+    @orders = current_user.orders.with_state('booked')
     respond_to do |format|
       format.html
     end
   end
-
   def cancel
     if request.post?
       @order = Order.find(params[:id])
@@ -71,33 +67,13 @@ class OrdersController < ApplicationController
         format.html { redirect_to request.referrer }
       end
     else
-      @orders = Order.user_orders(current_user.id,'cancel')
+      @orders = current_user.orders.with_state('cancel')
     end
   end
-
   def dispatched
-    @orders = Order.user_orders(current_user.id,'dispatched')
+    @orders = current_user.orders.with_state('dispatched')
     respond_to do |format|
       format.html
     end
-  end
-
- private
-  def add_line_item(order, varient_id, varient_price)
-    line_item = order.line_items.find_by_varient_id(varient_id)
-    if line_item.nil?
-      line_item = order.line_items.new(:varient_id => varient_id, :price => varient_price)
-    end
-    order.amount = order_amount(order.line_items)
-    order
-  end
-
-  def order_amount(line_items)
-    amount = 0
-    line_items.each do |item|
-      amount += item.price * item.quantity
-      amount += 30
-    end
-    amount
   end
 end

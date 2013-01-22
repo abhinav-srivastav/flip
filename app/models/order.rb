@@ -48,6 +48,30 @@ class Order < ActiveRecord::Base
   scope :user_orders, lambda { |id,state| where("user_id = ? AND state = ? ", id, state).order('updated_at desc ') }
   scope :to_be_dispatched, lambda { |time| where('updated_at < ? and state = ?', time, :booked) }
 
+  around_save do |order, block|
+    order.amount = 0
+    order.line_items.each do |item|
+      order.amount += item.price * item.quantity
+      order.amount += 30
+    end
+    block.call
+  end
+
+  def self.open_state
+    order = with_state('open').first
+    unless order
+      order = new
+    end
+    order
+  end
+
+  def add_line_item(varient_id, varient_price)
+    li = line_items.find_by_varient_id(varient_id)
+    if li.nil?
+      line_items.new(:varient_id => varient_id, :price => varient_price)
+    end
+  end
+
   def self.dispatch(time)
     booked = Order.to_be_dispatched(time)
     booked.each do |order|

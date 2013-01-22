@@ -64,7 +64,7 @@ function add_varient_to_cart(){
 		                      },
 		type: 'POST',
 		data: params,
-		url: '/orders',
+		url: '/orders/add_line_item_to_order',
 		complete: function(){ $('input[type="button"][value="grab in trolley"]').show();
 		                      $("#spinner_img").hide();
 		                      alert('Product added to cart!');
