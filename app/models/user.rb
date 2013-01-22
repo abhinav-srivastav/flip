@@ -11,7 +11,11 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true
   validates :wallet, :numericality => { :greater_than => 0   }
   
+  # [FIXME_CR] No need to add users with below scopes
+  # Thease are defined for a user itself.
   scope :normal_users, where(:super => false)
+
+  # [FIXME_CR] use plural (super_users) instead of super_user. This will return a active relation. not a single record
   scope :super_user, where(:super => true).limit(1)
   private
 

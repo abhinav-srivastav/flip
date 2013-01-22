@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+# [FIXME_CR] Please upgrade to latest stable (3.2.11)
+# One of the two reasons https://groups.google.com/forum/?fromgroups#!topic/rubyonrails-security/DCNTNp_qjFM
 gem 'rails', '3.2.8'
 
 # Bundle edge Rails instead:
