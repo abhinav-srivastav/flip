@@ -3,14 +3,14 @@
  </div>
   <dl class = "dl-horizontal" >      
     <dd>
+      <% unless @product.available? %>
+        <p class = 'text-error'>OUT OF STOCK</p>
+      <% end %>
       <% @product.images.each do |img| %>
         <%= image_tag(img.image.url(:small), :class => 'small_image') %>
       <% end %>
     </dd>
   </dl>
-  <%  if @product.available < 1  %>
-    <p class = 'text-error'>OUT OF STOCK</p>
-  <% end %>
   <dl class  = "dl-horizontal" >      
     <dt>Product Name:</dt>
     <dd><%= @product.product %></dd>
@@ -22,32 +22,21 @@
   <dl class = "dl-horizontal">
     <dd>  
       <div class = 'varients'>
-        <% @product.varients.each do |varient| %>
-          <div class='select_varient'>
-            <%= varient.colour.colour %>, <%= varient.size.size %>
-          </div>
-        <% end %>
-        <br/><br/>
-        <div class ='Size'>
-          <ul>
-            Sizes:
-            <% @varient['size'].each do |size_var| %>              
-              <li><%= link_to size_var, product_path(@product, :varient => { :size => size_var }) %></li>
-            <% end %>
-          </ul>
-        </div>
-        <div class = 'colour'>
-          <ul>Colour:
-          <% @varient['colour'].each do |colour_var| %>
-            <li><%= link_to colour_var, product_path(@product, :varient => { :colour => colour_var }) %></li>
+        <% @varients.each do |varient| %>
+          <% if varient.available > 0  %>
+            <div class='select_varient' id='<%= varient.id %> <%= varient.price %>' >
+              <%= varient.colour.colour if varient.colour %> <%= varient.size.size if varient.size %>
+            </div>
           <% end %>
-        </div>
+        <% end %>
       </div>
     </dd>
   </dl>
   <dl class  = "dl-horizontal" >      
     <dt>Price:</dt>
-    <dd><strike><%= @product.mrp if @product.mrp %></strike> <%= @product.price %></dd>
+    <% @varients.each do |varient|  %>
+      <dd id = '<%= varient.id %>' class='price_label'><strike><%= varient.mrp if varient.mrp %></strike> <%= varient.price %></dd>
+    <% end %>
   </dl>
   <dl class  = "dl-horizontal" >      
     <dt>Rating:</dt>
@@ -71,7 +60,12 @@
       <div class = 'comment'>
         <%= link_to 'Comment', new_comment_path(:product_id => @product.id) , :remote => :true, :class => 'btn btn-success' %><br/><br/>
       </div>
-      <div><%= button_to 'grab in trolley',orders_path(:id => @product.id, :price => @product.price), :class => "btn btn-primary" if @product.available > 0%></div>
+      <div>
+        <% if @varients.any?  %>
+          <%= spinner_tag %>
+          <%= button_to_function('grab in trolley', logged_in? ? 'add_varient_to_cart()' : 'window.location.href = '+login_path+'/' , :class => "btn btn-primary")if @product.available? %>
+        <% end %>
+      </div>
     </dd>
   </dl>
   <% unless @product.product_details.empty? %>

@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
   skip_before_filter :admin_authorize
 	def show		
     @product = Product.find(params[:id]) 
-    @varient = Varient.get_varient(@product, params[:varient])
+    @varients = @product.varients.availables
     respond_to do |format|
       format.html
     end

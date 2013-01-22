@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130118135926) do
+ActiveRecord::Schema.define(:version => 20130122074601) do
 
   create_table "addresses", :force => true do |t|
     t.string   "street_no"
@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(:version => 20130118135926) do
   end
 
   create_table "line_items", :force => true do |t|
-    t.integer  "product_id"
+    t.integer  "varient_id"
     t.integer  "quantity",                                  :default => 1
     t.decimal  "price",      :precision => 10, :scale => 2
     t.integer  "order_id"
@@ -117,14 +117,11 @@ ActiveRecord::Schema.define(:version => 20130118135926) do
 
   create_table "products", :force => true do |t|
     t.string   "product"
-    t.decimal  "price",       :precision => 10, :scale => 2
     t.integer  "brand_id"
-    t.datetime "created_at",                                                :null => false
-    t.datetime "updated_at",                                                :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "slug"
-    t.decimal  "mrp",         :precision => 10, :scale => 2
     t.text     "description"
-    t.integer  "available",                                  :default => 0
   end
 
   add_index "products", ["slug"], :name => "index_products_on_slug", :unique => true

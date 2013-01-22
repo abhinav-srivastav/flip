@@ -4,7 +4,8 @@
     This is a Booking Acknowledgement mail from Grab-ur-Trolley.
     Your order details:
   <% @order.line_items.each do |line| %>
-	Product Name : <%= line.product.product %>
+	Product Name : <%= line.varient.product.product %> 
+                 <%= 'Colour: '+ line.varient.colour.colour if line.varient.colour %> <%= 'Size: '+ line.varient.size.size if line.varient.size %>            
 	Quantity : <%= line.quantity %>
 	Amount : <%= line.price %>
   <% end %>

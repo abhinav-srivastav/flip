@@ -48,7 +48,7 @@ class ApplicationController < ActionController::Base
       flash[:error] = 'Please log in first'
       respond_to do |format|
        format.html { redirect_to login_path }
-       format.js {  }   
+       format.js { }   
       end
     end
   end

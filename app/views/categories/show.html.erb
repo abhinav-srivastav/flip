@@ -5,15 +5,16 @@
     <h3> There are no products in this category </h3>
   <% else %>
     <div class ='product_container'>
-      <% products.each do |p|  %>
-        <div class = 'product_div' price=<%= p.price %> rating=<%= total_rating(p) %>    >
-          <% img = p.images.first ? p.images.first.image.url(:small) : 'no_image-small.jpg'  %>  
-          <%= link_to image_tag(img), product_path(p) %><br/>
-          <% if p.available < 1  %>
+      <% products.each do |pro|  %>
+        <div class = 'product_div' %>
+          <% img = pro.images.first ? pro.images.first.image.url(:small) : 'no_image-small.jpg'  %>  
+          <%= link_to image_tag(img), product_path(pro) %><br/>
+          <%= link_to pro.brand.brand+' '+pro.product, product_path(pro) %><br/>
+          <% unless pro.available? %>
             <b class = 'text-error'>OUT OF STOCK</b><br/>
+          <% else %>
+            Price: <%= pro.varients.first.price %>
           <% end %>
-          <%= link_to p.brand.brand+' '+p.product, product_path(p) %><br/>
-          Price: <%= p.price %>
         </div>
       <% end %>
     </div>

@@ -86,10 +86,10 @@ class OrdersController < ApplicationController
   end
 
  private
-  def add_line_item(order, product_id, product_price)
-    line_item = order.line_items.find_by_product_id(product_id)
+  def add_line_item(order, varient_id, varient_price)
+    line_item = order.line_items.find_by_varient_id(varient_id)
     if line_item.nil?
-      line_item = order.line_items.new(:product_id => product_id, :price => product_price)
+      line_item = order.line_items.new(:varient_id => varient_id, :price => varient_price)
     end
     order.amount = order_amount(order.line_items)
     order

@@ -19,7 +19,10 @@
               </tr>
               <% @order.line_items.each do |line| %>
               <tr>
-                <td><%= line.product.product %> :<%= line.product.brand.brand %> </td>
+                <td>
+                  <%= line.varient.product.product %>
+                  <span class='muted'><%= 'Colour: '+ line.varient.colour.colour if line.varient.colour %> <%= 'Size: '+ line.varient.size.size if line.varient.size %></span>            
+                </td> 
                 <td id="<%= line.id %>">
                   <div><span><%= line.quantity %></span>&nbsp;&nbsp;&nbsp;
                     <%= link_to 'change', edit_line_item_path(line), :remote => true  %>

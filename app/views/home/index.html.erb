@@ -33,11 +33,12 @@
           <div class = 'product_div'>
             <% img = pro.images.first ? pro.images.first.image.url(:small) : 'no_image-small.jpg'  %>  
             <%= link_to image_tag(img), product_path(pro) %><br/>
-            <%  if pro.available < 1  %>
-              <b class = 'text-error'>OUT OF STOCK</b><br/>
-            <% end %>
             <%= pro.brand.brand+' '+pro.product %><br/>
-            Price: <%= pro.price %>
+            <%  unless pro.available? %>
+              <b class = 'text-error'>OUT OF STOCK</b><br/>
+            <% else %>
+              Price: <%= pro.varients.first.price %>
+            <% end %>          
           </div>
         <% end %>
       </div>
@@ -52,7 +53,11 @@
         <% img = pro.images.first ? pro.images.first.image.url(:small) : 'no_image-small.jpg'  %>  
         <%= link_to image_tag(img), product_path(pro) %><br/>
         <%= pro.product %><br/>
-        Best buy: <%= pro.price %>
+        <%  unless pro.available? %>
+          <b class = 'text-error'>OUT OF STOCK</b><br/>
+        <% else %>
+          Price: <%= pro.varients.first.price %>
+        <% end %>
       </div>
     <% end %>  
   </div>

@@ -3,7 +3,6 @@ class Product < ActiveRecord::Base
   friendly_id :product, use: :slugged
   has_and_belongs_to_many :categories
   has_and_belongs_to_many :prototypes
-  has_many :line_items, :dependent => :destroy
   has_many :images, :dependent => :destroy, :autosave => true
   has_many :product_details, :dependent => :destroy
   has_many :product_attributes, :through => :product_details
@@ -23,5 +22,10 @@ class Product < ActiveRecord::Base
   
   def add_details(pa_id)
     product_details.create(:product_attribute_id => pa_id)    
+  end
+
+  def available?
+    return false if varients.availables.empty?
+    true
   end
 end

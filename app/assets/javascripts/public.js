@@ -35,8 +35,39 @@ $(document).ready(function(){
 	  });
 	});
 
+    $(".varients div:first-child").addClass('active')
+	show_price();
 	$(".select_varient").click(function(){
 	  $(this).addClass('active').siblings().removeClass('active')
+	  show_price();
 	});
+    
 
 });
+
+function show_price() {
+	var_id = $('.active').attr('id').split(' ')
+	$("dd#"+var_id[0]).show().siblings('.price_label').hide()
+
+}
+
+
+function add_varient_to_cart(){
+	varient = ($('.active').attr('id')).split(' ')
+	params ={};
+	params['id'] = varient[0]
+	params['price'] = varient[1]
+	console.log()
+	$.ajax({
+		beforeSend: function(){ $('input[type="button"][value="grab in trolley"]').hide();
+		                        $("#spinner_img").show();
+		                      },
+		type: 'POST',
+		data: params,
+		url: '/orders',
+		complete: function(){ $('input[type="button"][value="grab in trolley"]').show();
+		                      $("#spinner_img").hide();
+		                      alert('Product added to cart!');
+		                    }
+	});
+}

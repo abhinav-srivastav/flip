@@ -4,7 +4,7 @@
     This is a Cancellation Acknowledgement mail from Grab-ur-Trolley.
     Your order details:
   <% @order.line_items.each do |line| %>
-	Product Name : <%= line.product.product %>
+	Product Name : <%= line.varient.product.product %>
 	Quantity : <%= line.quantity %>
 	Amount : <%= line.price %>
   <% end %>
