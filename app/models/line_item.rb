@@ -10,4 +10,9 @@ class LineItem < ActiveRecord::Base
      varient.available -= quantity
      varient.save
   end
+
+  def decrement_available_quantity
+    varient.available += quantity
+    varient.save
+  end
 end

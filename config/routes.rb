@@ -22,7 +22,7 @@ Flip::Application.routes.draw do
     get 'booked', :on => :collection
     post 'pay', :on => :member
     get 'confirm', :on => :member
-    get 'shipped', :on => :collection
+    get 'dispatched', :on => :collection
   end
   resources :categories do
     resources :brands do

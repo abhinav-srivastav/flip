@@ -12,11 +12,25 @@ class User < ActiveRecord::Base
   validates :wallet, :numericality => { :greater_than => 0   }
   
   scope :normal_users, where(:super => false)
-  scope :super_user, where(:super => true).limit(1)
+  scope :super_users, where(:super => true)
   private
 
-  def self.super
-    super_user.first
+  def self.credit_to_admin(amount)
+    admin = super_user
+    admin.wallet += amount
+    return true if admin.save
+    return false     
+  end
+
+  def debit_from_admin(amount)
+    admin = super_user
+    admin.wallet -= amount
+    return true if admin.save
+    return false
+  end
+
+  def self.super_user
+    super_users.first
   end
   def self.authorize(username, password)
     user = User.find_by_username(username)

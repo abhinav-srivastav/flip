@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
 
   before_filter :authorize_user
   def index 
-  	@order = Order.current_user_open_order(current_user.id)
+  	@order = Order.user_order(current_user.id, 'open')
     @order.amount = order_amount(@order.line_items)
     @order.save
   	respond_to do |format|
@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
   end
 
   def create 
-    @order = Order.current_user_open_order(current_user.id)
+    @order = Order.user_order(current_user.id, 'open')
     @order = add_line_item(@order, params[:id],params[:price])
     respond_to do |format|
       if @order.save
@@ -40,7 +40,7 @@ class OrdersController < ApplicationController
   def pay
     @order = Order.find(params[:id])
     respond_to do |format|
-      if @order.pay & credit_to_admin(@order.amount, @order.user)        
+      if @order.pay
         Notifier.booking(@order.user.email, @order.user.username, @order).deliver
         flash[:success] = 'Payment made successfully!'
         format.html { redirect_to user_path(current_user) }
@@ -61,9 +61,8 @@ class OrdersController < ApplicationController
   def cancel
     if request.post?
       @order = Order.find(params[:id])
-      @order.user.wallet += @order.amount
       respond_to do |format|    
-        if debit_from_admin(@order.amount) & @order.cancel 
+        if @order.cancel 
           Notifier.cancellation(@order.user.email, @order.user.username, @order).deliver  
           flash[:notice] = 'Order Cancelled.Credit refunded to wallet !'
         else
@@ -76,8 +75,8 @@ class OrdersController < ApplicationController
     end
   end
 
-  def shipped
-    @orders = Order.user_orders(current_user.id,'shipped')
+  def dispatched
+    @orders = Order.user_orders(current_user.id,'dispatched')
     respond_to do |format|
       format.html
     end

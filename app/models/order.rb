@@ -4,22 +4,30 @@ class Order < ActiveRecord::Base
   belongs_to :user, :inverse_of => :orders, :autosave => true
   
   attr_accessible :amount, :address_id, :user_id
+  validates :amount , :presence => true, :numericality => true
+  validates :address_id , :presence => true, :if => :booked?
+  validates :user_id , :presence => true, :unless => :open?
+
   accepts_nested_attributes_for :line_items
 
   state_machine initial: :open do
   	event :pay do
   		transition :open => :booked
   	end
-    event :ship do
-      transition :booked => :shipped
+    event :dispatch do
+      transition :booked => :dispatched
     end
     event :cancel do
       transition :booked => :cancel
     end    
+    event :deliver do
+      transition :dispatched => :delivered
+    end
   
     before_transition :open => :booked do |order|
       if  order.amount > 0 && order.amount <= order.user.wallet && order.address
         order.user.wallet -= order.amount
+        User.credit_to_admin(order.amount)
         order.line_items.each do |li|
           li.decrement_available_quantity
         end
@@ -27,33 +35,32 @@ class Order < ActiveRecord::Base
         false
       end
     end
+
+    before_transition :booked => :cancel do |order|
+      order.user.wallet += order.amount
+      User.debit_from_admin(order.amount)
+      order.line_items.each do |line|
+        line.return_quantity_to_varient
+      end
+    end
   end
 
-  scope :open_order, with_state(:open)
-  scope :current_user_open_orders, lambda { |id| open_order.where(:user_id => id) }
   scope :user_orders, lambda { |id,state| where("user_id = ? AND state = ? ", id, state).order('updated_at desc ') }
-  scope :to_be_shipped, where('updated_at < ? and state = ?', Time.now-2.hours, :booked)
+  scope :to_be_dispatched, lambda { |time| where('updated_at < ? and state = ?', time, :booked) }
 
-  def line_item_left(order)
-    if order.line_items.empty?
-      order.delete
-    end
-  end
-
-  def self.dispatch_shipment
-    booked = Order.to_be_shipped
+  def self.dispatch(time)
+    booked = Order.to_be_dispatched(time)
     booked.each do |order|
-      order.ship
+      order.dispatch
     end
   end
 
-
-  def self.current_user_open_order(id)
-    order = current_user_open_orders(id).first
+  def self.user_order(user_id,state)
+    order = user_orders(user_id,state).first
     if order
       order
     else
-      create(:user_id => id)
+      create(:user_id => user_id)
     end
   end 
 end
