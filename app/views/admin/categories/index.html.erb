@@ -12,7 +12,6 @@
       <td><%= cat.category %></td>
       <td><%= cat.parent.category unless cat.parent.nil? %></td>
       <td class='shift_right'>
-        <%#= link_to "show", admin_category_path(cat), :class => "btn btn-small" %>
         <%= link_to "edit", edit_admin_category_path(cat), :class => "btn btn-small" %>
         <%= link_to "remove", admin_category_path(cat), method: :delete, data: { confirm: "Are u sure ?" },:class =>"btn btn-danger btn-small" %>
        </td>

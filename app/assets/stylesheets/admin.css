@@ -15,4 +15,5 @@ tr.shipped { background-color: #BBBBBB;  }
 .hidden { display : none;  }
 textarea.product_description { width: 600px; height: 250px; }
 ul.nav-tabs li { margin: 15px;  }
-div.controls .radio, div.controls .checkbox { display: inline-block;    }
+div.controls .radio, div.controls .checkbox { display: inline-block; }
+div.alert { cursor : pointer; }

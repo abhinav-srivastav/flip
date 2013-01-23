@@ -8,7 +8,7 @@
       <td class='shift_right'><b>Actions</b></td>
     </tr>
     <% @orders.each do |order| %>
-    <tr class = <%= order.state %>>
+    <tr class = '<%= order.state %>'>
       <td><%= order.user.username %></td>
       <td><%= order.state %></td>
       <td><%= order.created_at %></td>
