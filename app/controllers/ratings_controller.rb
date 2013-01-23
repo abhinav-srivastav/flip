@@ -3,12 +3,11 @@ class RatingsController < ApplicationController
   before_filter :authorize_user
   
   def new
-    @rating = Rating.new
-    @@product_id = params[:product_id]
+    @rating = Rating.new(:product_id => params[:product_id])
   end
 
   def create
-    @rating =  current_user.ratings.find_or_create(@@product_id, params[:rating][:rating])
+    @rating =  current_user.ratings.find_or_create(params[:rating])
     respond_to do |format|
       if @rating.save
         flash[:success] = 'Your ratings have been recorded'
