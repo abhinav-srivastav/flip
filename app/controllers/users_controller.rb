@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
   before_filter :authorize_user, :except => [:new, :create]
   before_filter(:only => [:show, :edit, :update]) { @user = User.find(params[:id]) }
+  before_filter :authorize_user_to_edit, :only => :edit
   def show
   	respond_to do |format|
   	  format.html
@@ -23,10 +24,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
-  	unless @user.id.to_i == current_user.id.to_i
-  	  redirect_to :root, notice: 'Not authorized.'
-  	end 
+  def edit 
   end
 
   def update
@@ -38,4 +36,10 @@ class UsersController < ApplicationController
       end
     end
   end
+  private
+    def authorize_user_to_edit
+      unless @user.id.to_i == current_user.id.to_i
+        redirect_to :root, flash: { error: current_user.username+',you are not authorized to edit other user\' account.'}
+      end
+    end 
 end

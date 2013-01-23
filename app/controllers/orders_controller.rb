@@ -39,11 +39,9 @@ class OrdersController < ApplicationController
     respond_to do |format|
       if @order.pay
         Notifier.booking(@order.user.email, @order.user.username, @order).deliver
-        flash[:success] = 'Payment made successfully!'
-        format.html { redirect_to user_path(current_user) }
+        format.html { redirect_to user_path(current_user), :flash => { :success => 'Payment made successfully!' } }
       else
-        flash[:error] = 'Invalid details to place an order !'
-        format.html { redirect_to request.referrer }
+        format.html { redirect_to request.referrer, :flash => { :error => 'Invalid details to place an order !' } }
       end
     end
   end
