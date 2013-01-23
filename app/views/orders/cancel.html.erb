@@ -1,51 +1,5 @@
 <div>
   <%= render 'order_navigation' %>
   <h3><u>Cancelled Orders</u></h3>
-  <div class='table odd_color'>
-  <% @orders.each do |order|  %>
-    <div>
-      <dl class  = "dl-horizontal" >      
-        <dt>Booked Order For:</dt>
-        <dd><%= order.user.username %></dd>
-      </dl>
-      <dl class  = "dl-horizontal" >      
-        <dt>Booking Date:</dt>
-        <dd><%= order.updated_at.to_date %></dd>
-      </dl>
-      <% if order.address %>
-      <dl class  = "dl-horizontal" >      
-        <dt>Address:</dt>
-        <dd>
-          <%= order.address.name %>, 
-          <%= order.address.street_no %>,
-          <%= order.address.area %>, 
-          <%= order.address.city %>-<%= order.address.postal_code %>     
-        </dd>
-      </dl>
-      <% end %>
-      <table class='table'>
-        <tr>
-          <th>Product</th>
-          <th>Quantity</th>
-          <th>Price</th>
-        </tr>
-        <% order.line_items.each do |line| %>
-        <tr id="<%= line.id%>">
-          <td>
-            <%= line.varient.product.product %>
-            <span class='muted'><%= 'Colour: '+ line.varient.colour.colour if line.varient.colour %> <%= 'Size: '+ line.varient.size.size if line.varient.size %></span>            
-          </td>
-          <td><%= line.quantity %></td>
-          <td><%= line.price %></td>                
-        </tr>
-        <%end%>
-        <tr>
-          <td></td>
-          <td><span class = 'pull-right'><b>Total Amount:</b></span></td>
-          <td><b><%= order.amount %></b></td>
-        <tr>
-      </table>
-    </div>
-  <% end %>
-  </div>          
+  <%= render 'order_details', :orders => @orders %>
 </div>
