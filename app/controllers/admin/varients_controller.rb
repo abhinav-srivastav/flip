@@ -8,8 +8,7 @@ class Admin::VarientsController < Admin::BaseController
     @varient = Varient.new(params[:varient])
     respond_to do |format|
       if @varient.save
-        flash[:success] = 'varient added'
-        format.html { redirect_to edit_admin_product_path(@varient.product) }
+        format.html { redirect_to edit_admin_product_path(@varient.product), flash: { success: 'New varient for '+@varient.product.product+' created'} }
       else
         format.html {  render action: 'new' }
       end
@@ -22,8 +21,7 @@ class Admin::VarientsController < Admin::BaseController
   def update
     respond_to do |format|
       if @varient.update_attributes(params[:varient])
-      	flash[:success] = 'varient updated'
-      	format.html { redirect_to edit_admin_product_path(@varient.product) } 
+      	format.html { redirect_to edit_admin_product_path(@varient.product), flash: { success: 'Varient updated'} } 
       else
       	format.html { render action: 'edit' }
       end
@@ -32,7 +30,7 @@ class Admin::VarientsController < Admin::BaseController
   def destroy
     @varient.destroy
     respond_to do |format|
-      format.html { redirect_to request.referrer, :notice => 'varient deleted' } 
+      format.html { redirect_to request.referrer, :notice => 'Selected varient deleted' } 
     end
   end
 end

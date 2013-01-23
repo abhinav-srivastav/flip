@@ -15,7 +15,7 @@ class Admin::CategoriesController < Admin::BaseController
     @category  = Category.new(params[:category])
     respond_to do |format|
       if @category.save
-        format.html {redirect_to admin_categories_path}
+        format.html {redirect_to admin_categories_path, flash: { success: 'New category '+@category.category+' created'}  }
       else
         format.html {render action: 'new'}
       end
@@ -28,7 +28,7 @@ class Admin::CategoriesController < Admin::BaseController
   def update
 		respond_to do |format|
       if @category.update_attributes(params[:category])
-        format.html { redirect_to admin_categories_path }
+        format.html { redirect_to admin_categories_path, flash: { success: 'Category '+@category.category+' updated !'} }
       else
         format.html { render action: "edit"}
       end
@@ -38,7 +38,7 @@ class Admin::CategoriesController < Admin::BaseController
   def destroy
     @category.destroy
     respond_to do |format|
-      format.html { redirect_to request.referer }
+      format.html { redirect_to request.referer, flash: { notice: 'Selected category deleted'} }
     end
   end
 end

@@ -16,7 +16,7 @@ class Admin::ProductsController < Admin::BaseController
     @product  = Product.new(params[:product])
     respond_to do |format|
       if @product.save
-        format.html {redirect_to edit_admin_product_path(@product) }
+        format.html {redirect_to edit_admin_product_path(@product), flash: { success: 'New product '+@product.product+' created'} }
       else
         @product.images.build
         format.html {render action: 'new'}
@@ -33,8 +33,7 @@ class Admin::ProductsController < Admin::BaseController
   def update
 		respond_to do |format|
       if @product.update_attributes(params[:product])
-        flash[:success] = "Product updated !"
-        format.html { redirect_to admin_products_path }
+        format.html { redirect_to admin_products_path, flash: { success: 'Product '+@product.product+' updated !'} }
       else
         @other_attr = ProductAttribute.other_attributes(@product)
         @product.images.build
@@ -47,7 +46,7 @@ class Admin::ProductsController < Admin::BaseController
   def destroy
     @product.destroy
     respond_to do |format|
-      format.html { redirect_to request.referer }
+      format.html { redirect_to request.referer, flash: { notice: 'Selected product deleted '} }
     end
   end
 end

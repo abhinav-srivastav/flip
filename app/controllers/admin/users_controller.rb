@@ -14,7 +14,7 @@ class Admin::UsersController < Admin::BaseController
     @user  = User.new(params[:user])
     respond_to do |format|
       if @user.save
-        format.html {redirect_to admin_users_path}
+        format.html {redirect_to admin_users_path, flash: { success: 'New user '+@user.username+' created'}}
       else
         format.html {render action: 'new'}
       end
@@ -27,7 +27,7 @@ class Admin::UsersController < Admin::BaseController
   def update
 		respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to admin_users_path, :notice => "user updated !" }
+        format.html { redirect_to admin_users_path, flash: { success: 'Details for '+@user.username+' updated !'} }
       else
         format.html { render action: "edit"}
       end
@@ -37,7 +37,7 @@ class Admin::UsersController < Admin::BaseController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to request.referrer }
+      format.html { redirect_to request.referrer, :notice => 'Selected user deleted' }
     end
   end
 end

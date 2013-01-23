@@ -15,8 +15,7 @@ class Admin::SizesController < Admin::BaseController
     @size = Size.new(params[:size])
     respond_to do |format|
       if @size.save
-      	flash[:success] = 'New size added'
-        format.html { redirect_to admin_sizes_path }
+        format.html { redirect_to admin_sizes_path, flash: { success: 'New size '+@size.size+' created'} }
       else
         format.html { render action: new }
       end
@@ -29,8 +28,7 @@ class Admin::SizesController < Admin::BaseController
   def update
     respond_to do |format|
       if @size.update_attributes(params[:size])
-        flash[:success] = 'size updated'
-      	format.html { redirect_to admin_sizes_path }
+      	format.html { redirect_to admin_sizes_path, flash: { success: 'Size '+@size.size+' updated !'} }
       else
       	format.html { render action: 'edit' }
       end
@@ -40,7 +38,7 @@ class Admin::SizesController < Admin::BaseController
   def destroy
     @size.destroy
     respond_to do |format|
-      format.html { redirect_to request.referrer, notice: 'size deleted'  }
+      format.html { redirect_to request.referrer, notice: 'Selected size deleted'  }
     end
   end
 end

@@ -15,8 +15,7 @@ class Admin::ColoursController < Admin::BaseController
     @colour = Colour.new(params[:colour])
     respond_to do |format|
       if @colour.save
-      	flash[:success] = 'New colour added'
-        format.html { redirect_to admin_colours_path }
+        format.html { redirect_to admin_colours_path, flash: { success: 'New colour '+@colour.colour+' created'}}
       else
         format.html { render action: new }
       end
@@ -29,8 +28,7 @@ class Admin::ColoursController < Admin::BaseController
   def update
     respond_to do |format|
       if @colour.update_attributes(params[:colour])
-        flash[:success] = 'Colour updated'
-      	format.html { redirect_to admin_colours_path }
+      	format.html { redirect_to admin_colours_path, flash: { success: 'Colour '+@colour.colour+' updated !'} }
       else
       	format.html { render action: 'edit' }
       end

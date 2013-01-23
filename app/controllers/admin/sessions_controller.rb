@@ -6,7 +6,6 @@ class Admin::SessionsController < Admin::BaseController
   end
 
   def create
-    @@from_page ||= ''
   	valid_user = User.authorize(params[:username], params[:password])
   	if valid_user
   		session[:user_id] = valid_user.id
@@ -18,7 +17,6 @@ class Admin::SessionsController < Admin::BaseController
 
   def destroy
   	reset_session
-    flash[:success] = 'logged out successfully'
-    redirect_to :root
+    redirect_to :root, flash: {success: 'logged out successfully'}
   end
 end

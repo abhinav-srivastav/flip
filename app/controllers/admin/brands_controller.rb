@@ -15,7 +15,7 @@ class Admin::BrandsController < Admin::BaseController
     @brand  = Brand.new(params[:brand])
     respond_to do |format|
       if @brand.save
-        format.html {redirect_to admin_brands_path}
+        format.html {redirect_to admin_brands_path, flash: { success: 'New brand named '+@brand.brand+' created.'}}
       else
         format.html {render action: 'new'}
       end
@@ -28,7 +28,7 @@ class Admin::BrandsController < Admin::BaseController
   def update
 		respond_to do |format|
       if @brand.update_attributes(params[:brand])
-        format.html { redirect_to admin_brands_path }
+        format.html { redirect_to admin_brands_path, flash: { success: 'Brand '+@brand.brand+' updated !'  } }
       else
         format.html { render action: "edit"}
       end
@@ -38,7 +38,7 @@ class Admin::BrandsController < Admin::BaseController
 	def destroy
     @brand.destroy
     respond_to do |format|
-      format.html { redirect_to request.referer }
+      format.html { redirect_to request.referer, flash: { notice: 'Selected brand destroyed'  } }
     end
   end
 end

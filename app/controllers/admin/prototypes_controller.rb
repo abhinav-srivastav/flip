@@ -15,7 +15,7 @@ class Admin::PrototypesController < Admin::BaseController
     @prototype  = Prototype.new(params[:prototype])
     respond_to do |format|
       if @prototype.save
-        format.html {redirect_to admin_prototypes_path}
+        format.html {redirect_to admin_prototypes_path, flash: { success: 'New prototype '+@prototype.prototype+' created'}}
       else
         format.html {render action: 'new'}
       end
@@ -29,8 +29,7 @@ class Admin::PrototypesController < Admin::BaseController
     respond_to do |format|
       if @prototype.update_attributes(params[:prototype])
         @prototype.product_attribute_update
-        flash[:success] = "Prototype updated !"
-        format.html { redirect_to admin_prototypes_path }
+        format.html { redirect_to admin_prototypes_path, flash: { success: 'Prototype '+@prototype.prototype+' updated !'} }
       else
         format.html { render action: "edit"}
       end
@@ -47,7 +46,7 @@ class Admin::PrototypesController < Admin::BaseController
   def create_details
     @prototype.add_attributes_to_product(params[:product_id])
     respond_to do |format|
-      format.html { redirect_to request.referrer, :notice => 'Attributes updated' }
+      format.html { redirect_to request.referrer, flash: { success: => 'Attributes updated for '+@prototype.prototype } }
     end
   end
 end

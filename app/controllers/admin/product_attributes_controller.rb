@@ -18,7 +18,7 @@ class Admin::ProductAttributesController < Admin::BaseController
     @attribute  = ProductAttribute.new(params[:product_attribute])
     respond_to do |format|
       if @attribute.save
-        format.html {redirect_to @@return_path }
+        format.html {redirect_to @@return_path, flash: { success: 'New attribute '+@attribute.attribute+' created'} }
       else
         format.html {render action: 'new'}
       end
@@ -31,7 +31,7 @@ class Admin::ProductAttributesController < Admin::BaseController
   def update
     respond_to do |format|
       if @attribute.update_attributes(params[:product_attribute])
-        format.html { redirect_to admin_product_attributes_path }
+        format.html { redirect_to admin_product_attributes_path, flash: { success: 'Attribute '+@attribute.attribute+' updated !'} }
       else
         format.html { render action: "edit"}
       end
