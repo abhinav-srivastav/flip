@@ -1,14 +1,13 @@
 class BrandsController < ApplicationController
+  before_filter(:only => [:show, :show_all]) { @cat = Category.find(params[:category_id]) }
 
 	def show
     @brand  = Brand.find(params[:id]) 
-    @cat = Category.find(params[:category_id])
     respond_to do |format|
       format.html
     end
   end
   def show_all
-    @cat = Category.find(params[:category_id])
     respond_to do |format|
       format.html
     end

@@ -3,13 +3,11 @@ class CommentsController < ApplicationController
   before_filter :authorize_user
   
   def new
-    @comment = Comment.new
-    @@product_id = params[:product_id]
+    @comment = Comment.new(:product_id => params[:product_id])
   end
 
   def create 
     @comment = current_user.comments.new(params[:comment])
-    @comment.product_id = @@product_id
     respond_to do |format|
       if @comment.save
         format.html {redirect_to product_path(@comment.product) }
