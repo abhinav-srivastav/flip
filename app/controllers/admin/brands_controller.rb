@@ -1,5 +1,6 @@
 class Admin::BrandsController < Admin::BaseController
   before_filter(:only => [:destroy, :edit, :update]) { @brand = Brand.find(params[:id]) }
+
   def index
   	@brands = Brand.all
     respond_to do |format|
@@ -40,5 +41,4 @@ class Admin::BrandsController < Admin::BaseController
       format.html { redirect_to request.referer }
     end
   end
-
 end

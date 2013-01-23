@@ -28,4 +28,13 @@ class Product < ActiveRecord::Base
     return false if varients.availables.empty?
     true
   end
+
+  def total_rating
+    p = 0
+    return p if ratings.empty?
+    ratings.each do |rate|
+      p += rate.rating 
+    end
+    p /= ratings.count
+  end
 end

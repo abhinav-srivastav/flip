@@ -24,11 +24,9 @@ class Admin::ColoursController < Admin::BaseController
   end
 
   def edit
-    @colour = Colour.find(params[:id])
   end
 
   def update
-    @colour = Colour.find(params[:id])
     respond_to do |format|
       if @colour.update_attributes(params[:colour])
         flash[:success] = 'Colour updated'
@@ -40,7 +38,6 @@ class Admin::ColoursController < Admin::BaseController
   end
 
   def destroy
-    @colour = Colour.find(params[:id])
     @colour.destroy
     respond_to do |format|
       format.html { redirect_to request.referrer, notice: 'Colour deleted'  }

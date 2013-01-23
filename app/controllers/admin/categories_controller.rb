@@ -23,11 +23,9 @@ class Admin::CategoriesController < Admin::BaseController
   end
 
 	def edit 
-		@category = Category.find(params[:id])
 	end
 	
   def update
-		@category = Category.find(params[:id])
 		respond_to do |format|
       if @category.update_attributes(params[:category])
         format.html { redirect_to admin_categories_path }
@@ -38,7 +36,6 @@ class Admin::CategoriesController < Admin::BaseController
 	end
 
   def destroy
-    @category = Category.find(params[:id])
     @category.destroy
     respond_to do |format|
       format.html { redirect_to request.referer }

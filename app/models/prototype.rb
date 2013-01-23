@@ -7,10 +7,21 @@ class Prototype < ActiveRecord::Base
   validates :name, :presence => true, :uniqueness => true
 
   def add_attributes_to_product(product_id)
-    product = Product.find(params[:product_id])
+    product = Product.find(product_id)
     products << product
-    product_attributes.each do |pa|
-      product.add_details(pa.id)
+    add_attribute(product)
+  end
+
+  def product_attribute_update
+    products.each do |product|
+      add_attribute(product)
+    end 
+  end
+  def add_attribute(product)
+    product_attributes.each do |product_attr|
+      product.add_details(product_attr.id)
     end
   end
+
+
 end

@@ -10,14 +10,4 @@ module ApplicationHelper
     end
     link_to_function(name, "add_images(this,\"#{association}\",\"#{escape_javascript(fields)}\")")
   end
-
-  def total_rating(product)
-    p = 0
-    return p if product.ratings.empty?
-    product.ratings.each do |rate|
-      p += rate.rating 
-    end
-    p /= product.ratings.count
-  end
-
 end

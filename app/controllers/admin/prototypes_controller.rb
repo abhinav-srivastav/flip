@@ -28,11 +28,7 @@ class Admin::PrototypesController < Admin::BaseController
   def update
     respond_to do |format|
       if @prototype.update_attributes(params[:prototype])
-        @prototype.products.each do |pro|
-          @prototype.product_attributes.each do |pa|
-            pro.add_details(pa.id)
-          end
-        end
+        @prototype.product_attribute_update
         flash[:success] = "Prototype updated !"
         format.html { redirect_to admin_prototypes_path }
       else

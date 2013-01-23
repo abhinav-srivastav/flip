@@ -1,6 +1,6 @@
 <div>
   <%= image_tag(@product.images.first.image.url(:thumb), :class => 'thumb_image') if @product.images.any?  %><br/>
- </div>
+</div>
   <dl class = "dl-horizontal" >      
     <dd>
       <% unless @product.available? %>
@@ -19,35 +19,34 @@
     <dt>Brand name:</dt>
     <dd><%= @product.brand.brand %></dd>
   </dl>
+  <dl class  = "dl-horizontal" >      
+    <dt>Rating:</dt>
+    <dd>
+      <%= @product.total_rating %> (rated by <%= @product.ratings.count %>)<br/> 
+      <% user_rating = (current_user.ratings & @product.ratings).first if logged_in? %>
+      <% if user_rating %>
+        <p> Your rated this product <%= user_rating.rating %></p>
+      <% end %>
+    </dd>
+  </dl>
   <dl class = "dl-horizontal">
     <dd>  
       <div class = 'varients'>
         <% @varients.each do |varient| %>
           <% if varient.available > 0  %>
             <div class='select_varient' id='<%= varient.id %> <%= varient.price %>' >
-              <%= varient.colour.colour if varient.colour %> <%= varient.size.size if varient.size %>
-            </div>
-            
+              <%= "Colour:"+varient.colour.colour if varient.colour %> <%= 'Size:'+varient.size.size if varient.size %>
+            </div>            
           <% end %>
         <% end %>
       </div>
     </dd>
   </dl>
   <dl class  = "dl-horizontal" >      
-    <dt>Price:</dt>
+    <dt><h4>Price:<h4></dt>
     <% @varients.each do |varient|  %>
-      <dd id = '<%= varient.id %>' class='price_label'><strike><%= varient.mrp if varient.mrp %></strike> <%= varient.price %></dd>
+      <dd id = '<%= varient.id %>' class='price_label'><strike><h4><%= varient.mrp if varient.mrp %></strike> <%= varient.price %></h4></dd>
     <% end %>
-  </dl>
-  <dl class  = "dl-horizontal" >      
-    <dt>Rating:</dt>
-    <dd>
-      <%= total_rating(@product)%> (rated by <%= @product.ratings.count %>)<br/> 
-      <% user_rating = (current_user.ratings & @product.ratings).first if logged_in? %>
-      <% if user_rating %>
-        <p> Your rated this product <%= user_rating.rating %></p>
-      <% end %>
-    </dd>
   </dl>
   <dl class  = "dl-horizontal" >      
     <dt>Description:</dt>
