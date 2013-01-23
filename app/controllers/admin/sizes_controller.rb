@@ -44,4 +44,3 @@ class Admin::SizesController < Admin::BaseController
     end
   end
 end
-  

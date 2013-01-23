@@ -1,13 +1,11 @@
 class Admin::VarientsController < Admin::BaseController
   before_filter(:only => [:destroy, :edit, :update]) { @varient = Varient.find(params[:id]) }
   def new
-    @varient = Varient.new
-    @@product_id = params[:product_id]
+    @varient = Varient.new(:product_id => params[:product_id])
   end
 
   def create
     @varient = Varient.new(params[:varient])
-    @varient.product_id = @@product_id
     respond_to do |format|
       if @varient.save
         flash[:success] = 'varient added'
