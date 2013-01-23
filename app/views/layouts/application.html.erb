@@ -1,44 +1,43 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Flip</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body class = 'public' >    
-<div class="navbar navbar-inverse">
-  <div class="navbar-inner">
-    <div class="container-fluid">
-      <%= link_to 'Grab-Ur-Trolley', root_path, :class => 'brand' %>
-      <div class="nav-collapse collapse">
-        <div class="navbar-text pull-right">
-          <% if logged_in? %>
-            <%= link_to 'View My Trolley', open_orders_path %> | Hi,<%= link_to current_user.username, user_path(current_user) %> ! | <%= link_to 'Log out', logout_path %>
-          <% else %>
-            <%= link_to 'Sign Up', new_user_path %> | <%= link_to 'Log in', login_path%>
-          <% end %>
+  <head>
+    <title>Flip</title>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body class = 'public' >    
+    <div class="navbar navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <%= link_to 'Grab-Ur-Trolley', root_path, :class => 'brand' %>
+          <div class="nav-collapse collapse">
+            <div class="navbar-text pull-right">
+              <% if logged_in? %>
+                <%= link_to 'View My Trolley', open_orders_path %> | Hi,<%= link_to current_user.username, user_path(current_user) %> ! | <%= link_to 'Log out', logout_path %>
+              <% else %>
+                <%= link_to 'Sign Up', new_user_path %> | <%= link_to 'Log in', login_path%>
+              <% end %>
+            </div>
+            <% if current_user && current_user.admin %> 
+              <ul class='nav'>
+                <li><%= link_to "Admin Section", admin_categories_path  %></li>
+              </ul>
+            <% end %>
+          </div>
         </div>
-        <% if current_user.admin %> 
-          <ul class='nav'>
-            <li><%= link_to "Admin Section", admin_categories_path  %></li>
-          </ul>
-        <% end %>
       </div>
     </div>
-  </div>
-</div>
-  <div class = "container-fluid">
-    <div class = "row-fluid">
-      <% flash.each do |name,msg|    %>
-        <div class = "alert alert-<%= name %>">
-          <button type="button" class="close" data-dismiss="alert">×</button>
-          <p id =  "notice" ><%= msg %></p>
-        </div>
-      <% end %>
-      <%= yield %>
+    <div class = "container-fluid">
+      <div class = "row-fluid">
+        <% flash.each do |name,msg|    %>
+          <div class = "alert alert-<%= name %>">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <p id =  "notice" ><%= msg %></p>
+          </div>
+        <% end %>
+        <%= yield %>
+      </div>
     </div>
-  </div>
-
-</body>
+  </body>
 </html>
