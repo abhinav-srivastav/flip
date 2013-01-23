@@ -1,20 +1,18 @@
 class AddressesController < ApplicationController
 
   before_filter :authorize_user
-
   def new
-    @address = Address.new()
-  	@@order_page_path = request.referrer
+    @address = Address.new
+  	@@order_id = params[:order_id]
   end
 
   def create 
     @address = current_user.addresses.new(params[:address])
-    @@order_page_path ||= '/orders'
     unless @address.save
       flash[:error] = 'Invalid address'
     end
     respond_to do |format|
-      format.html { redirect_to @@order_page_path }
+      format.html { redirect_to confirm_order_path(@@order_id) }
     end
   end
 

@@ -1,5 +1,4 @@
 <div>
-  <%= render 'order_navigation' %>
   <h3><u>Confirm Order</u></h3>
   <dl class  = "dl-horizontal" >      
     <dt>Order For:</dt>
@@ -61,7 +60,7 @@
         <% end %>
       </div><br/>
     <div id='add_address'></div>
-    <%= link_to 'add new address', new_address_path, :remote => true, :class => "btn btn-small btn-warning" %><br/><br/>
+    <%= link_to 'add new address', new_address_path(:order_id => @order.id), :remote => true, :class => "btn btn-small btn-warning" %><br/><br/>
     <%= button_to 'Pay', pay_order_path(@order), :class => 'btn btn-small btn-success' %>
     </dd>
   </dl>  
