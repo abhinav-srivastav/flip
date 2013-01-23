@@ -1,6 +1,6 @@
 class Admin::SessionsController < Admin::BaseController
   layout 'application'
-  skip_before_filter :admin_authorize
+  skip_before_filter :authorize_admin
   def new
     @@from_page = request.referrer
   end

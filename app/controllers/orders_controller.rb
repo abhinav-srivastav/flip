@@ -76,4 +76,10 @@ class OrdersController < ApplicationController
       format.html
     end
   end
+  def deliver
+    @orders = current_user.orders.with_state('delivered')
+    respond_to do |format|
+      format.html
+    end
+  end
 end

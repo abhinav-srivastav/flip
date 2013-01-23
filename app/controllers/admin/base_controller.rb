@@ -2,7 +2,7 @@ class Admin::BaseController < ActionController::Base
  layout 'admin'
 
  before_filter :authorize_admin
- helper_method :admin_logged_in?, :current_user
+ helper_method :admin_logged_in?, :current_user, :logged_in?
 
  private
 

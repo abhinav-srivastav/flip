@@ -25,6 +25,7 @@ Flip::Application.routes.draw do
     post 'pay', :on => :member
     get 'confirm', :on => :member
     get 'dispatched', :on => :collection
+    get 'deliver', :on => :collection
   end
   resources :categories do
     resources :brands do
