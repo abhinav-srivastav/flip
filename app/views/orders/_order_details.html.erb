@@ -42,6 +42,9 @@
           <td><b><%= order.amount %></b></td>
         <tr>
       </table>
+      <% if can_cancel %>
+        <%= link_to 'cancel order', cancel_order_order_path(order), method: :post, :class => 'btn btn-danger' %>
+      <% end %>
     </div>
   <% end %>
 </div>          

@@ -20,7 +20,7 @@ Flip::Application.routes.draw do
     post 'add_line_item_to_order', :on => :collection
     get 'open', :on => :collection
     get 'cancel', :on => :collection
-    post 'cancel', :on => :member
+    post 'cancel_order', :on => :member
     get 'booked', :on => :collection
     post 'pay', :on => :member
     get 'confirm', :on => :member

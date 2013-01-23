@@ -1,7 +1,8 @@
 class OrdersController < ApplicationController
 
   before_filter :authorize_user
-  before_filter(:only => [:confirm,:update,:pay]) { @order = Order.find(params[:id]) }
+  before_filter(:only => [:confirm,:update,:pay, :cancel_order]) { @order = Order.find(params[:id]) }
+
   def open
   	@order = current_user.orders.open_state
     @order.save
@@ -52,32 +53,35 @@ class OrdersController < ApplicationController
       format.html
     end
   end
-  def cancel
-    if request.post?
-      @order = Order.find(params[:id])
-      respond_to do |format|    
-        if @order.cancel 
-          Notifier.cancellation(@order.user.email, @order.user.username, @order).deliver  
-          flash[:notice] = 'Order Cancelled.Credit refunded to wallet !'
-        else
-          flash[:error]  = 'Order can\'t be cancelled '
-        end
-        format.html { redirect_to request.referrer }
+  
+  def cancel_order
+    respond_to do |format|    
+      if @order.cancel 
+        Notifier.cancellation(@order.user.email, @order.user.username, @order).deliver  
+        flash[:notice] = 'Order Cancelled.Credit refunded to wallet !'
+      else
+        flash[:error]  = 'Order can\'t be cancelled now'
       end
-    else
-      @orders = current_user.orders.with_state('cancel')
+      format.html { redirect_to request.referrer }
     end
   end
+
+  def cancel
+    @orders = current_user.orders.with_state('cancel')
+  end
+
   def dispatched
     @orders = current_user.orders.with_state('dispatched')
     respond_to do |format|
       format.html
     end
   end
+
   def deliver
     @orders = current_user.orders.with_state('delivered')
     respond_to do |format|
       format.html
     end
   end
+
 end

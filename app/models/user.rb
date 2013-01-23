@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
     return false     
   end
 
-  def debit_from_admin(amount)
+  def self.debit_from_admin(amount)
     admin = super_user
     admin.wallet -= amount
     return true if admin.save
