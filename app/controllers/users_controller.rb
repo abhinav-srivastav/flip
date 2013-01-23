@@ -19,7 +19,7 @@ class UsersController < ApplicationController
       if @user.save
         format.html { redirect_to :root }
       else
-        format.html {render action: 'new'}
+        render action: 'new'
       end
     end
   end

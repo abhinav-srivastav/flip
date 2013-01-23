@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130122074601) do
+ActiveRecord::Schema.define(:version => 20130123131123) do
 
   create_table "addresses", :force => true do |t|
     t.string   "street_no"
@@ -153,12 +153,19 @@ ActiveRecord::Schema.define(:version => 20130122074601) do
     t.string   "username"
     t.string   "password_digest"
     t.string   "email"
-    t.boolean  "admin",                                          :default => false
-    t.decimal  "wallet",          :precision => 10, :scale => 2, :default => 10000.0
-    t.datetime "created_at",                                                          :null => false
-    t.datetime "updated_at",                                                          :null => false
-    t.boolean  "super",                                          :default => false
+    t.boolean  "admin",                                                                :default => false
+    t.decimal  "wallet",                                :precision => 10, :scale => 2, :default => 10000.0
+    t.datetime "created_at",                                                                                :null => false
+    t.datetime "updated_at",                                                                                :null => false
+    t.boolean  "super",                                                                :default => false
+    t.string   "encrypted_password",     :limit => 128,                                :default => "",      :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
   end
+
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["username"], :name => "index_users_on_username", :unique => true
 
   create_table "varients", :force => true do |t|
     t.integer  "product_id"

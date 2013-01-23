@@ -11,7 +11,7 @@ class Admin::SessionsController < Admin::BaseController
   		session[:user_id] = valid_user.id
       redirect_to @@from_page
     else
-      render 'new'
+      render action: 'new'
     end
   end
 

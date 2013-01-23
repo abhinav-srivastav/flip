@@ -1,4 +1,6 @@
 Flip::Application.routes.draw do
+  devise_for :users
+
   get "images/destroy"
 
   # The priority is based upon order of creation:
