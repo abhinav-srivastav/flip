@@ -41,7 +41,13 @@
               <tr>
                 <td></td>
                 <td></td>
-                <td><%= link_to 'Next', confirm_order_path(@order), :class => 'btn btn-small btn-success' %></td>
+                <td>
+                  <% if user_signed_in? %>
+                  <%= link_to 'Next', confirm_order_path(@order), :class => 'btn btn-small btn-success' %>
+                  <% else %>
+                  <%= link_to 'Log In to Continue', new_user_session_path, :class => 'btn btn-small btn-success' %>
+                  <% end %>
+                </td>
               </tr>
             </table>          
           </li>
