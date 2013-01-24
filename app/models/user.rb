@@ -15,8 +15,12 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true
   validates :wallet, :numericality => { :greater_than => 0   }
   
+  # [FIXME_CR] No need to add users with below scopes
+  # Thease are defined for a user itself.
   scope :normal_users, where(:super => false)
+
   scope :super_users, where(:super => true)
+
   private
 
   def self.credit_to_admin(amount)
