@@ -1,9 +1,9 @@
 <div class='navbar '>
 	<ul class='nav'>
-		<li ><%= link_to 'Open Order', open_orders_path %></li>
-		<li ><%= link_to 'Booked Orders', booked_orders_path %></li>
-		<li ><%= link_to 'Dispatched Orders', dispatched_orders_path %></li>
-		<li ><%= link_to 'Delivered Orders', deliver_orders_path %></li>
-	    <li ><%= link_to 'Cancelled Orders', cancel_orders_path %></li>
+		<li ><%= link_to 'Open', orders_path %></li>
+		<li ><%= link_to 'Booked', orders_path(:state => 'booked') %></li>
+		<li ><%= link_to 'Dispatched', orders_path(:state => 'dispatched') %></li>
+		<li ><%= link_to 'Delivered', orders_path(:state => 'delivered') %></li>
+	    <li ><%= link_to 'Cancelled', orders_path(:state => 'cancel') %></li>
 	</ul>
 </div><br/>

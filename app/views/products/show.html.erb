@@ -34,11 +34,12 @@
       <div class = 'varients'>
         <% @varients.each do |varient| %>
           <% if varient.available > 0  %>
-            <div class='select_varient' id='<%= varient.id %> <%= varient.price %>' >
+            <div class='select_varient' id='<%= varient.id %> <%= varient.price %>' >            
               <%= "Colour:"+varient.colour.colour if varient.colour %> <%= 'Size:'+varient.size.size if varient.size %>
             </div>            
           <% end %>
         <% end %>
+        <br/><br/>
       </div>
     </dd>
   </dl>
@@ -47,6 +48,19 @@
     <% @varients.each do |varient|  %>
       <dd id = '<%= varient.id %>' class='price_label'><strike><h4><%= varient.mrp if varient.mrp %></strike> <%= varient.price %></h4></dd>
     <% end %>
+    <div class='add_to_cart_div'>
+      <% if @varients.any?  %>
+        <%= spinner_tag %>
+        <%= form_tag add_line_item_to_order_orders_path do %>
+          <fieldset>
+            <%= hidden_field_tag :id, params[:id], :value => '1' %>
+            <%= hidden_field_tag :price, params[:price], :value => '22' %>
+            <%= submit_tag "Grab", :class => "btn btn-primary add_to_cart"%>
+          </fieldset>
+        <% end %>
+      <% end %>
+    </div>
+
   </dl>
   <dl class  = "dl-horizontal" >      
     <dt>Description:</dt>
@@ -59,12 +73,6 @@
       </div><br/>
       <div class = 'comment'>
         <%= link_to 'Comment', new_comment_path(:product_id => @product.id) , :remote => :true, :class => 'btn btn-success' %><br/><br/>
-      </div>
-      <div>
-        <% if @varients.any?  %>
-          <%= spinner_tag %>
-          <%= button_to_function('grab in trolley', user_signed_in? ? 'add_varient_to_cart()' : 'window.location.href = '+login_path+'/' , :class => "btn btn-primary")if @product.available? %>
-        <% end %>
       </div>
     </dd>
   </dl>

@@ -17,9 +17,21 @@ class User < ActiveRecord::Base
   
   # [FIXME_CR] No need to add users with below scopes
   # Thease are defined for a user itself.
-  scope :normal_users, where(:super => false)
+  scope :normals, where(:super => false)
 
-  scope :super_users, where(:super => true)
+  scope :supers, where(:super => true)
+
+  def order_with_state(state)
+    if state.nil? || state == 'open'
+      orders.open_state
+    else
+      orders.with_state(state)
+    end
+  end
+
+  def add_to_open_order(order_id)
+    orders.open_state.add_line_item_from_order(order_id)
+  end
 
   private
 
@@ -38,7 +50,7 @@ class User < ActiveRecord::Base
   end
 
   def self.super_user
-    super_users.first
+    supers.first
   end
 
 end

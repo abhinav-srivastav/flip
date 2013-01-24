@@ -1,6 +1,5 @@
 class LineItemsController < ApplicationController
 
-  before_filter :authorize_user
   before_filter(:only => [:destroy, :edit, :update]) { @line_item = LineItem.find(params[:id]) }
   def destroy
     @line_item.destroy 
@@ -17,7 +16,7 @@ class LineItemsController < ApplicationController
       flash[:error] = 'Quantity asked for product '+@line_item.varient.product.product+' is not available'
     end
     respond_to do |format|
-       format.html { redirect_to open_orders_path }
+       format.html { redirect_to orders_path }
     end
   end
 end

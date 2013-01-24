@@ -1,11 +1,6 @@
 <div>
-  <%= render 'order_navigation' %>
-  <h3><u>Open Order</u></h3>
+  <% @order = @orders if @orders %>
   <% if @order %>
-    <dl class  = "dl-horizontal" >      
-      <dt>Order For:</dt>
-      <dd><%= @order.user.username %></dd>
-    </dl>
     <dl class  = "dl-horizontal" >      
       <dt>Ordered Products:</dt>
       <dd>

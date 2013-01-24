@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_filter :authorize_user, :except => [:new, :create]
   before_filter(:only => [:show, :edit, :update]) { @user = User.find(params[:id]) }
   before_filter :authorize_user_to_edit, :only => :edit
+
   def show
   	respond_to do |format|
   	  format.html

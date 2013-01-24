@@ -49,30 +49,37 @@ class Order < ActiveRecord::Base
     end
   end
 
-  scope :user_orders, lambda { |id,state| where("user_id = ? AND state = ? ", id, state).order('updated_at desc ') }
-  scope :to_be_dispatched, lambda { |time| where('updated_at < ? and state = ?', time, :booked) }
+  scope :to_be_dispatched, lambda { where('updated_at < ? and state = ?', Time.now-2.hours, :booked) }
 
-  around_save do |order, block|
+  before_save do |order|
     order.amount = 0
     order.line_items.each do |item|
       order.amount += item.price * item.quantity
-      order.amount += 30
     end
-    block.call
+    order.amount += 30 if order.line_items.any? 
+  end
+
+  def add_line_item_from_order(cart_id)
+    cart = Order.find(cart_id)
+    cart.line_items.each do |li|
+      add_line_item(li.varient_id, li.price, li.quantity)
+    end 
+    cart.destroy
   end
 
   def self.open_state
-    order = with_state('open').first
-    unless order
-      order = new
-    end
+    unless order = with_state('open').first
+      order = create
+    end    
     order
   end
 
-  def add_line_item(varient_id, varient_price)
-    li = line_items.find_by_varient_id(varient_id)
-    if li.nil?
-      line_items.new(:varient_id => varient_id, :price => varient_price)
+  def add_line_item(varient_id, varient_price, order_quantity = 1)
+    if li = line_items.find_by_varient_id(varient_id) 
+      li.quantity += order_quantity
+      li.save
+    else
+      line_items.create(:varient_id => varient_id, :price => varient_price, :quantity => order_quantity)
     end
   end
 
@@ -81,14 +88,6 @@ class Order < ActiveRecord::Base
     booked.each do |order|
       order.dispatch
     end
-  end
-
-  def self.user_order(user_id,state)
-    order = user_orders(user_id,state).first
-    if order
-      order
-    else
-      create(:user_id => user_id)
-    end
   end 
+
 end

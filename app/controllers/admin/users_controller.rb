@@ -1,7 +1,7 @@
 class Admin::UsersController < Admin::BaseController
   before_filter(:only => [:destroy, :edit, :update]) { @user = User.find(params[:id]) }
   def index
-  	@users = User.normal_users
+  	@users = User.normals
     respond_to do |format|
 		  format.html
 	  end

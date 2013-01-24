@@ -7,6 +7,16 @@ class LineItem < ActiveRecord::Base
   validates :price, :presence => true, :numericality => true
   validates :varient_id, :presence => true
 
+  around_destroy do |line_item, block|
+    order = line_item.order
+    block.call
+    # order.save 
+  end 
+
+  def change_order_id(changed_order_id)
+    order_id = changed_order_id
+  end
+
 
   def decrement_available_quantity
      varient.available -= quantity

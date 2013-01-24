@@ -18,4 +18,26 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+
+  def user_logged_or_anonymous
+    if user_signed_in?
+      @orders = current_user.order_with_state(params[:state])
+    else
+      if session[:order]
+        @orders = Order.find(session[:order])
+      else
+        @orders = Order.create() 
+        session[:order] = @orders.id
+      end
+    end
+  end
+  
+  def after_sign_in_path_for(user)
+    if session[:order]
+      order = Order.find(session[:order])
+      current_user.add_to_open_order(order)
+      session[:order] = nil
+    end
+    root_path
+  end
 end
