@@ -7,11 +7,6 @@ class LineItem < ActiveRecord::Base
   validates :price, :presence => true, :numericality => true
   validates :varient_id, :presence => true
 
-  # before_save do |line_item|
-
-  # end
-
-
 
   def decrement_available_quantity
      varient.available -= quantity

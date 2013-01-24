@@ -16,8 +16,11 @@ class OrdersController < ApplicationController
     @order.add_line_item(params[:id],params[:price])
     respond_to do |format|
       if @order.save
+        # [FIXME_CR] Message should be more appropriate e.g. "Product one" added successfully to you cart.
         flash[:notice] = 'Added to order'
       else
+        # [FIXME_CR] Message should be more appropriate.
+        # Should let user know what wrong exacly going on. e.g "Product One" is out of stock etc.
         flash[:error] = 'invalid addition to order'
       end
       format.html { redirect_to request.referrer }
@@ -28,9 +31,11 @@ class OrdersController < ApplicationController
   end
 
   def update 
-    if @order.update_attributes(params[:order]) 
+    if @order.update_attributes(params[:order])
       flash.now[:success] = 'order details updated '
     else
+      # [FIXME_CR] Message should be more appropriate.
+      # Should let user know what wrong exacly going on. e.g "Product One" is out of stock etc.
       flash.now[:error] = 'error updating order'
     end  
     render :action =>  'confirm' 
@@ -47,6 +52,8 @@ class OrdersController < ApplicationController
     end
   end
 
+  # [FIXME_CR] This should be part of orders index action.
+  # Orders listing should be handeled by by index action if possible.
   def booked
     @orders = current_user.orders.with_state('booked')
     respond_to do |format|
@@ -83,5 +90,4 @@ class OrdersController < ApplicationController
       format.html
     end
   end
-
 end
