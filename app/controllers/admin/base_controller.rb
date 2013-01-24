@@ -14,14 +14,6 @@ class Admin::BaseController < ActionController::Base
   end
 
   def admin_logged_in?
-  	logged_in? && current_user.admin
-  end
-
-  def logged_in?
-    !!(current_user)
-  end
-
-  def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  	user_signed_in? && current_user.admin
   end
 end

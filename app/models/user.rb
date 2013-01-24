@@ -40,9 +40,5 @@ class User < ActiveRecord::Base
   def self.super_user
     super_users.first
   end
-  def self.authorize(username, password)
-    user = User.find_by_username(username)
-    return user if user && user.authenticate(password)
-    nil
-  end
+
 end

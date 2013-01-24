@@ -49,7 +49,6 @@ class Order < ActiveRecord::Base
     end
   end
 
-<<<<<<< HEAD
   scope :user_orders, lambda { |id,state| where("user_id = ? AND state = ? ", id, state).order('updated_at desc ') }
   scope :to_be_dispatched, lambda { |time| where('updated_at < ? and state = ?', time, :booked) }
 
@@ -70,7 +69,6 @@ class Order < ActiveRecord::Base
     order
   end
 
-<<<<<<< HEAD
   def add_line_item(varient_id, varient_price)
     li = line_items.find_by_varient_id(varient_id)
     if li.nil?

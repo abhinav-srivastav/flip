@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130123131123) do
+ActiveRecord::Schema.define(:version => 20130124063244) do
 
   create_table "addresses", :force => true do |t|
     t.string   "street_no"
@@ -151,7 +151,6 @@ ActiveRecord::Schema.define(:version => 20130123131123) do
 
   create_table "users", :force => true do |t|
     t.string   "username"
-    t.string   "password_digest"
     t.string   "email"
     t.boolean  "admin",                                                                :default => false
     t.decimal  "wallet",                                :precision => 10, :scale => 2, :default => 10000.0

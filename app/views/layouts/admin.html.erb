@@ -14,7 +14,7 @@
       <div class="nav-collapse collapse">
         <div class="navbar-text pull-right">
           Hi,<%= link_to current_user.username, user_path(current_user)%>! |
-          <%= link_to 'Log out', logout_path   %>
+          <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
         </div>
         <ul class='nav'>
           <li><%= link_to 'Categories', admin_categories_path %></li>
