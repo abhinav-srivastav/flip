@@ -1,16 +1,10 @@
 Flip::Application.routes.draw do
-  devise_for :users
-
-  get "images/destroy"
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
-  match 'login' => "admin/sessions#new"
-  match "logout" => "admin/sessions#destroy"
   match 'admin' => "admin/categories#index"
   post '/admin/product_details/:id' => 'admin/product_details#create' 
-
+  devise_for :users, :path => '', :path_names => { :sign_in => 'LogIn', :sign_out => 'LogOut' }
   namespace :admin do
     resources :categories, :users, :products, :brands, :sessions, :orders, :images, :product_attributes, :product_details, :varients, :colours, :sizes
     resources :prototypes do
