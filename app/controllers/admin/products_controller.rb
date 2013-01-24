@@ -1,5 +1,5 @@
 class Admin::ProductsController < Admin::BaseController
-  before_filter(:only => [:destroy, :edit, :update]) { @product = Product.find(params[:id])  }
+  before_filter(:only => [:destroy, :update]) { @product = Product.find(params[:id])  }
   def index
   	@products = Product.all
     respond_to do |format|
@@ -25,6 +25,7 @@ class Admin::ProductsController < Admin::BaseController
   end
 
 	def edit 
+    @product = Product.includes({:product_details => :product_attribute}, :images, {:varients => [:size, :colour]}).find(params[:id])
     @other_attr = ProductAttribute.other_attributes(@product)
     @product.images.build
     @product.product_attributes.build.product_details.build

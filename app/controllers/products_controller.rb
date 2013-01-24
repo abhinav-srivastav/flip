@@ -1,8 +1,8 @@
 class ProductsController < ApplicationController
 
   def show		
-    @product = Product.find(params[:id]) 
-    @varients = @product.varients.availables
+    @product = Product.includes(:images, :ratings, :brand, {:comments => :user}  ,:product_details => [:product_attribute]).find(params[:id]) 
+    @varients = @product.varients.includes(:size,:colour).availables
     respond_to do |format|
       format.html
     end

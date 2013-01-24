@@ -10,11 +10,11 @@ class ProductAttribute < ActiveRecord::Base
   
   def self.other_attributes(product)
   	other_attr = []
-  	all.each do |pa|
-      unless pa.products.include?(product)
-        other_attr << pa
-      end
-  	end
+    pro_attr = []
+    product.product_details.each do |pd|
+      pro_attr << pd.product_attribute
+    end
+    other_attr = all-pro_attr
     other_attr
   end
 end
