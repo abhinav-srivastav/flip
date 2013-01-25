@@ -1,9 +1,8 @@
-class Admin::BaseController < ActionController::Base
+class Admin::BaseController < ApplicationController
  layout 'admin'
- protect_from_forgery
 
  before_filter :authorize_admin
- helper_method :admin_logged_in?, :current_user, :logged_in?
+ helper_method :admin_logged_in?
 
  private
 

@@ -20,10 +20,11 @@
       <%= f.input :description, :input_html => { :class => 'product_description' } %>
       <%= f.association :brand, :label_method => :brand, :as => :radio_buttons %>
       <div class = "root_category">
-        <%= f.association :categories, :collection => Category.root(), :label_method => :category, :as => :check_boxes %>
+        <% root_category = Category.root %>
+        <%= f.association :categories, :collection => root_category, :label_method => :category, :as => :check_boxes, :input_method => :id %>
       </div>
-      <% Category.root.each do |root|  %>
-        <% unless root.children.empty? %>  
+      <% root_category.each do |root|  %>
+        <% if root.children.any?  %>
           <div class = 'child_category' id = "<%= root.id %>">
             <%= f.association :categories, :label => "#{root.category}'s Sub-Category" , :collection => root.children, :label_method => :category, :as => :check_boxes %>
           </div>

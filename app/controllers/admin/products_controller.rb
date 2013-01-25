@@ -25,7 +25,8 @@ class Admin::ProductsController < Admin::BaseController
   end
 
 	def edit 
-    @product = Product.includes({:product_details => :product_attribute}, :images, {:varients => [:size, :colour]}).find(params[:id])
+    @product = Product.includes({:product_details => :product_attribute}, :images, {:varients => [:size, :colour]}, :prototypes).find(params[:id])
+    @root_category = Category.root
     @other_attr = ProductAttribute.other_attributes(@product)
     @product.images.build
     @product.product_attributes.build.product_details.build

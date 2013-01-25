@@ -1,5 +1,5 @@
 class Admin::OrdersController < Admin::BaseController
-  before_filter(:only => [:show, :destroy]) { @order = Order.find(params[:id]) }
+  before_filter(:only => [:destroy]) { @order = Order.find(params[:id]) }
   def index 
     @orders = Order.order('updated_at desc')
     respond_to do |format|
@@ -8,6 +8,7 @@ class Admin::OrdersController < Admin::BaseController
   end
 
   def show
+    @order = Order.includes(:user, :address,:line_items => [:varient => [:product, :colour, :size]]).find(params[:id])
   end
 
 	def destroy

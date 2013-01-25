@@ -1,5 +1,5 @@
 class Admin::CategoriesController < Admin::BaseController
-  before_filter(:only => [:destroy, :edit, :update]) { @category = Category.find(params[:id]) }
+  before_filter(:only => [:destroy, :update]) { @category = Category.find(params[:id]) }
 	def index 
 		@categories = Category.all
 		respond_to do |format|
@@ -23,9 +23,11 @@ class Admin::CategoriesController < Admin::BaseController
   end
 
 	def edit 
+    @category = Category.includes(:products, :brands).find(params[:id])
 	end
 	
   def update
+    
 		respond_to do |format|
       if @category.update_attributes(params[:category])
         format.html { redirect_to admin_categories_path, flash: { success: 'Category '+@category.category+' updated !'} }
