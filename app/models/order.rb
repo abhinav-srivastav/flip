@@ -30,7 +30,7 @@ class Order < ActiveRecord::Base
     end
 
     before_transition :cart => :booked do |order|
-      if order.amount > 0 && order.amount <= order.user.wallet && order.address
+      if order.complete?
         order.user.wallet -= order.amount
         User.credit_to_admin(order.amount)
         order.line_items.each do |li|
@@ -86,6 +86,11 @@ class Order < ActiveRecord::Base
     end
   end
 
+  def complete?
+    return true if amount > 0 && order.amount <= order.user.wallet && order.address
+    false
+  end
+  
   def self.dispatch(time)
     booked = Order.to_be_dispatched(time)
     booked.each do |order|

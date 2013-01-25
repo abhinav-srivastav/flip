@@ -1,5 +1,5 @@
 class Notifier < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "admin@grab-your-trolley.com"
 
   def booking(order)
   	@order = order
