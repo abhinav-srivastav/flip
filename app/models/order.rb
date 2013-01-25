@@ -29,9 +29,7 @@ class Order < ActiveRecord::Base
     before_transition :cart => :booked do |order|
       if order.complete?
         order.debit(order.amount, order.user)
-        order.line_items.each do |li|
-          li.decrement_available_quantity
-        end
+        order.line_items.decrement_available_quantity
         Notifier.booking(order).deliver
       else
         false
@@ -40,10 +38,8 @@ class Order < ActiveRecord::Base
 
     before_transition :booked => :cancel do |order|
       order.credit(order.amount, order.user)
-      order.line_items.each do |line|
-        line.return_quantity_to_varient
-      end
-       Notifier.cancellation(order).deliver  
+      order.line_items.return_quantity_to_varient
+      Notifier.cancellation(order).deliver  
     end
   end
 

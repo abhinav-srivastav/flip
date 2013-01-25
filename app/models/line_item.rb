@@ -22,13 +22,17 @@ class LineItem < ActiveRecord::Base
   end
 
 
-  def decrement_available_quantity
-     varient.available -= quantity
-     varient.save
+  def self.decrement_available_quantity
+    all.each do |li|
+      li.varient.available -= quantity
+      li.varient.save
+    end
   end
 
   def return_quantity_to_varient
-    varient.available += quantity
-    varient.save
+    all.each do |li|
+      li.varient.available += quantity
+      li.varient.save
+    end
   end
 end
