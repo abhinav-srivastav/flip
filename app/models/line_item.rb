@@ -10,8 +10,12 @@ class LineItem < ActiveRecord::Base
   around_destroy do |line_item, block|
     order = line_item.order
     block.call
-    # order.save 
+    order.save if order 
   end 
+
+  after_save do |line_item|
+    line_item.order.save
+  end
 
   def change_order_id(changed_order_id)
     order_id = changed_order_id
