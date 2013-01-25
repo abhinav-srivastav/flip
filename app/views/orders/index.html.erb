@@ -4,6 +4,6 @@
   <% if params[:state] %>
     <%= render 'order_details', :orders => @orders %>
   <% else %>
-    <%= render 'open_order', :orders => @orders %>
+    <%= render 'cart', :orders => @orders %>
     <% end %>
 </div>

@@ -1,6 +1,6 @@
 class LineItem < ActiveRecord::Base
   belongs_to :varient
-  belongs_to :order, :autosave => true
+  belongs_to :order
   attr_accessible :varient_id, :quantity, :price
 
   validates :quantity, :numericality => { :greater_than => 0 }, :inclusion => { :in => lambda { |line_item| 0..(line_item.varient.available) } }

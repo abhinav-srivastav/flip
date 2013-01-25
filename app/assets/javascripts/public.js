@@ -1,24 +1,15 @@
 $(document).ready(function(){
-	// add address to order
+	// add highlight selected address for order
 	$('.order_address div').click(function() {
 		$(this).siblings().removeClass('selected')
 		$(this).addClass('selected');
-		order = {};
-		params = {};
-		order['id'] = $("div.order_address").attr('id')
-		order['address_id'] = $("div.selected").attr('id');
-		$("div.selected").siblings().children("a").show();
-		params['order'] = order
-		order_url = "/orders/"+order['id']
-		$.ajax({
-			beforeSend: function() { $("#spinner_img").show();},
-			type: 'PUT',
-			data: params,
-			url: order_url,
-			complete: function(){ $("#spinner_img").hide(); }
-		});
 	});
-    
+    $(".pay").click(function(){
+    	address_id = $("div.order_address .selected").attr('id')
+    	console.log(address_id)
+    	$(this).siblings("#address").attr('value', address_id)
+    });
+
     //zoom effect 
     $(".thumb_image").addimagezoom({ 
 		zoomrange: [3],
@@ -36,7 +27,9 @@ $(document).ready(function(){
 	});
 
     $(".varients div:first-child").addClass('active')
-	show_price();
+	if ($(".varients div:first-child").length) {
+      show_price();
+	}
 	$(".select_varient").click(function(){
 	  $(this).addClass('active').siblings().removeClass('active')
 	  show_price();

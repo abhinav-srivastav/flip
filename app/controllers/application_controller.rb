@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(user)
     if session[:order]
       order = Order.find(session[:order])
-      current_user.add_to_open_order(order)
+      current_user.add_to_cart(order)
       session[:order] = nil
     end
     root_path

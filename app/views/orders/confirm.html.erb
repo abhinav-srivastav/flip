@@ -47,21 +47,25 @@
       <%= spinner_tag %>  
       <div class='order_address' id="<%= @order.id %>">
         <% @order.user.addresses.each do |address| %>
-        <% selected = (address.id == @order.address_id) ? 'selected': ''  %>
-        <div id="<%= address.id %>" class='<%= selected %>'>
-          <%= link_to '×', address_path(address), method: :delete, data: { confirm: 'Delete Address ?' } ,:class => 'pull-right' %>
-          <%= address.name %><br/>
-          <%= address.street_no %><br/>
-          <%= address.area %><br/>
-          <%= address.city %><br/>
-          <%= address.state %>-<%= address.postal_code %><br/>
-          <%= address.country %>
-        </div>
+          <div id="<%= address.id %>" class='<%= "selected" if address.id == @order.address_id %>'>
+            <%= link_to '×', address_path(address), method: :delete, data: { confirm: 'Delete Address ?' } ,:class => 'pull-right' %>
+            <%= address.name %><br/>
+            <%= address.street_no %><br/>
+            <%= address.area %><br/>
+            <%= address.city %><br/>
+            <%= address.state %>-<%= address.postal_code %><br/>
+            <%= address.country %>
+          </div>
         <% end %>
       </div><br/>
-    <div id='add_address'></div>
-    <%= link_to 'add new address', new_address_path(:order_id => @order.id), :remote => true, :class => "btn btn-small btn-warning" %><br/><br/>
-    <%= button_to 'Pay', pay_order_path(@order), :class => 'btn btn-small btn-success' %>
+      <div id='add_address'></div>
+      <%= link_to 'add new address', new_address_path(:order_id => @order.id), :remote => true, :class => "btn btn-small btn-warning" %><br/><br/>
+      <%= form_tag pay_order_path(@order) do %>
+        <fieldset>
+          <%= hidden_field_tag :address, params[:address] %>
+          <%= submit_tag "Pay", :class => "btn btn-small btn-success pay"%>
+        </fieldset>
+      <% end %>
     </dd>
   </dl>  
 </div>

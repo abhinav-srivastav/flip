@@ -22,15 +22,15 @@ class User < ActiveRecord::Base
   scope :supers, where(:super => true)
 
   def order_with_state(state)
-    if state.nil? || state == 'open'
-      orders.open_state
+    if state.nil? || state == 'cart'
+      orders.cart_state
     else
       orders.with_state(state)
     end
   end
 
-  def add_to_open_order(order_id)
-    orders.open_state.add_line_item_from_order(order_id)
+  def add_to_cart(order_id)
+    orders.cart_state.add_line_item_from_order(order_id)
   end
 
   private

@@ -14,14 +14,9 @@ Flip::Application.routes.draw do
   resources :users, :products, :line_items, :addresses, :comments, :ratings
   resources :orders do
     post 'add_line_item_to_order', :on => :collection
-    get 'open', :on => :collection
-    get 'cancel', :on => :collection
     post 'cancel_order', :on => :member
-    get 'booked', :on => :collection
     post 'pay', :on => :member
     get 'confirm', :on => :member
-    get 'dispatched', :on => :collection
-    get 'deliver', :on => :collection
   end
   resources :categories do
     resources :brands do

@@ -1,17 +1,15 @@
 class Notifier < ActionMailer::Base
   default from: "from@example.com"
 
-  def booking(user_email,user_name, order)
+  def booking(order)
   	@order = order
-  	@user_name = user_name
-    mail to: user_email, subject: "booking confirmed "
+  	@user_name = @order.user.username
+    mail to: @order.user.email, subject: "booking confirmed "
   end
 
-  def cancellation(user_email, user_name, order)
+  def cancellation(order)
     @order = order
-    @user_name = user_name
-    mail to: user_email, subject: 'booked order cancelled'
+    @user_name = order.user.username
+    mail to: order.user.email, subject: 'booked order cancelled'
   end
-
-
 end

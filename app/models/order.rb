@@ -7,16 +7,17 @@ class Order < ActiveRecord::Base
   attr_accessible :amount, :address_id, :user_id
   validates :amount , :presence => true, :numericality => true
   validates :address_id , :presence => true, :if => :booked?
-  validates :user_id , :presence => true, :unless => :open?
+  validates :user_id , :presence => true, :unless => :cart?
 
   accepts_nested_attributes_for :line_items
-
+# cart - new - booked - dispatched - deliver
+                    # - cancel 
   # [FIXME_CR] Use a more appropriate name for order states
   # While order is in cart state its status should be somthing like cart or any other more appropriate name
   # As soon as user completes order, its status should be new/pending
-  state_machine initial: :open do
+  state_machine initial: :cart do
   	event :pay do
-  		transition :open => :booked
+  		transition :cart => :booked
   	end
     event :dispatch do
       transition :booked => :dispatched
@@ -27,14 +28,15 @@ class Order < ActiveRecord::Base
     event :deliver do
       transition :dispatched => :delivered
     end
-  
-    before_transition :open => :booked do |order|
-      if  order.amount > 0 && order.amount <= order.user.wallet && order.address
+
+    before_transition :cart => :booked do |order|
+      if order.amount > 0 && order.amount <= order.user.wallet && order.address
         order.user.wallet -= order.amount
         User.credit_to_admin(order.amount)
         order.line_items.each do |li|
           li.decrement_available_quantity
         end
+        Notifier.booking(order).deliver
       else
         false
       end
@@ -46,6 +48,7 @@ class Order < ActiveRecord::Base
       order.line_items.each do |line|
         line.return_quantity_to_varient
       end
+       Notifier.cancellation(order).deliver  
     end
   end
 
@@ -67,8 +70,8 @@ class Order < ActiveRecord::Base
     cart.destroy
   end
 
-  def self.open_state
-    unless order = with_state('open').first
+  def self.cart_state
+    unless order = with_state('cart').first
       order = create
     end    
     order
@@ -89,5 +92,4 @@ class Order < ActiveRecord::Base
       order.dispatch
     end
   end 
-
 end
