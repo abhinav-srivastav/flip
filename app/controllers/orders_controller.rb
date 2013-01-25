@@ -12,10 +12,6 @@ class OrdersController < ApplicationController
     respond_to do |format|
       if @orders.save
         flash[:notice] = params[:product]+' successfully added to cart'
-      else
-        # [FIXME_CR] Message should be more appropriate.
-        # Should let user know what wrong exacly going on. e.g "Product One" is out of stock etc.
-        flash[:error] = 'invalid addition to order'
       end
       format.html { redirect_to request.referrer }
     end
