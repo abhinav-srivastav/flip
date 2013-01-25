@@ -40,14 +40,4 @@ class ApplicationController < ActionController::Base
     end
     root_path
   end
-
-  def common_update(instance, return_path, field)
-    respond_to do |format|
-      if instance.update_attributes(params[field.to_sym])
-        format.html { redirect_to return_path, flash: { success: field.capitalize+' '+instance[field]+' updated !'  } }
-      else
-        format.html { render action: "edit"}
-      end
-    end
-  end
 end
