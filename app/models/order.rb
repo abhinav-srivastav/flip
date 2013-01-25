@@ -1,6 +1,7 @@
 class Order < ActiveRecord::Base
 
   has_many :line_items, :dependent => :destroy, :autosave => true
+  has_many :transactions, :autosave => true
   belongs_to :address
   belongs_to :user, :inverse_of => :orders, :autosave => true
   
@@ -10,10 +11,6 @@ class Order < ActiveRecord::Base
   validates :user_id , :presence => true, :unless => :cart?
 
   accepts_nested_attributes_for :line_items
-# cart - new - booked - dispatched - deliver
-                    # - cancel 
-  # [FIXME_CR] Use a more appropriate name for order states
-  # While order is in cart state its status should be somthing like cart or any other more appropriate name
   # As soon as user completes order, its status should be new/pending
   state_machine initial: :cart do
   	event :pay do
@@ -31,8 +28,7 @@ class Order < ActiveRecord::Base
 
     before_transition :cart => :booked do |order|
       if order.complete?
-        order.user.wallet -= order.amount
-        User.credit_to_admin(order.amount)
+        order.debit(order.amount, order.user)
         order.line_items.each do |li|
           li.decrement_available_quantity
         end
@@ -43,8 +39,7 @@ class Order < ActiveRecord::Base
     end
 
     before_transition :booked => :cancel do |order|
-      order.user.wallet += order.amount
-      User.debit_from_admin(order.amount)
+      order.credit(order.amount, order.user)
       order.line_items.each do |line|
         line.return_quantity_to_varient
       end
@@ -61,6 +56,17 @@ class Order < ActiveRecord::Base
     end
     order.amount += 30 if order.line_items.any? 
   end
+
+  def debit(amount,user)
+    user.wallet -= amount
+    transactions.create(:transaction_type => 'debit',:amount => amount,:user_id => user_id)
+  end
+
+  def credit(amount,user)
+    user.wallet += amount
+    transactions.create(:transaction_type => 'credit',:amount => amount,:user_id => user_id)
+  end
+
 
   def add_line_item_from_order(cart_id)
     cart = Order.find(cart_id)
@@ -87,10 +93,10 @@ class Order < ActiveRecord::Base
   end
 
   def complete?
-    return true if amount > 0 && order.amount <= order.user.wallet && order.address
+    return true if amount > 0 && amount <= user.wallet && address
     false
   end
-  
+
   def self.dispatch(time)
     booked = Order.to_be_dispatched(time)
     booked.each do |order|

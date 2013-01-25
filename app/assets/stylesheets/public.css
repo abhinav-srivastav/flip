@@ -49,3 +49,10 @@ div.varients div.active  {  border-color: #EC4952;
           box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(236, 37, 82, 0.6); }
 img.small_image, div.alert { cursor: pointer; } 
 div.add_to_cart_div { margin-left: 350px; margin-top: -30px;  }
+td.shift_right { width: 150px; }
+tr.credit { background-color:  #FFDDDD }
+tr.debit { background-color: #EAFFDD }
+#inner_table { width : 90%; border-collapse: collapse;  ; }
+#inner_table td, #inner_table th { border: 1px solid; } 
+table.transaction_records tr td { vertical-align: middle;  }
+table.transaction_records tr td:first-child { padding-left: 15px;  }

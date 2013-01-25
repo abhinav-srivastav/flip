@@ -3,14 +3,14 @@ div.pull_left { margin-left: -110px; }
 table tr td:first-child { padding-left : 15px;  }
 div.product_image { display: inline-block; padding-right: 10px;}
 div.product_image a { color: #f00f0f;}
-td.shift_right { width: 150px; }
+td.shift_right { width: 190px; }
 label { display: inline-block; margin: 0 15px 0 10px; }
 div.child_category { display : none; }
 td.dropdown { width : 25%;  }
 textarea.detail_textarea {  width : 400px; height : 100px; }
-tr.cancel { background-color:  #FFB2B2 }
-tr.open { background-color: #ADE48D } 
-tr.booked { background-color : #B2D7FF; }
+tr.cancel { background-color: #FFCCCC }
+tr.cart { background-color: #CCFFCC } 
+tr.booked { background-color : #CCCCFF; }
 tr.shipped { background-color: #BBBBBB;  }
 .hidden { display : none;  }
 textarea.product_description { width: 600px; height: 250px; }

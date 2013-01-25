@@ -14,6 +14,7 @@
       <td><%= order.created_at %></td>
       <td class='shift_right'>
         <%= link_to "Details", admin_order_path(order), :class => "btn btn-small" %>
+        <%= link_to "Transactions", order_transactions_path(:order => order), :class => "btn btn-small" %>
       </td>
     </tr>
     <% end %>

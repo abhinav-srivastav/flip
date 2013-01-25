@@ -11,8 +11,7 @@ class OrdersController < ApplicationController
     @orders.add_line_item(params[:id],params[:price])    
     respond_to do |format|
       if @orders.save
-        # [FIXME_CR] Message should be more appropriate e.g. "Product one" added successfully to you cart.
-        flash[:notice] = 'Product successfully added to cart'
+        flash[:notice] = params[:product]+' successfully added to cart'
       else
         # [FIXME_CR] Message should be more appropriate.
         # Should let user know what wrong exacly going on. e.g "Product One" is out of stock etc.

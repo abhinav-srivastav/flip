@@ -1,6 +1,9 @@
 Flip::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
+  
+  match 'user/transactions' => "transactions#index"
+  match 'order/transactions' => "transactions#index"
 
   match 'admin' => "admin/categories#index"
   post '/admin/product_details/:id' => 'admin/product_details#create' 
@@ -11,17 +14,19 @@ Flip::Application.routes.draw do
       get 'create_details', :on => :member
     end
   end
-  resources :users, :products, :line_items, :addresses, :comments, :ratings
+  resources :users, :products, :line_items, :addresses, :comments, :ratings, :categories
+  namespace 'user' do
+    resources :transactions, :only => [:index]
+  end
+  namespace 'order' do
+    resources :transactions, :only => [:index]
+  end
+
   resources :orders do
     post 'add_line_item_to_order', :on => :collection
     post 'cancel_order', :on => :member
     post 'pay', :on => :member
     get 'confirm', :on => :member
-  end
-  resources :categories do
-    resources :brands do
-      get 'show_all', :on => :collection
-    end
   end
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
