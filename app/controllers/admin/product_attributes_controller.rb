@@ -29,13 +29,7 @@ class Admin::ProductAttributesController < Admin::BaseController
   end
 
   def update
-    respond_to do |format|
-      if @attribute.update_attributes(params[:product_attribute])
-        format.html { redirect_to admin_product_attributes_path, flash: { success: 'Attribute '+@attribute.attribute+' updated !'} }
-      else
-        format.html { render action: "edit"}
-      end
-    end
+    common_update(@attribute, admin_product_attributes_path, 'product_attributes')
   end
 
   def destroy

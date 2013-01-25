@@ -26,13 +26,7 @@ class Admin::ColoursController < Admin::BaseController
   end
 
   def update
-    respond_to do |format|
-      if @colour.update_attributes(params[:colour])
-      	format.html { redirect_to admin_colours_path, flash: { success: 'Colour '+@colour.colour+' updated !'} }
-      else
-      	format.html { render action: 'edit' }
-      end
-    end
+    common_update(@colour, admin_colours_path, 'colour')
   end
 
   def destroy

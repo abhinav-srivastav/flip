@@ -26,13 +26,14 @@ class Admin::BrandsController < Admin::BaseController
 	end
 	
   def update
-		respond_to do |format|
-      if @brand.update_attributes(params[:brand])
-        format.html { redirect_to admin_brands_path, flash: { success: 'Brand '+@brand.brand+' updated !'  } }
-      else
-        format.html { render action: "edit"}
-      end
-    end
+    common_update(@brand, admin_brands_path, 'brand')
+		# respond_to do |format|
+  #     if @brand.update_attributes(params[:brand])
+  #       format.html { redirect_to admin_brands_path, flash: { success: 'Brand '+@brand.brand+' updated !'  } }
+  #     else
+  #       format.html { render action: "edit"}
+  #     end
+  #   end
 	end
 
 	def destroy
@@ -41,4 +42,14 @@ class Admin::BrandsController < Admin::BaseController
       format.html { redirect_to request.referer, flash: { notice: 'Selected brand destroyed'  } }
     end
   end
+  private
+    def common_update(instance, return_path, field)
+      respond_to do |format|
+        if instance.update_attributes(params[field.to_sym])
+          format.html { redirect_to return_path, flash: { success: field.capitalize+' '+instance[field]+' updated !'  } }
+        else
+          format.html { render action: "edit"}
+        end
+      end
+    end
 end

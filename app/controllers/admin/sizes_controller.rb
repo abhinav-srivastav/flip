@@ -26,13 +26,7 @@ class Admin::SizesController < Admin::BaseController
   end
 
   def update
-    respond_to do |format|
-      if @size.update_attributes(params[:size])
-      	format.html { redirect_to admin_sizes_path, flash: { success: 'Size '+@size.size+' updated !'} }
-      else
-      	format.html { render action: 'edit' }
-      end
-    end
+    common_update(@size, admin_sizes_path, 'size')
   end
 
   def destroy
