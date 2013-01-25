@@ -12,14 +12,7 @@ class Admin::PrototypesController < Admin::BaseController
   end
 
   def create 
-    @prototype  = Prototype.new(params[:prototype])
-    respond_to do |format|
-      if @prototype.save
-        format.html {redirect_to admin_prototypes_path, flash: { success: 'New prototype '+@prototype.name+' created'}}
-      else
-        format.html {render action: 'new'}
-      end
-    end
+    common_create( admin_prototypes_path, 'prototype')
   end
 
   def edit

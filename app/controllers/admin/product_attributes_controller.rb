@@ -15,10 +15,11 @@ class Admin::ProductAttributesController < Admin::BaseController
   end
 
   def create 
+    @@return_path ||= admin_product_attributes_path    
     @attribute  = ProductAttribute.new(params[:product_attribute])
     respond_to do |format|
       if @attribute.save
-        format.html {redirect_to @@return_path, flash: { success: 'New attribute '+@attribute.attribute+' created'} }
+        format.html {redirect_to @@return_path, flash: { success: 'New attribute '+@attribute.product_attributes+' created'} }
       else
         format.html {render action: 'new'}
       end

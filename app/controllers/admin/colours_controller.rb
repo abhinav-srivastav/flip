@@ -12,14 +12,7 @@ class Admin::ColoursController < Admin::BaseController
   end
   
   def create
-    @colour = Colour.new(params[:colour])
-    respond_to do |format|
-      if @colour.save
-        format.html { redirect_to admin_colours_path, flash: { success: 'New colour '+@colour.colour+' created'}}
-      else
-        format.html { render action: new }
-      end
-    end
+    common_create(admin_colours_path, 'colour')
   end
 
   def edit

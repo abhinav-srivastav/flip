@@ -12,14 +12,7 @@ class Admin::CategoriesController < Admin::BaseController
   end
 
   def create 
-    @category  = Category.new(params[:category])
-    respond_to do |format|
-      if @category.save
-        format.html {redirect_to admin_categories_path, flash: { success: 'New category '+@category.category+' created'}  }
-      else
-        format.html {render action: 'new'}
-      end
-    end
+    common_create(admin_categories_path, 'category')
   end
 
 	def edit 

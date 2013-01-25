@@ -25,4 +25,16 @@ class Admin::BaseController < ApplicationController
       end
     end
   end
+
+  def common_create(return_path, field)
+    @instance = field.capitalize.constantize.new(params[field.to_sym])
+    respond_to do |format|
+      if @instance.save
+        format.html { redirect_to return_path, flash: { success: 'New '+field.capitalize+' '+@instance[field]+' created !'  } }
+      else
+        format.html { render action: "edit"}
+      end
+    end
+  end
+
 end

@@ -11,14 +11,7 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def create 
-    @user  = User.new(params[:user])
-    respond_to do |format|
-      if @user.save
-        format.html {redirect_to admin_users_path, flash: { success: 'New user '+@user.username+' created'}}
-      else
-        format.html {render action: 'new'}
-      end
-    end
+    common_create(admin_brands_path, 'user')
   end
 
 	def edit 

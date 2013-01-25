@@ -12,14 +12,7 @@ class Admin::SizesController < Admin::BaseController
   end
   
   def create
-    @size = Size.new(params[:size])
-    respond_to do |format|
-      if @size.save
-        format.html { redirect_to admin_sizes_path, flash: { success: 'New size '+@size.size+' created'} }
-      else
-        format.html { render action: new }
-      end
-    end
+    common_create( admin_sizes_path, 'size')
   end
 
   def edit
