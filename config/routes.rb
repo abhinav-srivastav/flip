@@ -9,7 +9,11 @@ Flip::Application.routes.draw do
   post '/admin/product_details/:id' => 'admin/product_details#create' 
   devise_for :users, :path => '', :path_names => { :sign_in => 'LogIn', :sign_out => 'LogOut' }
   namespace :admin do
-    resources :categories, :users, :products, :brands, :sessions, :orders, :images, :product_attributes, :product_details, :varients, :colours, :sizes
+    resources :categories, :users, :products, :brands, :sessions, :images, :product_attributes, :product_details, :varients, :colours, :sizes
+    resources :orders do
+      post 'dispatch_order', :on => :member
+      post 'order_delivered', :on => :member
+    end
     resources :prototypes do
       get 'create_details', :on => :member
     end

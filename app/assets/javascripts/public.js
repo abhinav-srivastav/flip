@@ -4,11 +4,11 @@ $(document).ready(function(){
 		$(this).siblings().removeClass('selected')
 		$(this).addClass('selected');
 	});
-    $(".pay").click(function(){
-    	address_id = $("div.order_address .selected").attr('id')
-    	console.log(address_id)
-    	$(this).siblings("#address").attr('value', address_id)
-    });
+
+  $(".pay").click(function(){
+   	address_id = $("div.order_address .selected").attr('id')
+   	$(this).siblings("#address").attr('value', address_id)
+  });
 
     //zoom effect 
     $(".thumb_image").addimagezoom({ 
@@ -26,9 +26,9 @@ $(document).ready(function(){
 	  });
 	});
 
-    $(".varients div:first-child").addClass('active')
+  $(".varients div:first-child").addClass('active')
 	if ($(".varients div:first-child").length) {
-      show_price();
+    show_price();
 	}
 	$(".select_varient").click(function(){
 	  $(this).addClass('active').siblings().removeClass('active')
@@ -40,12 +40,34 @@ $(document).ready(function(){
 	  $(this).siblings('#id').attr('value', varient[0])
 	  $(this).siblings('#price').attr('value', varient[1])	
 	});
-    
+  
+  $('.thumb_image_strip img:lt(3)').addClass('active');
 
+  // check if product has more than 3 images for image slider   
+  if ($('.thumb_image_strip img').length <= 3) {
+    $('.image_show').detach()
+  }
+  else {
+    $('.image_show').click(function(){
+      if ($(this).attr('id') == 'right') {
+      	if ($('.thumb_image_strip img.active').last().next().length) {
+          image_strip = $('.thumb_image_strip img.active')
+          image_strip.first().removeClass('active');
+          image_strip.last().next().addClass('active')
+        }
+      }
+      else{
+        if ($('.thumb_image_strip img.active').first().prev().length) {
+          image_strip = $('.thumb_image_strip img.active')
+          image_strip.last().removeClass('active');
+          image_strip.first().prev().addClass('active')  
+        }
+      }
+    });
+  }
 });
 
 function show_price() {
 	var_id = $('.active').attr('id').split(' ')
 	$("dd#"+var_id[0]).show().siblings('.price_label').hide()
-
 }

@@ -1,5 +1,5 @@
 class Admin::ProductDetailsController < Admin::BaseController
-  before_filter(:only => [:destroy, :edit, :update]) { @pd = ProductDetail.find(params[:id])  }
+  before_filter(:except => [:create]) { @pd = ProductDetail.find(params[:id])  }
   def destroy
   	@pd.destroy
   	respond_to do |format|

@@ -15,6 +15,5 @@ class ProductAttribute < ActiveRecord::Base
       pro_attr << pd.product_attribute
     end
     other_attr = all-pro_attr
-    other_attr
   end
 end

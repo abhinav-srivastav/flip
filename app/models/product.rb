@@ -30,11 +30,11 @@ class Product < ActiveRecord::Base
   end
 
   def total_rating
-    p = 0
-    return p if ratings.empty?
+    t_rating = 0
+    return t_rating if ratings.empty?
     ratings.each do |rate|
-      p += rate.rating 
+      t_rating += rate.rating 
     end
-    p /= ratings.count
+    t_rating /= ratings.count
   end
 end

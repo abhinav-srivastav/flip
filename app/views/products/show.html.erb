@@ -6,9 +6,13 @@
       <% unless @product.available? %>
         <p class = 'text-error'>OUT OF STOCK</p>
       <% end %>
-      <% @product.images.each do |img| %>
-        <%= image_tag(img.image.url(:small), :class => 'small_image') %>
-      <% end %>
+      <span id='left' class='image_show'>&laquo;</span>
+      <div class='thumb_image_strip'>
+        <% @product.images.each do |img| %>
+          <%= image_tag(img.image.url(:small), :class => 'small_image')  %>
+        <% end %>
+      </div>
+      <span id='right' class='image_show'>&raquo;</span>
     </dd>
   </dl>
   <dl class  = "dl-horizontal" >      

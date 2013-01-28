@@ -44,6 +44,12 @@ class Order < ActiveRecord::Base
       order.line_items.return_quantity_to_varient
       Notifier.cancellation(order).deliver  
     end
+    after_transition :booked => :dispatched do |order|
+      Notifier.dispatched(order).deliver  
+    end
+    after_transition :dispatched => :delivered do |order|
+      Notifier.delivered(order).deliver  
+    end
   end
   
   # [FIXME_CR] Time.now will return server's time.
@@ -120,6 +126,7 @@ class Order < ActiveRecord::Base
     booked = Order.to_be_dispatched(time)
     booked.each do |order|
       order.dispatch
+      Notifier.dispatched(order).deliver   
     end
   end 
 end
