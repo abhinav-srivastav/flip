@@ -53,6 +53,7 @@ class OrdersController < ApplicationController
       format.html { redirect_to request.referrer }
     end
   end
+  
   private
     def cart_has_line_items
       if @order.line_items.empty?

@@ -5,13 +5,18 @@
       <td><b>Order's by</b></td>
       <td><b>Order Status</b></td>
       <td><b>Order Created On</b></td>
-      <td class='shift_right'><b>Actions</b></td>
+      <td><b>Actions</b></td>
+      <td class='shift_right'><b>View</b></td>
     </tr>
     <% @orders.each do |order| %>
     <tr class = '<%= order.state %>'>
       <td><%= order.user.username %></td>
       <td><%= order.state %></td>
       <td><%= order.created_at %></td>
+      <td>
+        <%= link_to "Dispatch", dispatch_order_admin_order_path(order), method: :post, :class => "btn btn-small" if order.state == 'booked' %>
+        <%= link_to "Deliver", deliver_admin_order_path(order) , method: :post, :class => "btn btn-small" if order.state == 'dispatched' %>
+      </td>
       <td class='shift_right'>
         <%= link_to "Details", admin_order_path(order), :class => "btn btn-small" %>
         <%= link_to "Transactions", order_transactions_path(:order => order), :class => "btn btn-small" %>
