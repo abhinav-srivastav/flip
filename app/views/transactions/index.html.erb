@@ -1,43 +1,48 @@
 <div>
+  <% if @transactions.any? %>
     <table class = 'table transaction_records'  >
-    <tr>
-      <th>Order No.</th>
-      <th>Username</th>
-      <th>Order Details</th>
-      <th>Type</th>
-      <th class='shift_right'>Amount</td>
-    </tr>
-    <% @transactions.each do |trans| %>
-      <tr class = '<%= trans.transaction_type %>'>
-        <td><%= trans.order_id %></td>
-        <td><%= trans.user.username %></td>
-        <td>
-          <table id ='inner_table' class = 'table'>
-            <tr>
-              <th>Product</th>
-              <th>Quantity</th>
-              <th>Price/Unit</th>
-            </tr>
-            <% trans.order.line_items.each do |line|  %>
-              <tr id="<%= line.id%>">
-                <td>
-                  <%= line.varient.product.product %>
-                  <span class='muted'><%= 'Colour: '+ line.varient.colour.colour if line.varient.colour %> <%= 'Size: '+ line.varient.size.size if line.varient.size %></span>            
-                </td>
-                <td><%= line.quantity %></td>
-                <td><%= line.price %></td>                
-              </tr>
-            <%end%>
-            <tr>
-              <td></td>
-              <td><span class = 'pull-right'><b>Shipping Charges:</b></span></td>
-              <td>30.0</td>
-            </tr>
-          </table>
-        </td>
-        <td><%= trans.transaction_type %></td>
-        <td class='shift_right'><%= trans.amount %></td>
+      <tr>
+        <th>Order No.</th>
+        <th>Username</th>
+        <th>Order Details</th>
+        <th>Type</th>
+        <th class='shift_right'>Amount</td>
       </tr>
-    <% end %>
-  </table>
+      <% @transactions.each do |trans| %>
+        <tr class = '<%= trans.transaction_type %>'>
+          <td><%= trans.order_id %></td>
+          <td><%= trans.user.username %></td>
+          <td>
+            <table id ='inner_table' class = 'table'>
+              <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price/Unit</th>
+              </tr>
+              <% trans.order.line_items.each do |line|  %>
+                <tr id="<%= line.id%>">
+                  <td>
+                    <%= line.varient.product.product %>
+                    <span class='muted'><%= 'Colour: '+ line.varient.colour.colour if line.varient.colour %> <%= 'Size: '+ line.varient.size.size if line.varient.size %></span>            
+                  </td>
+                  <td><%= line.quantity %></td>
+                  <td><%= line.price %></td>                
+                </tr>
+              <%end%>
+              <tr>
+                <td></td>
+                <td><span class = 'pull-right'><b>Shipping Charges:</b></span></td>
+                <td>30.0</td>
+              </tr>
+            </table>
+          </td>
+          <td><%= trans.transaction_type %></td>
+          <td class='shift_right'><%= trans.amount %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% else %>
+    <h4 class='text-error'>Sorry, no transactions for this request.</h4>
+    <%= link_to 'Back', request.referrer, :class => 'btn btn-inverse' %>
+  <% end %>
 </div>
