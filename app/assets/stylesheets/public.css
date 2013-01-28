@@ -56,3 +56,7 @@ tr.debit { background-color: #EAFFDD }
 #inner_table td, #inner_table th { border: 1px solid; } 
 table.transaction_records tr td { vertical-align: middle;  }
 table.transaction_records tr td:first-child { padding-left: 15px;  }
+div.thumb_image_strip { display: inline-block; }
+div.thumb_image_strip img { display: none; }
+div.thumb_image_strip img.active { display: inline-block; }
+span.image_show { cursor: pointer; font-size: 33px;  }
