@@ -8,6 +8,10 @@ gem 'rails', '3.2.11'
 gem 'mysql2'
 gem 'simple_form'
 gem "friendly_id", "~> 4.0.1"
+
+# [FIXME_CR] It seems there are no recent activities in state_machine gem
+# Aasm seems more active. So, we should use Aasm https://github.com/aasm/aasm
+# There is not much difference in both
 gem 'state_machine'
 gem "country-select", "~> 1.1.1"
 gem 'cocaine', '0.3.2'

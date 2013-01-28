@@ -32,12 +32,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  # [FIXME_CR] Need to discuss
   def add_to_cart(order_id)
     orders.cart_state.add_line_item_from_order(order_id)
   end
 
   private
 
+  # [FIXME_CR] Unused method
   def self.credit_to_admin(amount)
     admin = super_user
     admin.wallet += amount
@@ -45,6 +47,7 @@ class User < ActiveRecord::Base
     return false     
   end
 
+  # [FIXME_CR] Unused method
   def self.debit_from_admin(amount)
     admin = super_user
     admin.wallet -= amount
