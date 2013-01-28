@@ -70,5 +70,4 @@ $(document).ready(function(){
 function show_price() {
 	var_id = $('.active').attr('id').split(' ')
 	$("dd#"+var_id[0]).show().siblings('.price_label').hide()
-
 }

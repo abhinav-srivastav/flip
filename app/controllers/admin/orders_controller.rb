@@ -19,7 +19,7 @@ class Admin::OrdersController < Admin::BaseController
     end
   end
   
-  def deliver
+  def order_delivered
     @order.deliver
     respond_to do |format|
       format.html { redirect_to admin_orders_path, flash: { success: 'Order delivered !'}}
