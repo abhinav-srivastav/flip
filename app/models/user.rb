@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
+  extend FriendlyId
+  friendly_id :username, use: :slugged
   devise :database_authenticatable, :registerable,
          :recoverable
   has_many :orders, :dependent => :destroy, :inverse_of => :user

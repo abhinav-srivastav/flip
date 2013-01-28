@@ -1,5 +1,5 @@
 <div>
-  <h3><u>Orders</u></h3>
+  <h3><u>Order</u></h3>
   <%= render 'order_navigation' if user_signed_in? %>
   <% if params[:state] %>
     <%= render 'order_details', :orders => @orders %>
