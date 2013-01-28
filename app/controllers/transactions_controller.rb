@@ -1,13 +1,15 @@
 class TransactionsController < ApplicationController
   before_filter :authorize_user
-  before_filter :get_order_or_user, :only => :index
   def index
-  	@transactions = @order_or_user.transactions
+  	@transactions = get_order_or_user.transactions
   end
 
   private
     def get_order_or_user
-      table = params[:order] ? 'Order' : 'User'
-      @order_or_user = table.constantize.find(params[:order] || params[:user])  
+      return Order.find(params[:order]) if params[:order]
+      if current_user.admin
+        return User.find(params[:user]) if params[:user]
+      end
+      current_user
     end
 end

@@ -1,4 +1,10 @@
 <div>
+  <div class='navbar '>
+    <ul class='nav'>
+      <li ><%= link_to 'My Transactions', user_transactions_path(:user => @user) %></li>
+      <li><%= link_to 'My Orders', orders_path %></li>
+    </ul>
+  </div><br/>
   <dl class  = "dl-horizontal" >      
     <dt>User Name:</dt>
     <dd><%= @user.username %></dd>
@@ -10,14 +16,6 @@
   <dl class  = "dl-horizontal" >      
     <dt>Email:</dt>
     <dd><%= @user.email %></dd>
-  </dl>
-  <dl class  = "dl-horizontal" >      
-    <dt><%= link_to 'My Transactions', user_transactions_path(:user => @user) %></dt>
-    <dt><%= link_to 'My Orders', orders_path %></dt>
-  </dl>
-  <dl class='dl-horizontal'>
-    <dt></dt>
-    <dd></dd>
   </dl>
   <%= link_to 'Home', :root, :class => "btn btn-warning" %>
   <%= link_to 'edit details', edit_user_path(@user), :class => "btn" %>

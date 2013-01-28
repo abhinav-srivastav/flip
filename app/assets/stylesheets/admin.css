@@ -3,7 +3,7 @@ div.pull_left { margin-left: -110px; }
 table tr td:first-child { padding-left : 15px;  }
 div.product_image { display: inline-block; padding-right: 10px;}
 div.product_image a { color: #f00f0f;}
-td.shift_right { width: 190px; }
+td.shift_right { width: 210px; }
 label { display: inline-block; margin: 0 15px 0 10px; }
 div.child_category { display : none; }
 td.dropdown { width : 25%;  }
