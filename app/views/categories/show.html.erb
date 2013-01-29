@@ -4,7 +4,7 @@
   <% if products.empty? %>
     <h3> There are no products in this category </h3>
   <% else %>
-    <div class ='product_container'>
+    <div class ='category_products'>
       <% products.each do |pro|  %>
         <div class = 'product_div' %>
           <% img = pro.images.first ? pro.images.first.image.url(:small) : 'no_image-small.jpg'  %>  

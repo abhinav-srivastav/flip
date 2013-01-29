@@ -14,7 +14,7 @@ $(document).ready(function(){
     $(".thumb_image").addimagezoom({ 
 		zoomrange: [3],
 		imagevertcenter : true,
-		magnifiersize: [900,500]
+		magnifiersize: [900,400]
 	});
 
 	$(".small_image").click(function(e){
@@ -65,6 +65,22 @@ $(document).ready(function(){
       }
     });
   }
+  // using masonry js for image alignment
+  var $container = $('div.category_products');
+  $container.imagesLoaded(function(){
+    $container.masonry({
+      itemSelector : 'div.product_div',
+      columnWidth : 180
+    }); 
+  });
+
+
+
+
+
+
+
+
 });
 
 function show_price() {

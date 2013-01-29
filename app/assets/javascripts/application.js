@@ -15,5 +15,6 @@
 //= require jquery-ui
 //= require bootstrap
 //= require multizoom
+//= require masonry.min
 //= require public
 

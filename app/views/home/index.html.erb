@@ -48,17 +48,19 @@
     <div class = 'category_header'>
       <h3>Freshly arrived:</h3>
     </div>
-    <% @product.each do |pro|%>
-      <div class = 'product_div'>
-        <% img = pro.images.first ? pro.images.first.image.url(:small) : 'no_image-small.jpg'  %>  
-        <%= link_to image_tag(img), product_path(pro) %><br/>
-        <%= pro.product %><br/>
-        <%  unless pro.available? %>
-          <b class = 'text-error'>OUT OF STOCK</b><br/>
-        <% else %>
-          Price: <%= pro.varients.first.price %>
-        <% end %>
-      </div>
-    <% end %>  
+    <div class = 'category_products'>
+      <% @product.each do |pro|%>
+        <div class = 'product_div'>
+          <% img = pro.images.first ? pro.images.first.image.url(:small) : 'no_image-small.jpg'  %>  
+          <%= link_to image_tag(img), product_path(pro) %><br/>
+          <%= pro.product %><br/>
+          <%  unless pro.available? %>
+            <b class = 'text-error'>OUT OF STOCK</b><br/>
+          <% else %>
+            Price: <%= pro.varients.first.price %>
+          <% end %>
+        </div>
+      <% end %>  
+    </div>
   </div>
 </div>

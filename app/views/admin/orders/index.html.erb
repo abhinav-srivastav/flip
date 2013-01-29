@@ -10,7 +10,7 @@
     </tr>
     <% @orders.each do |order| %>
     <tr class = '<%= order.state %>'>
-      <td><%= order.user.username %></td>
+      <td><%= order_belongs_to = order.user ? order.user.username : 'anonymous cart'   %></td>
       <td><%= order.state %></td>
       <td><%= order.created_at %></td>
       <td>

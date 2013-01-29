@@ -124,7 +124,7 @@ jQuery(document).ready(function($){
 				cursorshadeborder: '1px solid black',
 				cursorshade: false,
 				leftoffset: 15, //offsets here are used (added to) the width of the magnifyarea when
-				rightoffset: 10 //calculating space requirements and to position it visa vis any drop shadow
+				rightoffset: 5 //calculating space requirements and to position it visa vis any drop shadow
 			},
 
 		isie: (function(){/*@cc_on @*//*@if(@_jscript_version >= 5)return true;@end @*/return false;})(), //is this IE?
