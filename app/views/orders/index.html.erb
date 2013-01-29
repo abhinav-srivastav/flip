@@ -1,9 +1,5 @@
 <div>
   <h3><u>Order</u></h3>
-  <%= render 'order_navigation' if user_signed_in? %>
-  <% if params[:state] %>
-    <%= render 'order_details', :orders => @orders %>
-  <% else %>
-    <%= render 'cart', :orders => @orders %>
-    <% end %>
+  <%= render 'order_navigation' %>
+  <%= render 'order_details', :orders => @orders %>
 </div>

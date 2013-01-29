@@ -43,7 +43,7 @@
             <td><b><%= order.amount %></b></td>
           <tr>
         </table>
-        <%= link_to 'cancel order', cancel_order_order_path(order), method: :post, :class => 'btn btn-danger' if order.state == 'booked'%>
+        <%= link_to 'cancel order', cancelled_order_path(order), method: :post, :class => 'btn btn-danger' if order.state == 'booked'%>
       </div>
     <% end %>
   <% else %>

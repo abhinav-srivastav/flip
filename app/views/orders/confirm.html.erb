@@ -63,7 +63,7 @@
       <%= form_tag pay_order_path(@order) do %>
         <fieldset>
           <%= hidden_field_tag :address, params[:address] %>
-          <%= submit_tag "Pay", :class => "btn btn-small btn-success pay"%>
+          <%= submit_tag "Pay", :class => "btn btn-primary pay"%>
         </fieldset>
       <% end %>
     </dd>

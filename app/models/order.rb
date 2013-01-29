@@ -28,9 +28,7 @@ class Order < ActiveRecord::Base
 
     before_transition :cart => :booked do |order|
       if order.can_be_booked?
-        # [FIXME_CR] Here we are substructing amount from user not from the order. So it should be something like debit_user or somtehing more appropriate
-        # Please lets discuss this
-        order.debit(order.amount, order.user)
+        order.user.debit(order.amount)
         order.line_items.decrement_available_quantity
         Notifier.booking(order).deliver
       else
@@ -39,8 +37,7 @@ class Order < ActiveRecord::Base
     end
 
     before_transition :booked => :cancel do |order|
-      # [FIXME_CR] similar a debit and before_transition 
-      order.credit(order.amount, order.user)
+      order.user.credit(order.amount)
       order.line_items.return_quantity_to_varient
       Notifier.cancellation(order).deliver  
     end
@@ -56,60 +53,22 @@ class Order < ActiveRecord::Base
   # Please use Time.current (Time.zone.now)
   # scope :to_be_dispatched, lambda { where('updated_at < ? and state = ?', Time.now-2.hours, :booked) }
 
-  # [FIXME_CR] Lets use a cleaner approach here. Please extract code under before_save into a private method. 
-  # and use before_save :newly_created_private_method (e.g calculate_total_amount).
-  # 
-  before_save :update_order_amount
-  before_save do |order|
-    order.amount = 0
-    # [FIXME_CR] item.price * item.quantity belongs to line_item. So, we should move this to line_item
-    # Also, this can be written as somthing like line_items.collect(&:total).sum
-    order.line_items.each do |item|
-      order.amount += item.price * item.quantity
-    end
 
-    # [FIXME_CR] Not sure why we are adding this to an order. shipping or processing changes?
-    order.amount += 30 if order.line_items.any? 
-  end
+  before_save :update_order_amount, :add_overhead_charges
 
-  def debit(amount,user)
-    # [FIXME_CR] Below mentioned two lines will be nedded all the time if we are creating a debit transaction.
-    # if we move user.wallet -= amount to before/after create callback then this is not needed.
-    # Lets also include a reason for the transaction ("Bought Order#XXXXXXXXXX")
-    user.wallet -= amount
-    transactions.create(:transaction_type => 'debit',:amount => amount,:user_id => user_id)
-  end
-
-  def credit(amount,user)
-    # [FIXME_CR] Similar to debit.
-    user.wallet += amount
-    transactions.create(:transaction_type => 'credit',:amount => amount,:user_id => user_id)
-  end
-
-
-  # [FIXME_CR] Need to discuss why we have defined this and add_line_item.
-  #  
-  def add_line_item_from_order(cart_id)
-    cart = Order.find(cart_id)
-    cart.line_items.each do |li|
+  def merge_line_item_from_order(anonymous_cart)
+    anonymous_cart.line_items.each do |li|
       add_line_item(li.varient_id, li.price, li.quantity)
     end 
-    cart.destroy
+    anonymous_cart.destroy
   end
 
-  def self.cart_state
-    unless order = with_state('cart').first
-      order = create
-    end    
-    order
-  end
-
-  def add_line_item(varient_id, varient_price, order_quantity = 1)
+  def add_line_item(varient_id, varient_price, varient_quantity = 1)
     if li = line_items.find_by_varient_id(varient_id) 
-      li.quantity += order_quantity
+      li.quantity += varient_quantity
       li.save
     else
-      line_items.create(:varient_id => varient_id, :price => varient_price, :quantity => order_quantity)
+      line_items.create(:varient_id => varient_id, :price => varient_price, :quantity => varient_quantity)
     end
   end
 
@@ -118,7 +77,13 @@ class Order < ActiveRecord::Base
   end
   private
     def update_order_amount
+      self.amount = self.line_items.sum('price * quantity').to_i
     end
+
+    def add_overhead_charges
+      self.amount += SHIPPING_CHARGES if self.line_items.any?
+    end
+
 
   # def self.dispatch(time)
   #   booked = Order.to_be_dispatched(time)

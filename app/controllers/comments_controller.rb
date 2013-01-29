@@ -1,7 +1,6 @@
 class CommentsController < ApplicationController
 
   before_filter :authorize_user
-  before_filter :validate_user_before_delete, :only => :destroy
 
   def new
     @comment = Comment.new(:product_id => params[:product_id])
@@ -18,18 +17,14 @@ class CommentsController < ApplicationController
     end
   end
 
-  def destroy
-    @comment.destroy    
+  def destroy    
     respond_to do |format|
-      format.html { redirect_to request.referrer, :notice => 'Comment removed'  } 
+      if @comment.destroy
+        flash[:notice] = 'Comment removed'
+      else
+        flash[:error] = 'Not allowed to remove this comment'
+      end
+      format.html { redirect_to request.referrer } 
     end
   end
-  
-  private
-    def validate_user_before_delete
-      @comment = Comment.find(params[:id])
-      unless (@comment.user_id == current_user.id) || current_user.admin
-        redirect_to request.referrer, :notice => 'Not authorized to remove this comment'  
-      end
-    end
 end

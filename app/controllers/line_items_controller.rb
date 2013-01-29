@@ -16,7 +16,7 @@ class LineItemsController < ApplicationController
       flash[:error] = 'Quantity asked for product '+@line_item.varient.product.product+' is not available'
     end
     respond_to do |format|
-       format.html { redirect_to orders_path }
+       format.html { redirect_to cart_orders_path }
     end
   end
 end

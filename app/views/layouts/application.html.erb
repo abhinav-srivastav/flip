@@ -14,9 +14,9 @@
           <div class="nav-collapse collapse">
             <div class="navbar-text pull-right">
               <% if user_signed_in? %>
-                <%= link_to 'View My Trolley', orders_path %> | Hi,<%= link_to current_user.username, user_path(current_user) %> ! | <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
+                <%= link_to 'View My Trolley('+current_cart.line_items.count.to_s+')', cart_orders_path %> | Hi,<%= link_to current_user.username, user_path(current_user) %> ! | <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
               <% else %>
-                <%= link_to 'Trolley', orders_path %> | <%= link_to 'Sign Up', new_user_registration_path %> | <%= link_to 'Log in', new_user_session_path%>
+                <%= link_to 'Trolley('+current_cart.line_items.count.to_s+')', cart_orders_path %> | <%= link_to 'Sign Up', new_user_registration_path %> | <%= link_to 'Log in', new_user_session_path%>
               <% end %>
             </div>
             <% if current_user && current_user.admin %> 

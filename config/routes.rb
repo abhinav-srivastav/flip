@@ -27,8 +27,9 @@ Flip::Application.routes.draw do
   end
 
   resources :orders do
-    post 'add_line_item_to_order', :on => :collection
-    post 'cancel_order', :on => :member
+    get 'cart', :on => :collection
+    post 'add_line_item', :on => :collection
+    post 'cancelled', :on => :member
     post 'pay', :on => :member
     get 'confirm', :on => :member
   end
