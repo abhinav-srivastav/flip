@@ -25,8 +25,7 @@ class Admin::ProductDetailsController < Admin::BaseController
   def update
   	respond_to do |format|
   	  if @pd.update_attributes(params[:product_detail])
-        flash[:success] = 'Attribute updated !'
-  	  	format.html { redirect_to edit_admin_product_path(@pd.product) }
+  	  	format.html { redirect_to edit_admin_product_path(@pd.product), flash: { success: 'Attribute Updated !' } }
   	  else
   	  	format.html { render action: 'edit' } 
   	  end

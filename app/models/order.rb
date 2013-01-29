@@ -27,7 +27,7 @@ class Order < ActiveRecord::Base
     end
 
     before_transition :cart => :booked do |order|
-      if order.complete?
+      if order.can_be_booked?
         # [FIXME_CR] Here we are substructing amount from user not from the order. So it should be something like debit_user or somtehing more appropriate
         # Please lets discuss this
         order.debit(order.amount, order.user)
@@ -54,11 +54,12 @@ class Order < ActiveRecord::Base
   
   # [FIXME_CR] Time.now will return server's time.
   # Please use Time.current (Time.zone.now)
-  scope :to_be_dispatched, lambda { where('updated_at < ? and state = ?', Time.now-2.hours, :booked) }
+  # scope :to_be_dispatched, lambda { where('updated_at < ? and state = ?', Time.now-2.hours, :booked) }
 
   # [FIXME_CR] Lets use a cleaner approach here. Please extract code under before_save into a private method. 
   # and use before_save :newly_created_private_method (e.g calculate_total_amount).
   # 
+  before_save :update_order_amount
   before_save do |order|
     order.amount = 0
     # [FIXME_CR] item.price * item.quantity belongs to line_item. So, we should move this to line_item
@@ -112,21 +113,18 @@ class Order < ActiveRecord::Base
     end
   end
 
-  def complete?
-    # [FIXME_CR] The below mentioned line will return either true or false. So there is no need to add if.
-    # Only amount > 0 && amount <= user.wallet && address will work
-    # And here we are checking if an order can be completed or not. Not the order is complete or not
-    # So, we should rebname this method to an appropriate name ()
-    return true if amount > 0 && amount <= user.wallet && address
-    false
+  def can_be_booked?
+    amount > 0 && amount <= user.wallet && address
   end
-
-  # # [FIXME_CR] unused metghod
-  def self.dispatch(time)
-    booked = Order.to_be_dispatched(time)
-    booked.each do |order|
-      order.dispatch
-      Notifier.dispatched(order).deliver   
+  private
+    def update_order_amount
     end
-  end 
+
+  # def self.dispatch(time)
+  #   booked = Order.to_be_dispatched(time)
+  #   booked.each do |order|
+  #     order.dispatch
+  #     Notifier.dispatched(order).deliver   
+  #   end
+  # end 
 end

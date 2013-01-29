@@ -13,7 +13,6 @@ class Product < ActiveRecord::Base
   attr_accessible :product, :category_ids, :brand_id, :images_attributes, :varients_attributes,
                   :product_attributes_attributes, :description, :prototype_ids
   accepts_nested_attributes_for :product_attributes
-  accepts_nested_attributes_for :categories
   accepts_nested_attributes_for :images, :allow_destroy => true
   accepts_nested_attributes_for :varients, :allow_destroy => true
   

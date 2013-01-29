@@ -22,6 +22,4 @@ class Prototype < ActiveRecord::Base
       product.add_details(product_attr.id)
     end
   end
-
-
 end

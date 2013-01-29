@@ -36,7 +36,7 @@ $(document).ready(function(){
 	});
 
 	$(".add_to_cart").click(function(){
-	  varient = ($('.active').attr('id')).split(' ')
+	  varient = ($('div.active').attr('id')).split(' ')
 	  $(this).siblings('#id').attr('value', varient[0])
 	  $(this).siblings('#price').attr('value', varient[1])	
 	});
