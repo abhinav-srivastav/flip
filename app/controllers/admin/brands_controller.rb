@@ -25,7 +25,7 @@ class Admin::BrandsController < Admin::BaseController
 	def destroy
     @brand.destroy
     respond_to do |format|
-      format.html { redirect_to request.referer, flash: { notice: 'Selected brand destroyed'  } }
+      format.html { redirect_back_or_other_path(request.referrer, admin_brands_path,{notice: 'Selected brand destroyed'}) }
     end
   end   
 end

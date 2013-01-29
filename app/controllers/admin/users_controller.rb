@@ -30,7 +30,7 @@ class Admin::UsersController < Admin::BaseController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to request.referrer, :notice => 'Selected user deleted' }
+      format.html { redirect_back_or_other_path(request.referrer, orders_path,{notice: 'selected user deleted'}) }
     end
   end
 end

@@ -36,7 +36,7 @@ class Admin::ProductAttributesController < Admin::BaseController
   def destroy
   	@attribute.destroy
   	respond_to do |format|
-  	  format.html { redirect_to request.referrer, notice: 'Attribute deleted successfully.'}
+  	  format.html { redirect_back_or_other_path(request.referrer, admin_product_attributes_path,{notice: 'Attribute deleted successfully.'} ) }
   	end
   end
 end

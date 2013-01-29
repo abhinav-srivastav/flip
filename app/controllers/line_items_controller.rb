@@ -4,7 +4,7 @@ class LineItemsController < ApplicationController
   def destroy
     @line_item.destroy 
     respond_to do |format|
-      format.html { redirect_to request.referrer, notice: 'Removed line item !' }
+      format.html { redirect_back_or_other_path(request.referrer, orders_path, {notice: 'Removed line item !'}) }
     end
   end
   

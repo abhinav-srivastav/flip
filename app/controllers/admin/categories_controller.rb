@@ -26,7 +26,7 @@ class Admin::CategoriesController < Admin::BaseController
   def destroy
     @category.destroy
     respond_to do |format|
-      format.html { redirect_to request.referer, flash: { notice: 'Selected category deleted'} }
+      format.html { redirect_back_or_other_path(request.referrer, admin_categories_path,{notice: 'Selected category destroyed'})
     end
   end
 end

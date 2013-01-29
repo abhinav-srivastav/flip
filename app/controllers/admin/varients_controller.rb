@@ -30,7 +30,7 @@ class Admin::VarientsController < Admin::BaseController
   def destroy
     @varient.destroy
     respond_to do |format|
-      format.html { redirect_to request.referrer, :notice => 'Selected varient deleted' } 
+      format.html { redirect_back_or_other_path(request.referrer, admin_products_path,{notice: 'Selected varient deleted'}) } 
     end
   end
 end

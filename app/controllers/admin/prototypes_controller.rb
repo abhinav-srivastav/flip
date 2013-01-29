@@ -32,14 +32,14 @@ class Admin::PrototypesController < Admin::BaseController
   def destroy
     @prototype.destroy
     respond_to do |format|
-      format.html { redirect_to request.referrer, :notice => 'Prototype deleted' }
+      format.html { redirect_back_or_other_path(request.referrer, orders_path,{notice: 'Prototype deleted'}) }
     end
   end
 
   def create_details
     @prototype.add_attributes_to_product(params[:product_id])
     respond_to do |format|
-      format.html { redirect_to request.referrer, flash: { success: 'Attributes updated for '+@prototype.name } }
+      format.html { redirect_back_or_other_path(request.referrer, admin_products_path,{success: 'Attributes updated for '+@prototype.name }) }
     end
   end
 end
