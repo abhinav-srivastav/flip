@@ -20,7 +20,7 @@ class AddressesController < ApplicationController
     @address = Address.find(params[:id])
     @address.destroy
     respond_to do |format|
-      format.html { redirect_to request.referrer, :notice => 'Address deleted !'  }
+      format.html { redirect_back_or_other_path(request.referrer,cart_orders_path,{:notice => 'Address deleted !'} ) }
     end 
   end
 

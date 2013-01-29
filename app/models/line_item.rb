@@ -24,14 +24,14 @@ class LineItem < ActiveRecord::Base
 
   def self.decrement_available_quantity
     all.each do |li|
-      li.varient.available -= quantity
+      li.varient.available -= li.quantity
       li.varient.save
     end
   end
 
   def return_quantity_to_varient
     all.each do |li|
-      li.varient.available += quantity
+      li.varient.available += li.quantity
       li.varient.save
     end
   end

@@ -4,12 +4,9 @@ class Comment < ActiveRecord::Base
   attr_accessible :comment, :product_id, :user_id
   validates_presence_of :comment, :product_id, :user_id
 
-  before_destroy :user_authenticated_to_destroy?
+  before_destroy :user_authorized_to_destroy?
 
   private
-    def user_authenticated_to_destroy?
-      return true if current_user.admin
-      return true if self.user_id == current_user.id
-      false
+    def user_authorized_to_destroy?
     end
 end

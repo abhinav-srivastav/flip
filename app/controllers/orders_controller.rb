@@ -23,21 +23,10 @@ class OrdersController < ApplicationController
     end
   end
 
-  def update
-    # [FIXME_CR] Here we should check if order update is successfull or not
-    # And action should be taken accordingly
-    @order.update_attributes(params[:order])  
-    respond_to do |format|
-      format.html { redirect_back_or_other_path(request.referrer, orders_path) }
-    end
-  end
-
   def confirm
   end
 
   def pay
-    # [FIXME_CR] Here we are assigning params[:address] to order. Please lets make sure address passed in params[:address] exists
-    #
     @order.address_id = params[:address]
     respond_to do |format|
       if @order.pay
@@ -69,9 +58,5 @@ class OrdersController < ApplicationController
       if @order.line_items.empty?
         redirect_to request.referrer, :flash => { error: 'Order should have atleast 1 product !' }
       end
-    end
-
-    def redirect_back_or_other_path(path,optional_path)
-      redirect_to ( path || optional_path)
     end
 end

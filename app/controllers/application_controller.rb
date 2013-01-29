@@ -36,4 +36,8 @@ class ApplicationController < ActionController::Base
     session[:order_id] = nil
     session[:previous_url] || root_path
   end
+
+  def redirect_back_or_other_path(path,optional_path, message={})
+    redirect_to ( path || optional_path), flash: message
+  end
 end

@@ -17,14 +17,15 @@ class CommentsController < ApplicationController
     end
   end
 
-  def destroy    
+  def destroy  
+    @comment = Comment.where('id=?',params[:id]).first
     respond_to do |format|
       if @comment.destroy
         flash[:notice] = 'Comment removed'
       else
         flash[:error] = 'Not allowed to remove this comment'
       end
-      format.html { redirect_to request.referrer } 
+      format.html { redirect_back_or_other_path(request.referrer, root_path) } 
     end
   end
 end

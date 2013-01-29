@@ -48,9 +48,7 @@ class Order < ActiveRecord::Base
       Notifier.delivered(order).deliver  
     end
   end
-  
-  # [FIXME_CR] Time.now will return server's time.
-  # Please use Time.current (Time.zone.now)
+  # scope required if auto-dispatching of booked orders done  
   # scope :to_be_dispatched, lambda { where('updated_at < ? and state = ?', Time.now-2.hours, :booked) }
 
 
@@ -84,12 +82,11 @@ class Order < ActiveRecord::Base
       self.amount += SHIPPING_CHARGES if self.line_items.any?
     end
 
-
+  # method for auto-dispatching of booked order through runner task in config/scheduler.rb
   # def self.dispatch(time)
   #   booked = Order.to_be_dispatched(time)
   #   booked.each do |order|
   #     order.dispatch
-  #     Notifier.dispatched(order).deliver   
   #   end
   # end 
 end
