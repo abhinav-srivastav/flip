@@ -25,12 +25,4 @@ class Admin::OrdersController < Admin::BaseController
       format.html { redirect_to admin_orders_path, flash: { success: 'Order delivered !'}}
     end
   end
-
-
-	def destroy
-    @order.destroy
-    respond_to do |format|
-      format.html { redirect_to request.referer, notice: 'Deleted successfully'}
-    end
-  end
 end

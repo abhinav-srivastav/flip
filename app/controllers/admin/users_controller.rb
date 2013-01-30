@@ -28,9 +28,6 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def destroy
-    @user.destroy
-    respond_to do |format|
-      format.html { redirect_back_or_other_path(request.referrer, orders_path,{notice: 'selected user deleted'}) }
-    end
+    common_destroy(@user, request.referrer, admin_users_path, {notice: 'selected user deleted'})
   end
 end

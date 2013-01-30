@@ -46,9 +46,6 @@ class Admin::ProductsController < Admin::BaseController
   end
 
   def destroy
-    @product.destroy
-    respond_to do |format|
-      format.html { redirect_back_or_other_path(request.referrer, admin_products_path,{notice: 'Selected product deleted '} ) }
-    end
+    common_destroy(@product, request.referrer, admin_products_path, {notice: 'selected product deleted'})
   end
 end

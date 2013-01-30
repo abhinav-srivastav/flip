@@ -30,10 +30,7 @@ class Admin::PrototypesController < Admin::BaseController
   end
 
   def destroy
-    @prototype.destroy
-    respond_to do |format|
-      format.html { redirect_back_or_other_path(request.referrer, orders_path,{notice: 'Prototype deleted'}) }
-    end
+    common_destroy(@prototype, request.referrer, admin_prototypes_path, {notice: 'Prototype deleted'})
   end
 
   def create_details

@@ -37,4 +37,12 @@ class Admin::BaseController < ApplicationController
     end
   end
 
+  def common_destroy(instance, return_path, optional_path, msg ={})
+    instance.destroy
+    respond_to do |format|
+      format.html { redirect_back_or_other_path(return_path, optional_path, msg )  } 
+    end
+  end
+
+
 end

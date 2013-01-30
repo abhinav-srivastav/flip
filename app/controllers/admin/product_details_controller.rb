@@ -1,10 +1,7 @@
 class Admin::ProductDetailsController < Admin::BaseController
   before_filter(:except => [:create]) { @pd = ProductDetail.find(params[:id])  }
   def destroy
-  	@pd.destroy
-  	respond_to do |format|
-      format.html { redirect_back_or_other_path(request.referrer, admin_product_details_path,{notice: 'Attribute successfully removed'} ) }
-  	end
+    common_destroy(@pd, request.referrer, admin_product_details_path, {notice: 'Attribute details successfully removed'})
   end
   
   def create

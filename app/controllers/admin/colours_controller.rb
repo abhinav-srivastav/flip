@@ -23,9 +23,6 @@ class Admin::ColoursController < Admin::BaseController
   end
 
   def destroy
-    @colour.destroy
-    respond_to do |format|
-      format.html { redirect_back_or_other_path(request.referrer, admin_colours_path,{notice: 'Colour deleted'}) } 
-    end
+    common_destroy(@colour, request.referrer, admin_colours_path, {notice: 'colour deleted'})
   end
 end

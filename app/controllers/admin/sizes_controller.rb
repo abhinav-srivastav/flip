@@ -23,9 +23,6 @@ class Admin::SizesController < Admin::BaseController
   end
 
   def destroy
-    @size.destroy
-    respond_to do |format|
-      format.html { redirect_back_or_other_path(request.referrer, admin_sizes_path,{notice: 'Selected Size deleted'}) }
-    end
+    common_destroy(@size, request.referrer, admin_sizes_path, {notice: 'selected size deleted'})
   end
 end
