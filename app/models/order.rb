@@ -27,7 +27,7 @@ class Order < ActiveRecord::Base
 
     before_transition :cart => :booked do |order|
       if order.can_be_booked?
-        order.user.debit(order.amount)
+        order.user.debit(order.amount, order.id)
         order.line_items.decrement_available_quantity
         Notifier.booking(order).deliver
       else
@@ -36,7 +36,7 @@ class Order < ActiveRecord::Base
     end
 
     before_transition :booked => :cancel do |order|
-      order.user.credit(order.amount)
+      order.user.credit(order.amount, order.id)
       order.line_items.return_quantity_to_varient
       Notifier.cancellation(order).deliver  
     end
@@ -70,7 +70,7 @@ class Order < ActiveRecord::Base
   end
 
   def can_be_booked?
-    amount > 0 && amount <= user.wallet && address
+    self.amount > 0 && self.amount <= self.user.wallet && self.address
   end
   private
     def update_order_amount

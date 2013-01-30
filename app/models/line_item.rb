@@ -29,7 +29,7 @@ class LineItem < ActiveRecord::Base
     end
   end
 
-  def return_quantity_to_varient
+  def self.return_quantity_to_varient
     all.each do |li|
       li.varient.available += li.quantity
       li.varient.save

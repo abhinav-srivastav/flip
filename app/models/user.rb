@@ -45,11 +45,11 @@ class User < ActiveRecord::Base
     supers.first
   end
 
-  def debit(amount)
-    transactions.create(:transaction_type => 'debit',:amount => amount)
+  def debit(amount, order_id)
+    transactions.create(:transaction_type => 'debit',:amount => amount, :order_id => order_id )
   end
 
-  def credit(amount)
-    transactions.create(:transaction_type => 'credit',:amount => amount)
+  def credit(amount, order_id)
+    transactions.create(:transaction_type => 'credit',:amount => amount, :order_id => order_id)
   end
 end

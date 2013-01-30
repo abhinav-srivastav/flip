@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130130052415) do
+ActiveRecord::Schema.define(:version => 20130130095904) do
 
   create_table "addresses", :force => true do |t|
     t.string   "street_no"
@@ -156,6 +156,7 @@ ActiveRecord::Schema.define(:version => 20130130052415) do
     t.decimal  "amount",           :precision => 10, :scale => 2
     t.datetime "created_at",                                      :null => false
     t.datetime "updated_at",                                      :null => false
+    t.string   "transaction_id"
   end
 
   create_table "users", :force => true do |t|
