@@ -1,10 +1,9 @@
 html, body { height: 100%;}
 body div.container-fluid { padding: 0px 150px; }
-/*div.main_body { overflow: auto;  min-height: 100%; height :auto !important; height : 100%;margin: 45px auto -60px; }*/
-div.main_body div { margin-top: 5px; }
-div.footer { height: 50px; background-color: #111111;  }
+div.main_body { overflow: auto;  min-height: 80%;  }
+div.main_body div { margin-top: 5px;}
+div.footer { height: 50px; background-color: #111111; margin-top: 10px; }
 div.footer div.footer_content { padding-top: 5px;    }
-
 .nav-collapse ul.nav { padding-top: 10px; }
 ul { list-style-type: none;}
 table.table tr td div .change_quantity { font-size: smaller; }
