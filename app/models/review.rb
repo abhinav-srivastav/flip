@@ -1,8 +1,8 @@
-class Comment < ActiveRecord::Base
+class Review < ActiveRecord::Base
   belongs_to :product
   belongs_to :user
-  attr_accessible :comment, :product_id, :user_id
-  validates_presence_of :comment, :product_id, :user_id
+  attr_accessible :review, :product_id, :user_id
+  validates_presence_of :review, :product_id, :user_id
 
   before_destroy :user_authorized_to_destroy?
 

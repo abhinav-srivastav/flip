@@ -11,7 +11,6 @@ class Order < ActiveRecord::Base
   validates :user_id , :presence => true, :unless => :cart?
 
   accepts_nested_attributes_for :line_items
-  # As soon as user completes order, its status should be new/pending
   state_machine initial: :cart do
   	event :pay do
   		transition :cart => :booked

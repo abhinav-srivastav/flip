@@ -7,7 +7,7 @@ class Product < ActiveRecord::Base
   has_many :product_details, :dependent => :destroy
   has_many :product_attributes, :through => :product_details
   has_many :ratings, :dependent => :destroy
-  has_many :comments, :dependent => :destroy
+  has_many :reviews, :dependent => :destroy
   has_many :varients, :dependent => :destroy
   belongs_to :brand 
   attr_accessible :product, :category_ids, :brand_id, :images_attributes, :varients_attributes,

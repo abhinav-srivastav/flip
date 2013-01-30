@@ -21,15 +21,15 @@ div.new_address_form { margin: 10px; padding : 10px; border: 2px dotted   ; disp
 div.odd_color div { padding:10px 0 10px 5px; }
 div.odd_color div:nth-child(odd) { background-color: #f0f0f0; }
 div.pull_left { margin-left: -110px; }
-div.comment_box { border : 1px solid; margin-bottom: 5px;}
-div.comment_user, div.comment_text { display: table-cell; padding-left: 5px; }
-div.comment_user { width: 200px;}
-div.comment_text { width: 840px; border-left: 1px solid; vertical-align: top; }
-div.comment_text a { display: none; }
-div.comment_box:hover div.comment_text a { display : inline;  }
-textarea.comment_textarea { width: 400px; height: 150px; }
+div.review_box { border : 1px solid; margin-bottom: 5px;}
+div.review_user, div.review_text { display: table-cell; padding-left: 5px; }
+div.review_user { width: 200px;}
+div.review_text { width: 840px; border-left: 1px solid; vertical-align: top; }
+div.review_text a { display: none; }
+div.review_box:hover div.review_text a { display : inline;  }
+textarea.review_textarea { width: 400px; height: 150px; }
 textarea.product_description { width: 600px; height: 250px; }
-.comment_delete { float: right; }
+.review_delete { float: right; }
 
 div.left_div, div.product_div { display : inline-block;  }
 div.product_div { margin : 10px; width : 150px; }

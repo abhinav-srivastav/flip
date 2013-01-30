@@ -76,8 +76,8 @@
       <div class = 'rate' >
         <%= link_to 'Rate this product', new_rating_path(:product_id => @product.id) ,:remote => true, :class => 'btn btn-warning' %>
       </div><br/>
-      <div class = 'comment'>
-        <%= link_to 'Comment', new_comment_path(:product_id => @product.id) , :remote => :true, :class => 'btn btn-success' %><br/><br/>
+      <div class = 'review'>
+        <%= link_to 'Review', new_review_path(:product_id => @product.id) , :remote => :true, :class => 'btn btn-success' %><br/><br/>
       </div>
     </dd>
   </dl>
@@ -99,16 +99,16 @@
       </dd>
     </dl>
   <% end %>
-  <% unless @product.comments.empty? %>
+  <% unless @product.reviews.empty? %>
     <dl class = 'dl-horizontal'>
       <dd>  
-        <div><h4>Comments:</h4></div>
-        <% @product.comments.each do |comment| %>
-          <div class = 'comment_box'>
-            <div class = 'comment_user'><b><%= comment.user.username %></b><br/>On <%= comment.updated_at.to_date %></div>
-            <div class = 'comment_text'>
-              <%= link_to (image_tag('delete.png')), comment_path(comment), :method => :delete, :data => { :confirm => 'Delete this comment ?' }, :class=> 'comment_delete' if user_authorized_to_delete?(comment) %>
-              <%= comment.comment %>
+        <div><h4>Reviews:</h4></div>
+        <% @product.reviews.each do |review| %>
+          <div class = 'review_box'>
+            <div class = 'review_user'><b><%= review.user.username %></b><br/>On <%= review.updated_at.to_date %></div>
+            <div class = 'review_text'>
+              <%= link_to (image_tag('delete.png')), review_path(review), :method => :delete, :data => { :confirm => 'Delete this review ?' }, :class=> 'review_delete' if user_authorized_to_delete?(review) %>
+              <%= review.review %>
             </div>
           </div>
         <% end %>

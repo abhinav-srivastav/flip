@@ -12,14 +12,14 @@ class Admin::OrdersController < Admin::BaseController
   end
   
 
-  def dispatch_order
+  def dispatch
     @order.dispatch
     respond_to do |format|
       format.html { redirect_to admin_orders_path, flash: { success: 'Order dispatched !'}}
     end
   end
   
-  def order_delivered
+  def delivered
     @order.deliver
     respond_to do |format|
       format.html { redirect_to admin_orders_path, flash: { success: 'Order delivered !'}}
