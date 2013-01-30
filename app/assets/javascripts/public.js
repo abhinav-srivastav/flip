@@ -49,6 +49,7 @@ $(document).ready(function(){
   }
   else {
     $('.image_show').click(function(){
+      console.log(this)
       if ($(this).attr('id') == 'right') {
       	if ($('.thumb_image_strip img.active').last().next().length) {
           image_strip = $('.thumb_image_strip img.active')
