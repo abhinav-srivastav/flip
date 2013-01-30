@@ -74,17 +74,9 @@ $(document).ready(function(){
       columnWidth : 180
     }); 
   });
-
-
-
-
-
-
-
-
 });
 
 function show_price() {
-	var_id = $('.active').attr('id').split(' ')
-	$("dd#"+var_id[0]).show().siblings('.price_label').hide()
+	var_id = $('div.active').attr('id').split(' ')
+	$("div#"+var_id[0]).show().siblings('.price_label').hide()
 }

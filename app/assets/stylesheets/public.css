@@ -1,7 +1,8 @@
 html, body { height: 100%;}
 body div.container-fluid { padding: 0px 150px; }
 /*div.main_body { overflow: auto;  min-height: 100%; height :auto !important; height : 100%;margin: 45px auto -60px; }*/
-div.footer { height: 50px; background-color: #111111  }
+div.main_body div { margin-top: 5px; }
+div.footer { height: 50px; background-color: #111111;  }
 div.footer div.footer_content { padding-top: 5px;    }
 
 .nav-collapse ul.nav { padding-top: 10px; }
@@ -24,16 +25,21 @@ div.pull_left { margin-left: -110px; }
 div.top_row {  }
 div.other_product_details { position: relative; display: table-row;}
 div.other_product_details div {margin-top: 15px;}
-
+div.price_label { display: inline-block; }
 div.rate_and_comment div{  }
-div.review_box { border : 1px solid; margin-bottom: 5px;}
+div.review_box { border-bottom : 1px dotted; margin-bottom: 5px;}
 div.review_user, div.review_text { display: table-cell; padding-left: 5px; }
 div.review_user { width: 200px;}
-div.review_text { width: 840px; border-left: 1px solid; vertical-align: top; }
+div.review_text { width: 840px; vertical-align: top; }
 div.review_text a { display: none; }
 div.review_box:hover div.review_text a { display : inline;  }
 textarea.review_textarea { width: 400px; height: 150px; }
+div.description div { display: table-row; border:1px solid;  }
 textarea.product_description { width: 600px; height: 250px; }
+table.product_description_table { border-collapse: collapse; width: 100%; }
+table.product_description_table tr:first-child { background-color: #dddddd; }
+table.product_description_table tr td { border-left: 1px solid #dddddd; border-right: 1px solid #dddddd; background-color: #eeeeee; }
+table.product_description_table tr:last-child td { border-bottom: 1px solid #dddddd; }
 .review_delete { float: right; }
 div.left_div, div.product_div { display : inline-block;  }
 div.product_div { margin : 10px; width : 150px; }

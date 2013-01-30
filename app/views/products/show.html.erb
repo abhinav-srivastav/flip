@@ -1,12 +1,9 @@
-<div class='top_row span11'>
+<div class='top_row span12'>
   <div class='span7'>
     <div>
       <%= image_tag(@product.images.first.image.url(:thumb), :class => 'thumb_image') if @product.images.any?  %><br/>
     </div>
     <div>
-      <% unless @product.available? %>
-        <p class = 'text-error'>OUT OF STOCK</p>
-      <% end %>
       <span id='left' class='image_show'>&laquo;</span>
       <div class='thumb_image_strip'>
         <% @product.images.each do |img| %>
@@ -26,37 +23,40 @@
         <p> Your rated this product <%= user_rating.rating %></p>
       <% end %>
     </div>
-    <div class = 'varients'>
-      <% @varients.each do |varient| %>
-        <% if varient.available > 0  %>
-          <div class='select_varient' id='<%= varient.id %> <%= varient.price %>' >
-            <%= "Colour:"+varient.colour.colour if varient.colour %> <%= 'Size:'+varient.size.size if varient.size %>
-          </div>            
-        <% end %>
-      <% end %>
-      <br/><br/>
-    </div>
-    <div class  = "text-error" >      
-      Price:
-      <% @varients.each do |varient|  %>
-        <div id = '<%= varient.id %>' class='price_label'>
-          <strike><h4><%= varient.mrp if varient.mrp %></strike><%= varient.price %></h4>
-        </div>
-      <% end %>
-      <div class='add_to_cart_div'>
-        <% if @varients.any?  %>
-          <%= spinner_tag %>
-          <%= form_tag add_line_item_orders_path do %>
-            <fieldset>
-              <%= hidden_field_tag :id, params[:id], :value => '1' %>
-              <%= hidden_field_tag :price, params[:price], :value => '22' %>
-              <%= hidden_field_tag :product, params[:product], :value => @product.product %>
-              <%= submit_tag "Grab in Trolley", :class => "btn btn-primary add_to_cart"%>
-            </fieldset>
-          <% end %>
+    <% if @product.available? %>
+      <div class = 'varients'>
+        <% @varients.each do |varient| %>
+          <% if varient.available > 0  %>
+            <div class='select_varient' id='<%= varient.id %> <%= varient.price %>' >
+              <%= "Colour:"+varient.colour.colour if varient.colour %> <%= 'Size:'+varient.size.size if varient.size %>
+            </div>
+          <% end %>              
         <% end %>
       </div>
-    </div>  
+      <div class  = "text-error" >      
+        <h4><span>Price:</span>
+        <% @varients.each do |varient|  %>
+          <div id = '<%= varient.id %>' class='price_label'>
+            <strike><%= varient.mrp if varient.mrp%></strike> <%= varient.price %>
+          </div>
+        <% end %></h4>
+        <div class='add_to_cart_div'>
+          <% if @varients.any?  %>
+            <%= spinner_tag %>
+            <%= form_tag add_line_item_orders_path do %>
+              <fieldset>
+                <%= hidden_field_tag :id, params[:id], :value => '1' %>
+                <%= hidden_field_tag :price, params[:price], :value => '22' %>
+                <%= hidden_field_tag :product, params[:product], :value => @product.product %>
+                <%= submit_tag "Grab in Trolley", :class => "btn btn-primary add_to_cart"%>
+              </fieldset>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% else %>
+      <h4 class = 'text-error'>OUT OF STOCK</h4>    
+    <% end %>
   </div>
 </div>
 <div class='other_product_details'>
@@ -68,43 +68,38 @@
       <%= link_to 'Review', new_review_path(:product_id => @product.id) , :remote => :true, :class => 'btn btn-success' %>
     </div>
   </div>
-  <dl class  = "dl-horizontal" >      
-    <dt>Description:</dt>
-    <dd><div class = 'product_description'><%= sanitize @product.description %></div></dd>
-  </dl>
-
-  <% unless @product.product_details.empty? %>
-    <dl class  = "dl-horizontal" >      
-      <dd>
-        <table class='table table-striped'>
-          <tr>
-            <td><b>Description</b></td>
-            <td></td>
-          </tr>
-          <% @product.product_details.each do |pro_detail| %>
-          <tr>
-            <td class = 'attribute_name'><%= pro_detail.product_attribute.product_attributes %></td>
-            <td><%= pro_detail.details %></td>
-          </tr>
-          <% end %>
-        </table>
-      </dd>
-    </dl>
+  <div class='description'>
+    <div><h4>About <%= @product.product %>:</h4></div>
+    <div class = 'product_description'><%= sanitize @product.description %></div>
+  </div>
+  <% unless @product.product_details.empty? %> 
+    <div>
+      <table class='table product_description_table'>
+        <tr>
+          <th>Description</th>
+          <th></th>
+        </tr>
+        <% @product.product_details.each do |pro_detail| %>
+        <tr>
+          <td class = 'attribute_name'><%= pro_detail.product_attribute.product_attributes %></td>
+          <td><%= pro_detail.details %></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>  
   <% end %>
   <% unless @product.reviews.empty? %>
-    <dl class = 'dl-horizontal'>
-      <dd>  
-        <div><h4>Reviews:</h4></div>
-        <% @product.reviews.each do |review| %>
-          <div class = 'review_box'>
-            <div class = 'review_user'><b><%= review.user.username %></b><br/>On <%= review.updated_at.to_date %></div>
-            <div class = 'review_text'>
-              <%= link_to (image_tag('delete.png')), review_path(review), :method => :delete, :data => { :confirm => 'Delete this review ?' }, :class=> 'review_delete' if user_authorized_to_delete?(review) %>
-              <%= review.review %>
-            </div>
+    <div>  
+      <div><h4>Reviews for <%= @product.product %>:</h4></div>
+      <% @product.reviews.each do |review| %>
+        <div class = 'review_box'>
+          <div class = 'review_user'><b><%= review.user.username %></b><br/>On <%= review.updated_at.to_date %></div>
+          <div class = 'review_text'>
+            <%= link_to (image_tag('delete.png')), review_path(review), :method => :delete, :data => { :confirm => 'Delete this review ?' }, :class=> 'review_delete' if user_authorized_to_delete?(review) %>
+            <%= review.review %>
           </div>
-        <% end %>
-      </dd>    
-    </dl>
+        </div>
+      <% end %>
+    </div>    
   <% end %>
 </div>
