@@ -3,6 +3,7 @@ div.container-fluid { padding: 0px 170px; }
 body div.navbar-inner { padding-bottom: 50px;     }
 div.main_body { overflow: auto;  min-height: 75%;  }
 div.main_body div { margin-top: 5px;}
+div.alert { text-align: center; }
 div#navbar_layer_2 { margin-top:-62px;}
 div#navbar_layer_2 .pull-right { padding-right:20px;}
 ul.category_catalog { position: absolute; z-index: 3;}

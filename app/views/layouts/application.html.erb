@@ -48,7 +48,7 @@
       <div class = "row-fluid">
         <% flash.each do |name,msg|    %>
           <div class = "alert alert-<%= name %>" data-dismiss="alert">
-            <p id =  "notice" ><%= msg %></p>
+            <p id="notice" ><%= msg %></p>
           </div>
         <% end %>
         <%= yield %>
