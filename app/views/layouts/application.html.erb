@@ -14,16 +14,11 @@
           <div class="nav-collapse collapse">
             <div class="navbar-text pull-right">
               <% if user_signed_in? %>
-                Hi <%= link_to current_user.username, user_path(current_user) %> | <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
+               <%= link_to "Admin Section", admin_products_path if current_user.admin %> | Hi <%= link_to current_user.username, user_path(current_user) %> | <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
               <% else %>
                 <%= link_to 'Sign Up', new_user_registration_path %> | <%= link_to 'Log in', new_user_session_path%>
               <% end %>
             </div>
-            <% if current_user && current_user.admin %> 
-              <ul class='nav'>
-                <li><%= link_to "Admin Section", admin_categories_path  %></li>
-              </ul>
-            <% end %>
           </div>
         </div>
       </div>

@@ -37,7 +37,7 @@ $(document).ready(function(){
     $(".thumb_image").addimagezoom({ 
 		zoomrange: [3],
 		imagevertcenter : true,
-		magnifiersize: [550,200]
+		magnifiersize: [600,200]
 	});
 
 	$(".small_image").click(function(e){
@@ -45,7 +45,7 @@ $(document).ready(function(){
       $(".thumb_image").addimagezoom({ 
 		zoomrange: [3],
 		imagevertcenter : true,
-		magnifiersize: [550,200]
+		magnifiersize: [600,200]
 	  });
 	});
 

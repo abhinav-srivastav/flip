@@ -69,7 +69,7 @@ div.varients div.active  {  border-color: #EC4952;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(236, 37, 82, 0.6);
      -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(236, 37, 82, 0.6);
           box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(236, 37, 82, 0.6); }
-div.thumb_image_div { border: 1px solid #cdcdcd; width: 200px; padding: 10px;  }
+div.thumb_image_div { border: 1px solid #cdcdcd; width: 300px; padding: 10px;  }
 img.thumb_image { height: auto;   }
 img.small_image, div.alert { cursor: pointer; } 
 .add_to_cart_div { margin-top: 3 0px;  }
@@ -80,7 +80,7 @@ tr.debit { background-color: #EAFFDD }
 #inner_table td, #inner_table th { border: 1px solid; } 
 table.transaction_records tr td { vertical-align: middle;  }
 table.transaction_records tr td:first-child { padding-left: 15px;  }
-div.small_images_strip {  margin-left: 15px ; }
+div.small_image_strip {  margin-left: 20px ; }
 div.small_images { display: inline-block; }
 div.small_images img { display: none; }
 div.small_images img.active { display: inline-block; }
