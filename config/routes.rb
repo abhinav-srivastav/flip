@@ -5,7 +5,7 @@ Flip::Application.routes.draw do
   match 'user/transactions' => "transactions#index"
   match 'order/transactions' => "transactions#index"
 
-  match 'admin' => "admin/categories#index"
+  match 'admin' => "admin/products#index"
   post '/admin/product_details/:id' => 'admin/product_details#create' 
   devise_for :users, :path => '', :path_names => { :sign_in => 'LogIn', :sign_out => 'LogOut' }
   namespace :admin do

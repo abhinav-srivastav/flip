@@ -8,20 +8,25 @@ class Transaction < ActiveRecord::Base
   validates :user_id, :presence => true
   validates :transaction_id, :presence => true, :uniqueness => true
 
-  before_validation :generate_transaction_id
+  before_validation :generate_transaction_id, :on => :create
   before_create :update_user_wallet
 
 
+  def debit?
+    transaction_type == 'debit'
+  end
+
   private
     def update_user_wallet
-      if self.transaction_type == 'debit'
+      if debit?
         user.wallet -= self.amount
       else
         user.wallet += self.amount
       end
       user.save
     end
+
     def generate_transaction_id
-      self.transaction_id = 'TS'+user.username+(Time.current.to_s).gsub(/[- UTC:]/,'')+order.id.to_s
+      self.transaction_id = "TS#{Time.current.to_i}" unless transaction_id?
     end    
 end

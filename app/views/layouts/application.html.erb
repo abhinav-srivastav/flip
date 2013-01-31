@@ -29,17 +29,22 @@
       </div>
     </div>
     <div class='container-fluid' id='navbar_layer_2'>
-      <div class='pull-right'><%= link_to( image_tag('cart.jpg')+' ('+current_cart.line_items.count.to_s+')', cart_orders_path) %></div>  
-      <div class='navbar-text '>
+      <div class='navbar-text pull-right'><%= link_to( image_tag('cart.jpg')+' ('+current_cart.line_items.count.to_s+')', cart_orders_path) %></div>  
+      <div class='navbar-text'>
+        <% @categories = Category.visible  %>
         <ul class='btn btn-inverse category_catalog'>
           See all Categories <b class='caret'></b>
-          <li class='root'><%= link_to 'Clothing' %>
-            <ul class='category_catalog_sub'>
-              <li><%= link_to 'Shirt' %></li>
-            </ul>
-          </li>
-          <li class='root'><%= link_to 'Mobile' %></li>
-          <li class='root'><%= link_to 'Shoes' %></li>
+          <% @categories.root.each do |cat| %>
+          <li class='root dropdown-submenu'><%= link_to cat.category, category_path(cat.slug), :class => 'root_link' %>
+            <% unless cat.children.empty? %>  
+              <ul class = 'child_category dropdown-menu' >
+                <% cat.children.each do |child_cat| %>
+                  <li><%= link_to child_cat.category, category_path(child_cat.slug), :class => 'subcat_link' if child_cat.products.any? %></li> 
+                <% end %>                
+              </ul>
+            <% end %>  
+          </li>     
+          <% end %>
         </ul>
       </div>
 

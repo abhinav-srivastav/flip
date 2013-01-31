@@ -7,6 +7,7 @@ class RatingsController < ApplicationController
   end
 
   def create
+    sfvu
     @rating =  current_user.ratings.find_or_create(params[:rating])
     respond_to do |format|
       if @rating.save

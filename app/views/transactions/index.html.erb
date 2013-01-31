@@ -2,7 +2,7 @@
   <% if @transactions.any? %>
     <table class = 'table transaction_records'  >
       <tr>
-        <th>Order No.</th>
+        <th>Transaction No.</th>
         <th>Username</th>
         <th>Order Details</th>
         <th>Type</th>
@@ -10,7 +10,7 @@
       </tr>
       <% @transactions.each do |trans| %>
         <tr class = '<%= trans.transaction_type %>'>
-          <td><%= trans.order_id %></td>
+          <td><%= trans.transaction_id %></td>
           <td><%= trans.user.username %></td>
           <td>
             <table id ='inner_table' class = 'table'>

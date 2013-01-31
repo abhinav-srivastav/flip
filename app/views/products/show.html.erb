@@ -42,7 +42,6 @@
         <% end %></h4>
         <div class='add_to_cart_div'>
           <% if @varients.any?  %>
-            <%= spinner_tag %>
             <%= form_tag add_line_item_orders_path do %>
               <fieldset>
                 <%= hidden_field_tag :id, params[:id], :value => '1' %>
@@ -62,10 +61,18 @@
 <div class='other_product_details'>
   <div class = 'rate_and_comment'>
     <div class = 'rate' >
-      <%= link_to 'Rate this product', new_rating_path(:product_id => @product.id) ,:remote => true, :class => 'btn btn-warning' %>
+      <% if user_signed_in? %>
+        <%= link_to 'Rate this product', new_rating_path(:product_id => @product.id), :remote => true, :class => 'btn btn-warning' %>
+      <% else %>
+        <%= link_to 'Rate this product',new_user_session_path, :class => 'btn btn-warning' %>
+      <% end %>
     </div>
     <div class = 'review'>
-      <%= link_to 'Review', new_review_path(:product_id => @product.id) , :remote => :true, :class => 'btn btn-success' %>
+      <% if user_signed_in? %>
+      <%= link_to 'Review', new_review_path(:product_id => @product.id), :remote => :true, :class => 'btn btn-success' %>
+      <% else %>
+        <%= link_to 'Review',new_user_session_path, :class => 'btn btn-success' %>
+      <% end %>
     </div>
   </div>
   <div class='description'>

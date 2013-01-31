@@ -2813,7 +2813,7 @@ table th[class*="span"],
   clear: both;
   font-weight: normal;
   line-height: 20px;
-  color: #333333;
+  color: #ffffff;
   white-space: nowrap;
 }
 
@@ -2891,6 +2891,8 @@ table th[class*="span"],
 }
 
 .dropdown-submenu > .dropdown-menu {
+  background-color:  #363636;
+  color :  #ffffff;
   top: 0;
   left: 100%;
   margin-top: -6px;
@@ -2920,7 +2922,7 @@ table th[class*="span"],
   width: 0;
   height: 0;
   margin-top: 5px;
-  margin-right: -10px;
+  /*margin-right: -10px;*/
   border-color: transparent;
   border-left-color: #cccccc;
   border-style: solid;
