@@ -16,9 +16,6 @@
   <div class='span4'>
     <h3><%= @product.product %></h3>
     <div> Brand: <%= @product.brand.brand %> </div>
-    <div id='ratings'>
-      <%= render 'ratings/ratings', :product => @product %>
-    </div>
     <% if available?(@product) %>
       <div class = 'varients'>
         <% @varients.each do |varient| %>
@@ -77,6 +74,19 @@
   <% end %>
 
   <div class = 'span12 rate_and_comment'>
+    <div class = 'span6 review'>
+      <%= link_to 'Review','', :class => 'btn btn-success write_review', 'data-valid' => user_signed_in? %><br/>
+      <div class='input_form'>
+        <%= form_tag reviews_path, :remote => true do %>
+          <fieldset>
+            <%= hidden_field_tag 'review[product_id]', @product.id %>
+            <%= text_area_tag 'review[review]' %><br/>
+            <%= submit_tag "Save", :class => "btn btn-primary add_review_or_rating"%>
+            <span class = "btn btn-inverse cancel_review_or_rating">Cancel</span>
+          </fieldset>
+        <% end %>
+      </div>
+    </div>
     <div class = 'span5 rate'>
       <%= link_to 'Rate this product','', :class => 'btn btn-warning rate_product', 'data-valid' => user_signed_in? %>
       <div id='ratings'>
@@ -87,22 +97,6 @@
           <fieldset>
             <%= hidden_field_tag 'rating[product_id]', @product.id %>
             <%= number_field_tag 'rating[rating]', nil, :in => 1..5 %><br/>
-            <%= submit_tag "Save", :class => "btn btn-primary add_review_or_rating"%>
-            <span class = "btn btn-inverse cancel_review_or_rating">Cancel</span>
-          </fieldset>
-        <% end %>
-      </div>
-    </div>
-    <div class = 'span6 review'>
-      <% if @product.reviews.empty? %>
-        <p>Be the first to review the product !</p>
-      <% end  %>
-      <%= link_to 'Review','', :class => 'btn btn-success write_review', 'data-valid' => user_signed_in? %><br/>
-      <div class='input_form'>
-        <%= form_tag reviews_path, :remote => true do %>
-          <fieldset>
-            <%= hidden_field_tag 'review[product_id]', @product.id %>
-            <%= text_area_tag 'review[review]' %><br/>
             <%= submit_tag "Save", :class => "btn btn-primary add_review_or_rating"%>
             <span class = "btn btn-inverse cancel_review_or_rating">Cancel</span>
           </fieldset>

@@ -1,4 +1,5 @@
 <% if @product.reviews.any? %>
+  <h5>Used <%= @product.product %>? Write a review for it !</h5>
   <div>
     <h4>Reviews for <%= @product.product %>:</h4>
   </div>
@@ -11,4 +12,6 @@
       </div>
     </div>
   <% end %>
+<% else %>
+  <h5 class='text-success'>Be the first to review the product !</h5>
 <% end %>
