@@ -1,49 +1,22 @@
 <div class='span3'>
-  <div class= 'sidebar-nav'>
-    <!-- adding tabbed navigation -->
-    <div class = 'tabbale tabs-left'>
-      <h3 >Categories</h3>
-      <ul class = 'nav nav-tabs'>
-        <% @categories.root.each do |cat| %>
-          <li><%= cat.category %>
-            <ul class = 'child_category'>
-              <% unless cat.children.empty? %>
-                <% cat.children.each do |child_cat| %>
-                  <li><%= link_to_if child_cat.products.any?, child_cat.category, "##{child_cat.slug}", 'data-toggle' => 'tab' %></li> 
-                <% end %>                
-              <% end %>
-              <li><%= link_to_if cat.products.any?, 'View all', "##{cat.slug}", 'data-toggle' => 'tab' %></li>
-            </ul>
-          </li>     
-        <% end %>
-      </ul>
+  <div class='other_attractions'>
+    <div class = 'category_header'>
+      <h4>Other Products:</h4>
+    </div>
+    <% pro = Product.last  %>
+    <div class = 'product_div'>
+      <% img = pro.images.first ? pro.images.first.image.url(:small) : 'no_image-small.jpg'  %>  
+      <%= link_to image_tag(img), product_path(pro) %><br/>
+      <%= pro.product %><br/>
+      <%  unless available?(pro) %>
+        <b class = 'text-error'>OUT OF STOCK</b><br/>
+      <% else %>
+        Price: <%= pro.varients.first.price %>
+      <% end %>
     </div>
   </div>
 </div>
 <div class ='span7'>
-  <!-- tabbed content for the navigation -->
-  <div class="tab-content">
-    <% @categories.each do |cat| %>
-      <div class = 'tab-pane' id = "<%= cat.slug %>">  
-        <div class = 'category_header'>
-          <h3><%=cat.category%></h3> (<%= link_to 'View more', category_path(cat) %>)
-        </div>
-        <% product = cat.products.take(3)  %>
-        <% product.each do |pro|%>
-          <div class = 'product_div'>
-            <% img = pro.images.first ? pro.images.first.image.url(:small) : 'no_image-small.jpg'  %>  
-            <%= link_to image_tag(img), product_path(pro) %><br/>
-            <%= pro.brand.brand+' '+pro.product %><br/>
-            <%  unless pro.available? %>
-              <b class = 'text-error'>OUT OF STOCK</b><br/>
-            <% else %>
-              Price: <%= pro.varients.first.price %>
-            <% end %>          
-          </div>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
   <div class = 'new_arrivals'>
     <div class = 'category_header'>
       <h3>Freshly arrived:</h3>
@@ -54,10 +27,9 @@
           <% img = pro.images.first ? pro.images.first.image.url(:small) : 'no_image-small.jpg'  %>  
           <%= link_to image_tag(img), product_path(pro) %><br/>
           <%= pro.product %><br/>
-          <%  unless pro.available? %>
-            <b class = 'text-error'>OUT OF STOCK</b><br/>
-          <% else %>
-            Price: <%= pro.varients.first.price %>
+          Price: <%= pro.varients.first.price %><br/>
+          <%  unless available?(pro) %>
+            <small class = 'text-error'>OUT OF STOCK</small>
           <% end %>
         </div>
       <% end %>  

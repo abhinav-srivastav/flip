@@ -18,11 +18,7 @@ class Transaction < ActiveRecord::Base
 
   private
     def update_user_wallet
-      if debit?
-        user.wallet -= self.amount
-      else
-        user.wallet += self.amount
-      end
+      user.wallet += debit? ? -(self.amount) : self.amount
       user.save
     end
 

@@ -10,4 +10,9 @@ module ApplicationHelper
     end
     link_to_function(name, "add_images(this,\"#{association}\",\"#{escape_javascript(fields)}\")")
   end
+
+  def available?(product)
+    return false if product.varients.availables.empty?
+    true
+  end
 end

@@ -23,17 +23,4 @@ class Product < ActiveRecord::Base
     product_details.create(:product_attribute_id => pa_id)    
   end
 
-  def available?
-    return false if varients.availables.empty?
-    true
-  end
-
-  def total_rating
-    t_rating = 0
-    return t_rating if ratings.empty?
-    ratings.each do |rate|
-      t_rating += rate.rating 
-    end
-    t_rating /= ratings.count
-  end
 end

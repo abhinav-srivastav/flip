@@ -3,14 +3,16 @@ class ReviewsController < ApplicationController
   before_filter :authorize_user
 
   def new
-    @review = Review.new(:product_id => params[:product_id])
+    @review = current_user.reviews.new(:product_id => params[:product_id])
   end
-
+  
   def create 
     @review = current_user.reviews.new(params[:review])
     respond_to do |format|
       if @review.save
-        format.html {redirect_to product_path(@review.product_id) }
+        @product = @review.product
+        format.html {redirect_to product_path(@product) }
+        format.js
       else
         format.html {render action: 'new'}
       end

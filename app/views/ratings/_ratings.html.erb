@@ -1,0 +1,9 @@
+<% if total_rating(@product) %>
+  Rating: <%= total_rating(@product) %> (rated by <%= @product.ratings.count %>) <br/>
+  <% user_rating = (current_user.ratings & @product.ratings).first if user_signed_in? %>
+  <% if user_rating %>
+    <p> Your rated this product <%= user_rating.rating %></p>
+  <% end %>
+<% else %>
+  Be the first to rate it ! 
+<% end %>   

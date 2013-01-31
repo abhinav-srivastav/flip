@@ -1,0 +1,14 @@
+<% if @product.reviews.any? %>
+  <div>
+    <h4>Reviews for <%= @product.product %>:</h4>
+  </div>
+  <% @product.reviews.each do |review| %>
+    <div class = 'review_box'>
+      <div class = 'review_user'><b><%= review.user.username %></b><br/>On <%= review.updated_at.to_date %></div>
+      <div class = 'review_text'>
+        <%= link_to (image_tag('delete.png')), review_path(review), :method => :delete, :data => { :confirm => 'Delete this review ?' }, :class=> 'review_delete' if user_authorized_to_delete?(review) %>
+        <%= review.review %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

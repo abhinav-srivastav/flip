@@ -10,10 +10,9 @@
           <% img = pro.images.first ? pro.images.first.image.url(:small) : 'no_image-small.jpg'  %>  
           <%= link_to image_tag(img), product_path(pro) %><br/>
           <%= link_to pro.brand.brand+' '+pro.product, product_path(pro) %><br/>
-          <% unless pro.available? %>
-            <b class = 'text-error'>OUT OF STOCK</b><br/>
-          <% else %>
-            Price: <%= pro.varients.first.price %>
+          Price: <%= pro.varients.first.price %><br/>
+          <% unless available?(pro) %>
+            <small class = 'text-error'>OUT OF STOCK</small>
           <% end %>
         </div>
       <% end %>

@@ -1,4 +1,27 @@
 $(document).ready(function(){
+  if(window.location.pathname == '/') { 
+    $('ul.category_catalog .root').show();
+    $('div.other_attractions').css('margin-top', $('ul.category_catalog').height())
+  }
+
+  $('.write_review , .rate_product').click(function(e){
+    e.preventDefault();
+    if($(this).attr('data-valid') == 'true') {
+      inputs = $(this).siblings('.input_form').find('.add_review_or_rating')
+      $(inputs).siblings().each(function(){
+      if($(this).css('display') != 'none')
+        $(this).val('')  
+       });
+      $(this).siblings('.input_form').css('display', 'inline-block');
+    }
+    else
+      window.location.href = '/LogIn'
+  });
+
+  $('.add_review_or_rating, .cancel_review_or_rating').click(function(){
+    $(this).parents('.input_form').hide()
+  });
+
 	// add highlight selected address for order
 	$('.order_address div').click(function() {
 		$(this).siblings().removeClass('selected')
@@ -14,15 +37,15 @@ $(document).ready(function(){
     $(".thumb_image").addimagezoom({ 
 		zoomrange: [3],
 		imagevertcenter : true,
-		magnifiersize: [900,400]
+		magnifiersize: [550,200]
 	});
 
 	$(".small_image").click(function(e){
-      $(".thumb_image").attr('src',$(this).attr('src').replace('/small/','/thumb/'))    
+      $(".thumb_image").attr('src',$(this).attr('src').replace('/tiny/','/thumb/'))    
       $(".thumb_image").addimagezoom({ 
 		zoomrange: [3],
 		imagevertcenter : true,
-		magnifiersize: [900,500]
+		magnifiersize: [550,200]
 	  });
 	});
 
@@ -41,27 +64,26 @@ $(document).ready(function(){
 	  $(this).siblings('#price').attr('value', varient[1])	
 	});
   
-  $('.thumb_image_strip img:lt(3)').addClass('active');
+  $('.small_images img:lt(3)').addClass('active');
 
   // check if product has more than 3 images for image slider   
-  if ($('.thumb_image_strip img').length <= 3) {
+  if ($('.small_images img').length <= 3) {
     $('.image_show').detach()
   }
   else {
     $('.image_show').click(function(){
-      console.log(this)
       if ($(this).attr('id') == 'right') {
-      	if ($('.thumb_image_strip img.active').last().next().length) {
-          image_strip = $('.thumb_image_strip img.active')
-          image_strip.first().removeClass('active');
-          image_strip.last().next().addClass('active')
+      	if ($('.small_images img.active').last().next().length) {
+          images = $('.small_images img.active')
+          images.first().removeClass('active');
+          images.last().next().addClass('active')
         }
       }
       else{
-        if ($('.thumb_image_strip img.active').first().prev().length) {
-          image_strip = $('.thumb_image_strip img.active')
-          image_strip.last().removeClass('active');
-          image_strip.first().prev().addClass('active')  
+        if ($('.small_images img.active').first().prev().length) {
+          images = $('.small_images img.active')
+          images.last().removeClass('active');
+          images.first().prev().addClass('active')  
         }
       }
     });

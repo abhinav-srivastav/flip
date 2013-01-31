@@ -1,5 +1,5 @@
 <div class = 'new_review_form'>
-  <%= simple_form_for (@review), :html => { :class => 'form-horizontal'} do |f| %>
+  <%= simple_form_for (@review), :html => { :class => 'form-horizontal'}, :remote => true do |f| %>
     <%= f.hidden_field :product_id, :value => @review.product_id %>
     <div class = 'pull_left'>
       <%= f.input :review, :input_html => { :class => 'review_textarea'} %>

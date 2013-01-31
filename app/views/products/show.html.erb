@@ -1,13 +1,13 @@
 <div class='top_row span12'>
   <div class='span7'>
-    <div>
+    <div >
       <%= image_tag(@product.images.first.image.url(:thumb), :class => 'thumb_image') if @product.images.any?  %><br/>
     </div>
-    <div>
+    <div class='small_image_strip'>
       <span id='left' class='image_show'>&laquo;</span>
-      <div class='thumb_image_strip'>
+      <div class='small_images'>
         <% @product.images.each do |img| %>
-          <%= image_tag(img.image.url(:small), :class => 'small_image')  %>
+          <%= image_tag(img.image.url(:tiny), :class => 'small_image')  %>
         <% end %>
       </div>
       <span id='right' class='image_show'>&raquo;</span>
@@ -16,14 +16,10 @@
   <div class='span4'>
     <h3><%= @product.product %></h3>
     <div> Brand: <%= @product.brand.brand %> </div>
-    <div> 
-      Rating: <%= @product.total_rating %> (rated by <%= @product.ratings.count %>) <br/>
-      <% user_rating = (current_user.ratings & @product.ratings).first if user_signed_in? %>
-      <% if user_rating %>
-        <p> Your rated this product <%= user_rating.rating %></p>
-      <% end %>
+    <div id='ratings'>
+      <%= render 'ratings/ratings', :product => @product %>
     </div>
-    <% if @product.available? %>
+    <% if available?(@product) %>
       <div class = 'varients'>
         <% @varients.each do |varient| %>
           <% if varient.available > 0  %>
@@ -59,22 +55,6 @@
   </div>
 </div>
 <div class='other_product_details'>
-  <div class = 'rate_and_comment'>
-    <div class = 'rate' >
-      <% if user_signed_in? %>
-        <%= link_to 'Rate this product', new_rating_path(:product_id => @product.id), :remote => true, :class => 'btn btn-warning' %>
-      <% else %>
-        <%= link_to 'Rate this product',new_user_session_path, :class => 'btn btn-warning' %>
-      <% end %>
-    </div>
-    <div class = 'review'>
-      <% if user_signed_in? %>
-      <%= link_to 'Review', new_review_path(:product_id => @product.id), :remote => :true, :class => 'btn btn-success' %>
-      <% else %>
-        <%= link_to 'Review',new_user_session_path, :class => 'btn btn-success' %>
-      <% end %>
-    </div>
-  </div>
   <div class='description'>
     <div><h4>About <%= @product.product %>:</h4></div>
     <div class = 'product_description'><%= sanitize @product.description %></div>
@@ -95,18 +75,43 @@
       </table>
     </div>  
   <% end %>
-  <% unless @product.reviews.empty? %>
-    <div>  
-      <div><h4>Reviews for <%= @product.product %>:</h4></div>
-      <% @product.reviews.each do |review| %>
-        <div class = 'review_box'>
-          <div class = 'review_user'><b><%= review.user.username %></b><br/>On <%= review.updated_at.to_date %></div>
-          <div class = 'review_text'>
-            <%= link_to (image_tag('delete.png')), review_path(review), :method => :delete, :data => { :confirm => 'Delete this review ?' }, :class=> 'review_delete' if user_authorized_to_delete?(review) %>
-            <%= review.review %>
-          </div>
-        </div>
-      <% end %>
-    </div>    
-  <% end %>
+
+  <div class = 'span12 rate_and_comment'>
+    <div class = 'span5 rate'>
+      <%= link_to 'Rate this product','', :class => 'btn btn-warning rate_product', 'data-valid' => user_signed_in? %>
+      <div id='ratings'>
+        <%= render 'ratings/ratings', :product => @product %>
+      </div>
+      <div class='input_form'>
+        <%= form_tag ratings_path, :remote => true do %>
+          <fieldset>
+            <%= hidden_field_tag 'rating[product_id]', @product.id %>
+            <%= number_field_tag 'rating[rating]', nil, :in => 1..5 %><br/>
+            <%= submit_tag "Save", :class => "btn btn-primary add_review_or_rating"%>
+            <span class = "btn btn-inverse cancel_review_or_rating">Cancel</span>
+          </fieldset>
+        <% end %>
+      </div>
+    </div>
+    <div class = 'span6 review'>
+      <% if @product.reviews.empty? %>
+        <p>Be the first to review the product !</p>
+      <% end  %>
+      <%= link_to 'Review','', :class => 'btn btn-success write_review', 'data-valid' => user_signed_in? %><br/>
+      <div class='input_form'>
+        <%= form_tag reviews_path, :remote => true do %>
+          <fieldset>
+            <%= hidden_field_tag 'review[product_id]', @product.id %>
+            <%= text_area_tag 'review[review]' %><br/>
+            <%= submit_tag "Save", :class => "btn btn-primary add_review_or_rating"%>
+            <span class = "btn btn-inverse cancel_review_or_rating">Cancel</span>
+          </fieldset>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  
+  <div id = 'reviews'>  
+    <%= render 'reviews/reviews', :product => @product %>
+  </div>    
 </div>
