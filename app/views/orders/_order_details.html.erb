@@ -1,51 +1,34 @@
 <div class='table odd_color'>
   <% if @orders.any? %>
-    <% @orders.each do |order|  %>
-      <div>
-        <dl class  = "dl-horizontal" >      
-          <dt>Booked Order For:</dt>
-          <dd><%= order.user.username %></dd>
-        </dl>
-        <dl class  = "dl-horizontal" >      
-          <dt>Booking Date:</dt>
-          <dd><%= order.updated_at.to_date %></dd>
-        </dl>
-        <% if order.address %>
-        <dl class  = "dl-horizontal" >      
-          <dt>Address:</dt>
-          <dd>
+    <table class='table' >
+      <tr>
+        <td>Id</td>
+        <td>Booked for</td>
+        <td>Address</td>
+        <td>Amount</td>
+        <% if @orders.first.state == 'booked' %>
+          <td>Cancel</td>
+        <% end %>  
+      </tr>
+      <% @orders.each do |order|  %>
+        <tr>
+          <td><%= link_to order.id, order_path(order.id) %></td>
+          <td><%= order.user.username %></td>
+          <td>              
             <%= order.address.name %>, 
             <%= order.address.street_no %>,
             <%= order.address.area %>, 
-            <%= order.address.city %>-<%= order.address.postal_code %>     
-          </dd>
-        </dl>
-        <% end %>
-        <table class='table'>
-          <tr>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Price</th>
-          </tr>
-          <% order.line_items.each do |line| %>
-          <tr id="<%= line.id%>">
-            <td>
-              <%= line.varient.product.product %>
-              <span class='muted'><%= 'Colour: '+ line.varient.colour.colour if line.varient.colour %> <%= 'Size: '+ line.varient.size.size if line.varient.size %></span>            
-            </td>
-            <td><%= line.quantity %></td>
-            <td><%= line.price %></td>                
-          </tr>
-          <%end%>
-          <tr>
-            <td></td>
-            <td><span class = 'pull-right'><b>Total Amount:</b></span></td>
-            <td><b><%= order.amount %></b></td>
-          <tr>
-        </table>
-        <%= link_to 'cancel order', cancelled_order_path(order), method: :post, :class => 'btn btn-danger' if order.state == 'booked'%>
-      </div>
-    <% end %>
+            <%= order.address.city %>-<%= order.address.postal_code %>              
+          </td>
+          <td>
+            <%= order.amount %>
+          </td>
+          <% if order.state == 'booked' %>
+            <td><%= link_to 'cancel', cancelled_order_path(order), method: :post, :class => 'btn btn-danger btn-small' %></td>
+          <% end %>
+        </tr>  
+      <% end %>  
+    </table> 
   <% else %>
     <h4 class = 'text-error'> No orders in this category !  </h4>
   <% end %>

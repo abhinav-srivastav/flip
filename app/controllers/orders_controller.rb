@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
 
   before_filter :authorize_user, :except => [:add_line_item, :cart]
-  before_filter(:only => [:confirm,:update,:pay, :cancelled]) { @order = Order.find(params[:id]) }
+  before_filter(:only => [:confirm,:update,:pay, :cancelled, :show]) { @order = Order.find(params[:id]) }
   before_filter :cart_has_line_items, :only => :confirm
 
   def index  
@@ -24,6 +24,9 @@ class OrdersController < ApplicationController
   end
 
   def confirm
+  end
+
+  def show
   end
 
   def pay
