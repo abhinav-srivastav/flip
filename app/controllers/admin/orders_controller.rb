@@ -11,8 +11,7 @@ class Admin::OrdersController < Admin::BaseController
     @order = Order.includes(:user, :address,:line_items => [:varient => [:product, :colour, :size]]).find(params[:id])
   end
   
-
-  def dispatch
+  def dispatched
     @order.dispatch
     respond_to do |format|
       format.html { redirect_to admin_orders_path, flash: { success: 'Order dispatched !'}}

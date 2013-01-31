@@ -47,6 +47,8 @@
         </div>
       </div>
     <% else %>
+      <% varient = @product.varients.first  %>
+      <h4 class='muted'>Price: <strike><%= varient.mrp if varient.mrp%></strike> <%= varient.price %> </h4>
       <h4 class = 'text-error'>OUT OF STOCK</h4>    
     <% end %>
   </div>
@@ -76,6 +78,7 @@
   <div class = 'span12 rate_and_comment'>
     <div class = 'span6 review'>
       <%= link_to 'Review','', :class => 'btn btn-success write_review', 'data-valid' => user_signed_in? %><br/>
+      
       <div class='input_form'>
         <%= form_tag reviews_path, :remote => true do %>
           <fieldset>

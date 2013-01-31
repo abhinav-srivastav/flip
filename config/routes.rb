@@ -11,7 +11,7 @@ Flip::Application.routes.draw do
   namespace :admin do
     resources :categories, :users, :products, :brands, :sessions, :images, :product_attributes, :product_details, :varients, :colours, :sizes
     resources :orders do
-      post 'dispatch', :on => :member
+      post 'dispatched', :on => :member
       post 'delivered', :on => :member
     end
     resources :prototypes do

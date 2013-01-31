@@ -30,7 +30,7 @@ class OrdersController < ApplicationController
     @order.address_id = params[:address]
     respond_to do |format|
       if @order.pay
-        format.html { redirect_to user_path(current_user), :flash => { :success => 'Payment made successfully!' } }
+        format.html { redirect_to root_path, :flash => { :success => 'Payment made successfully! You will recieve your confirmation mail shortly' } }
       else
         if @order.address
           flash[:error] = 'Not enough credit in your wallet for this order'

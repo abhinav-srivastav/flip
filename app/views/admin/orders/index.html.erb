@@ -14,7 +14,7 @@
       <td><%= order.state %></td>
       <td><%= order.created_at %></td>
       <td>
-        <%= link_to "Dispatch", dispatch_admin_order_path(order), method: :post, :class => "btn btn-small" if order.state == 'booked' %>
+        <%= link_to "Dispatch", dispatched_admin_order_path(order), method: :post, :class => "btn btn-small" if order.state == 'booked' %>
         <%= link_to "Delivered", delivered_admin_order_path(order) , method: :post, :class => "btn btn-small" if order.state == 'dispatched' %>
       </td>
       <td class='shift_right'>
