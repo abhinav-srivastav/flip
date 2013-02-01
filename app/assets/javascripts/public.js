@@ -4,14 +4,10 @@ $(document).ready(function(){
     $('div.other_attractions').css('margin-top', $('ul.category_catalog').height())
   }
 
-  $('.write_review , .rate_product').click(function(e){
+  $('.write_review ').click(function(e){
     e.preventDefault();
-    if($(this).attr('data-valid') == 'true') {
-      inputs = $(this).siblings('.input_form').find('.add_review_or_rating')
-      $(inputs).siblings().each(function(){
-      if($(this).css('display') != 'none')
-        $(this).val('')  
-       });
+    if($(this).attr('data-valid') == 'true') {      
+      $('#review_review').val('')  
       $(this).siblings('.input_form').css('display', 'inline-block');
     }
     else
@@ -97,6 +93,32 @@ $(document).ready(function(){
       itemSelector : 'div.product_div',
       columnWidth : 180
     }); 
+  });
+
+  //rating stars
+  $('.rating_image').hover(
+    function(){
+      $(this).prevAll().each(function(){
+        $(this).css('background', 'url(../assets/selected_star.png)').css('background-repeat','no-repeat')
+      });
+      $(this).css('background', 'url(../assets/selected_star.png)').css('background-repeat','no-repeat')
+    },
+    function(){
+      $(this).prevAll().each(function(){
+        $(this).css('background', 'url(../assets/star.jpg)').css('background-repeat','no-repeat')
+      });
+      $(this).css('background', 'url(../assets/star.jpg)').css('background-repeat','no-repeat')
+    }
+  );
+
+  $('.rating_image').click(function(){
+    if($(this).attr('data-valid') == 'true') {
+      console.log($(this).attr('id'))
+      $('#rating_rating').val($(this).attr('id'))  
+      $('#submit_rating').click();
+    }
+    else
+      window.location.href = '/LogIn'
   });
 });
 

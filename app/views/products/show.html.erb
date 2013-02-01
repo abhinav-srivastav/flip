@@ -1,5 +1,5 @@
 <div class='top_row span12'>
-  <div class='span4'>
+  <div class='image_display span4'>
     <div >
       <%= image_tag(@product.images.first.image.url(:thumb), :class => 'thumb_image') if @product.images.any?  %><br/>
     </div>
@@ -13,7 +13,7 @@
       <span id='right' class='image_show'>&raquo;</span>
     </div>
   </div>
-  <div class='span7'>
+  <div class=' product_info span7'>
     <h3><%= @product.product %></h3>
     <div> Brand: <%= @product.brand.brand %> </div>
     <% if available?(@product) %>
@@ -91,19 +91,26 @@
       </div>
     </div>
     <div class = 'span5 rate'>
-      <%= link_to 'Rate this product','', :class => 'btn btn-warning rate_product', 'data-valid' => user_signed_in? %>
-      <div id='ratings'>
-        <%= render 'ratings/ratings', :product => @product %>
-      </div>
+      <h4 class='text-warning'>Used <%= @product.product%> ? Rate it !</h4>
+      <div id='rating_box'>
+          <div class='rating_image' id='1' data-valid = '<%= user_signed_in? %>'> </div>
+          <div class='rating_image' id='2' data-valid = '<%= user_signed_in? %>'> </div>
+          <div class='rating_image' id='3' data-valid = '<%= user_signed_in? %>'> </div>
+          <div class='rating_image' id='4' data-valid = '<%= user_signed_in? %>'> </div>
+          <div class='rating_image' id='5' data-valid = '<%= user_signed_in? %>'> </div>
+        </div>
       <div class='input_form'>
+        
         <%= form_tag ratings_path, :remote => true do %>
           <fieldset>
             <%= hidden_field_tag 'rating[product_id]', @product.id %>
-            <%= number_field_tag 'rating[rating]', nil, :in => 1..5 %><br/>
-            <%= submit_tag "Save", :class => "btn btn-primary add_review_or_rating"%>
-            <span class = "btn btn-inverse cancel_review_or_rating">Cancel</span>
+            <%= hidden_field_tag 'rating[rating]' %>
+            <%= submit_tag "Save", :class => "btn btn-primary hidden add_review_or_rating", :id=> 'submit_rating'%>
           </fieldset>
         <% end %>
+      </div>
+      <div id='ratings'>
+        <%= render 'ratings/ratings', :product => @product %>
       </div>
     </div>
   </div>
