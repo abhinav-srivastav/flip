@@ -1,1 +1,7 @@
-$('*#ratings').html("<%= escape_javascript(render :partial=>'ratings/ratings',:locals => {:product => @product})%>")
+$('#ratings').hide();
+$('.rating_spinner').show().delay(500).queue(function(){
+	$('#ratings').html("<%= escape_javascript(render :partial=>'ratings/ratings',:locals => {:product => @product})%>").fadeIn();
+    $(this).hide();	
+    $(this).dequeue();
+});
+// $('*#ratings').html("<%= escape_javascript(render :partial=>'ratings/ratings',:locals => {:product => @product})%>")

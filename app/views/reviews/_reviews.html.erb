@@ -1,9 +1,10 @@
+<%= spinner_tag('reviews_spinner')  %>
 <% if @product.reviews.any? %>
   <h5>Used <%= @product.product %> ? Write a review for it !</h5>
   <div>
     <h4>Reviews for <%= @product.product %>:</h4>
   </div>
-  <% @product.reviews.each do |review| %>
+  <% @product.reviews.reverse!.each do |review| %>
     <div class = 'review_box'>
       <div class = 'review_user'><b><%= review.user.username %></b><br/>On <%= review.updated_at.to_date %></div>
       <div class = 'review_text'>

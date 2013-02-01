@@ -99,8 +99,7 @@
           <div class='rating_image' id='4' data-valid = '<%= user_signed_in? %>'> </div>
           <div class='rating_image' id='5' data-valid = '<%= user_signed_in? %>'> </div>
         </div>
-      <div class='input_form'>
-        
+      <div class='input_form'>        
         <%= form_tag ratings_path, :remote => true do %>
           <fieldset>
             <%= hidden_field_tag 'rating[product_id]', @product.id %>
@@ -109,6 +108,7 @@
           </fieldset>
         <% end %>
       </div>
+      <%= spinner_tag('rating_spinner') %>
       <div id='ratings'>
         <%= render 'ratings/ratings', :product => @product %>
       </div>

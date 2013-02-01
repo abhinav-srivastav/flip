@@ -1,9 +1,11 @@
-<% if total_rating(@product) %>
-  Rating: <%= total_rating(@product) %> (rated by <%= @product.ratings.count %>) <br/>
-  <% user_rating = (current_user.ratings & @product.ratings).first if user_signed_in? %>
-  <% if user_rating %>
-    <p> Your rated this product <%= user_rating.rating %></p>
-  <% end %>
-<% else %>
-  <h5 class='text-warning'>Be the first to rate it ! </h5>
-<% end %>   
+<div class='rating_text'>
+	<% if total_rating(@product) %>
+	  Rating: <%= total_rating(@product) %> (rated by <%= @product.ratings.count %>) <br/>
+	  <% user_rating = (current_user.ratings & @product.ratings).first if user_signed_in? %>
+	  <% if user_rating %>
+	    <p> Your rated this product <%= user_rating.rating %></p>
+	  <% end %>
+	<% else %>
+	  <h5 class='text-warning'>Be the first to rate it ! </h5>
+	<% end %>
+</div>   

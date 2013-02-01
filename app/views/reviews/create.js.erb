@@ -1,1 +1,4 @@
-$('#reviews').html("<%= escape_javascript(render :partial=>'reviews/reviews',:locals => {:product => @product})%>")
+$('.reviews_spinner').show().delay(500).queue(function(){
+	$('#reviews').html("<%= escape_javascript(render :partial=>'reviews/reviews',:locals => {:product => @product})%>")
+    $(this).dequeue();
+});

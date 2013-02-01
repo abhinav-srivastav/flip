@@ -1,6 +1,6 @@
 module ApplicationHelper
-  def spinner_tag
-    image_tag("spinner.gif", :id => "spinner_img", :alt => "Loding...", :style => "display : none")
+  def spinner_tag(klass='')
+    image_tag("spinner.gif", :id => "spinner_img", :alt => "Loding...", :style => "display : none", :class => klass)
   end
   
   def link_to_add_images(name, f, association)
