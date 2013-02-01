@@ -41,8 +41,10 @@ $(document).ready(function(){
 	});
 
 	$(".small_image").click(function(e){
-      $(".thumb_image").attr('src',$(this).attr('src').replace('/tiny/','/thumb/'))    
-      $(".thumb_image").addimagezoom({ 
+    $('div.zoomtracker').remove();
+    d = $('<img />').attr('src', $(this).attr('src').replace('/tiny/','/thumb/')).addClass('thumb_image') 
+    $(".thumb_image").parent().html(d)
+    $(".thumb_image").addimagezoom({ 
 		zoomrange: [3],
 		imagevertcenter : true,
 		magnifiersize: [600,200]

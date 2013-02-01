@@ -16,6 +16,7 @@ div.footer { height: 50px; background-color: #111111; margin-top: 10px; }
 div.footer div.footer_content { padding-top: 5px;    }
 .nav-collapse ul.nav { padding-top: 10px; }
 ul { list-style-type: none;}
+
 table.table tr td div .change_quantity { font-size: smaller; }
 .order_address div { display: inline-block; border: 1px solid; padding: 5px 20px; }
 .order_address div.selected { border-color: rgba(236, 73, 82, 0.9);
