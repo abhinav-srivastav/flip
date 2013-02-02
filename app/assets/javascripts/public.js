@@ -126,7 +126,6 @@ $(document).ready(function(){
     $(this).addClass('small_select_div_active').siblings().removeClass('small_select_div_active')
     form = $(this).parent().siblings('.input_form')
     id = $(this).attr('id')
-    console.log($(this).parent().siblings('.input_form'))
     if($(form).hasClass('color_form')) {
       $(form).find('#colour_colour').val(id)
       $(form).find('.all_sizes_for_colour').click()

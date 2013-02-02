@@ -1,3 +1,5 @@
+<% preference ||= ''  %>
+<%= size.inspect %>
 <% size.each do |var| %>
-  <div class='small_select_div' id='<%= var.size_id %>'><%= var.size.size %></div>
+  <div class='small_select_div <%= "small_select_div_active"  if preference == var.id %>' id='<%= var.size_id %>'><%= var.size.size if var.size %></div>
 <% end %>

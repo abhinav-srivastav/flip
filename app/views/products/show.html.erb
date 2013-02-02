@@ -21,7 +21,7 @@
         <h4>Colour</h4>
         <% color = @varients.to_a.uniq{ |ele| ele[:colour_id] }%>
         <div id='colours_for_varients'>
-          <%= render 'varients/colours_for_varients', :colour => color %>
+          <%= render 'varients/colours_for_varients', :colour => color, :preference => color.first.id if color.any? %>
         </div>
         <div class=' input_form color_form'>
           <%= form_tag sizes_for_colour_varients_path, :remote => true do %>
@@ -37,7 +37,7 @@
         <h4>Size</h4>
         <% size = @varients.to_a.uniq { |ele| ele[:size_id] } %>
         <div id='sizes_for_varients'>
-          <%= render 'varients/sizes_for_varients', :size => size %>
+          <%= render 'varients/sizes_for_varients', :size => size, :preference => size.first.id if size.any? %>
         </div>
         <div class=' input_form size_form'>
           <%= form_tag colours_for_size_varients_path, :remote => true do %>

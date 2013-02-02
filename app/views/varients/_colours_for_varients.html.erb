@@ -1,3 +1,4 @@
+<% preference ||= '' %>
 <% colour.each do |var| %>
-  <div class='small_select_div' id='<%= var.colour_id %>'><%= var.colour.colour %></div>
-<% end %>    
+  <div class='small_select_div <%= "small_select_div_active" if preference == var.id %>' id='<%= var.colour_id %>'><%= var.colour.colour if var.colour %></div>
+<% end %>
