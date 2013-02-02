@@ -38,7 +38,7 @@ div.other_product_details { position: relative; display: table-row;}
 div.other_product_details div {margin-top: 15px;}
 div.price_label { display: inline-block; }
 /*div.rate_and_comment div{  }*/
-div.rate_and_comment div.input_form { display:none; }
+div.input_form { display:none; }
 div.review_box { border-bottom : 1px dotted; margin-bottom: 5px;}
 div.review_user, div.review_text { display: table-cell; padding-left: 5px; }
 div.review_user { width: 200px;}
@@ -89,6 +89,7 @@ div.small_images img { display: none; }
 div.small_images img.active { display: inline-block; }
 span.image_show { cursor: pointer; font-size: 33px; }
 .rating_image { margin:0; padding:0; display:inline-block; width:25px; height:26px;  background: url(star.jpg); background-repeat: no-repeat; }
-/*.rating_image:hover { background: url(selected_star.png); background-repeat: no-repeat; }*/
 .hidden { display: none; }
 div#rating_box { margin-top: -10px;  }
+div.small_select_div { width: 60px; height: 30px; border: 1px solid; padding-left: 15px; padding-top: 10px; display: inline-block;}
+div.small_select_div_active {  border: 2px solid;  }

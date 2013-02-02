@@ -33,6 +33,11 @@ Flip::Application.routes.draw do
     post 'pay', :on => :member
     get 'confirm', :on => :member
   end
+
+  resources :varients do 
+    post 'colours_for_size', :on => :collection
+    post 'sizes_for_colour', :on => :collection
+  end
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action

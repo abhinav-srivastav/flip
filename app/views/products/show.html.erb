@@ -16,6 +16,41 @@
   <div class=' product_info span7'>
     <h3><%= @product.product %></h3>
     <div> Brand: <%= @product.brand.brand %> </div>
+    <div>  
+      <div class='span4 colour_div '>
+        <h4>Colour</h4>
+        <% color = @varients.to_a.uniq{ |ele| ele[:colour_id] }%>
+        <div id='colours_for_varients'>
+          <%= render 'varients/colours_for_varients', :colour => color %>
+        </div>
+        <div class=' input_form color_form'>
+          <%= form_tag sizes_for_colour_varients_path, :remote => true do %>
+            <fieldset>
+              <%= hidden_field_tag 'colour[product_id]', @product.id %>
+              <%= hidden_field_tag 'colour[colour]' %><br/>
+              <%= submit_tag "Submit", :class => "btn btn-primary all_sizes_for_colour "%>
+            </fieldset>
+          <% end %>
+        </div>
+      </div>
+      <div class='span4 size_div'>
+        <h4>Size</h4>
+        <% size = @varients.to_a.uniq { |ele| ele[:size_id] } %>
+        <div id='sizes_for_varients'>
+          <%= render 'varients/sizes_for_varients', :size => size %>
+        </div>
+        <div class=' input_form size_form'>
+          <%= form_tag colours_for_size_varients_path, :remote => true do %>
+            <fieldset>
+              <%= hidden_field_tag 'size[product_id]', @product.id %>
+              <%= hidden_field_tag 'size[size]' %><br/>
+              <%= submit_tag "Submit", :class => "btn btn-primary all_colours_for_size "%>
+            </fieldset>
+          <% end %>
+        </div>
+      </div>
+    </div>  
+      <br/>
     <% if available?(@product) %>
       <div class = 'varients'>
         <% @varients.each do |varient| %>
